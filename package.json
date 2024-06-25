@@ -1,0 +1,22 @@
+{
+  "name": "@unsignd/uuuui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.8",
+    "typescript": "^5.5.2"
+  },
+  "dependencies": {
+    "@types/react": "^18.3.3",
+    "styled-components": "^6.1.11"
+  }
+}
