@@ -1,7 +1,10 @@
-import styled from 'styled-components';
+import { css } from '@emotion/css';
+import { ReactNode } from 'react';
 
-const Wrapper = styled.button``;
+export type ButtonProps = {
+  children: ReactNode;
+};
 
-export default function Button() {
-  return <div>Hello, World!</div>;
+export default function Button({ children }: ButtonProps) {
+  return <button className={css``}>{children}</button>;
 }
