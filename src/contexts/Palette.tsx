@@ -8,8 +8,8 @@ export const PaletteContext = createContext<PaletteContextType | undefined>(
 export function usePalette(): PaletteContextType {
   const context = useContext(PaletteContext);
 
-  if (!context) {
-    throw new Error('usePalette() must be used within a Provider');
+  if (context === undefined) {
+    throw new Error('usePalette() must be used within a Provider.');
   }
 
   return context;

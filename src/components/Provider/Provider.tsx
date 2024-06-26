@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import { PaletteType, ThemeType } from '../../types';
 import { PaletteContext } from '../../contexts/Palette';
-import { ThemeContext } from 'styled-components';
+import { ThemeContext } from '../../contexts/Theme';
 
 interface ProviderProps {
   children: ReactNode;
