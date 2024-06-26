@@ -1,3 +1,2 @@
 export * from './components';
-export * from './types';
-export * from './utils';
+export * as Type from './types';

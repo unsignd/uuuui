@@ -1,14 +1,10 @@
-export enum ThemeType {
-  LIGHT,
-  DARK,
+export enum Curve {
+  NORMAL = 'normal',
+  FULL = 'full',
 }
 
-export enum CurveType {
-  SLIGHT,
-  FULL,
-}
-
-export enum BorderType {
-  INVISIBLE,
-  VISIBLE,
+export enum Border {
+  INVISIBLE = 'invisible',
+  ON_HOVER = 'on_hover',
+  VISIBLE = 'visible',
 }
