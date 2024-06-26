@@ -1,34 +1,90 @@
 import { css } from '@emotion/css';
 import { ReactNode } from 'react';
-import { BorderType, CurveType } from '../../types';
+import { Type } from '../..';
+import { toRem } from '../../utils/unit';
 
 type ButtonProps = {
   children: ReactNode;
 
-  border?: BorderType;
-  curve?: CurveType;
+  border?: Type.Border;
+  curve?: Type.Curve;
 };
 
 export default function Button({
   children,
-  border = BorderType.INVISIBLE,
-  curve = CurveType.SLIGHT,
+  border = Type.Border.INVISIBLE,
+  curve = Type.Curve.NORMAL,
 }: ButtonProps) {
   return (
     <button
       className={css`
-        height: 2.5rem;
+        height: ${{
+          [Type.Border.VISIBLE]: toRem(40),
+          [Type.Border.ON_HOVER]: toRem(40),
+          [Type.Border.INVISIBLE]: toRem(40),
+        }[border]}rem;
 
-        padding: 0 0.875rem;
+        padding: 0
+          ${{
+            [Type.Border.VISIBLE]: toRem(13),
+            [Type.Border.ON_HOVER]: toRem(14),
+            [Type.Border.INVISIBLE]: toRem(14),
+          }[border]}rem;
 
+        color: ${{
+          [Type.Border.VISIBLE]: `#000`,
+          [Type.Border.ON_HOVER]: '#000',
+          [Type.Border.INVISIBLE]: '#fff',
+        }[border]};
+        background-color: ${{
+          [Type.Border.VISIBLE]: '#fff',
+          [Type.Border.ON_HOVER]: '#fff',
+          [Type.Border.INVISIBLE]: '#08090a',
+        }[border]};
+
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         border: ${{
-          [BorderType.VISIBLE]: `0.063rem solid #000`,
-          [BorderType.INVISIBLE]: 'none',
+          [Type.Border.VISIBLE]: `${toRem(1)}rem solid #ced0d6`,
+          [Type.Border.ON_HOVER]: 'none',
+          [Type.Border.INVISIBLE]: 'none',
         }[border]};
         border-radius: ${{
-          [CurveType.SLIGHT]: 0.625,
-          [CurveType.FULL]: 1.25,
+          [Type.Curve.NORMAL]: toRem(10),
+          [Type.Curve.FULL]: toRem(20),
         }[curve]}rem;
+
+        transition: scale 150ms ease-in-out 50ms;
+
+        cursor: pointer;
+
+        &:hover {
+          height: ${{
+            [Type.Border.VISIBLE]: toRem(40),
+            [Type.Border.ON_HOVER]: toRem(40),
+            [Type.Border.INVISIBLE]: toRem(40),
+          }[border]}rem;
+
+          padding: 0
+            ${{
+              [Type.Border.VISIBLE]: toRem(13),
+              [Type.Border.ON_HOVER]: toRem(13),
+              [Type.Border.INVISIBLE]: toRem(14),
+            }[border]}rem;
+
+          border: ${{
+            [Type.Border.VISIBLE]: `${toRem(1)}rem solid #ced0d6`,
+            [Type.Border.ON_HOVER]: `${toRem(1)}rem solid #ced0d6`,
+            [Type.Border.INVISIBLE]: 'none',
+          }[border]};
+
+          scale: 1.05;
+        }
+
+        &:active {
+          scale: 1;
+        }
       `}
     >
       {children}
