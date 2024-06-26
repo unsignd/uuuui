@@ -48,9 +48,6 @@ const Wrapper = styled.button<{
   transition: scale 100ms ease-in-out;
 
   cursor: pointer;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 
   &:hover {
     border: ${(props) =>
@@ -72,6 +69,9 @@ const Wrapper = styled.button<{
   }
 
   & * {
+    margin: 0;
+    padding: 0;
+
     color: ${(props) =>
       ({
         low: props.$colorset['base.500'],
