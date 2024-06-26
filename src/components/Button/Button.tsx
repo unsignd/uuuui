@@ -1,9 +1,8 @@
 import styled from 'styled-components';
-import { css } from '@emotion/css';
-import { ButtonHTMLAttributes, ReactNode, useState } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { toRem } from '../../utils';
-import { BorderType, CurveType, PaletteType } from '../../types';
-import Configs from '../../configs';
+import { BorderType, CurveType, ColorsetType } from '../../types';
+import { usePalette, useTheme } from '../../contexts';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
@@ -16,7 +15,7 @@ const Wrapper = styled.button<{
   $border: BorderType;
   $curve: CurveType;
 
-  $palette: PaletteType;
+  $colorset: ColorsetType;
 }>`
   height: ${toRem(40)}rem;
 
@@ -30,20 +29,20 @@ const Wrapper = styled.button<{
 
   color: ${(props) =>
     ({
-      visible: props.$palette['base.500'],
-      on_hover: props.$palette['base.500'],
-      invisible: props.$palette['base.100'],
+      visible: props.$colorset['base.500'],
+      on_hover: props.$colorset['base.500'],
+      invisible: props.$colorset['base.100'],
     }[props.$border])};
   background-color: ${(props) =>
     ({
-      visible: props.$palette['base.100'],
-      on_hover: props.$palette['base.100'],
-      invisible: props.$palette['base.500'],
+      visible: props.$colorset['base.100'],
+      on_hover: props.$colorset['base.100'],
+      invisible: props.$colorset['base.500'],
     }[props.$border])};
 
   border: ${(props) =>
     ({
-      visible: `${toRem(1)}rem solid ${props.$palette['base.300']}`,
+      visible: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
       on_hover: 'none',
       invisible: 'none',
     }[props.$border])};
@@ -71,8 +70,8 @@ const Wrapper = styled.button<{
 
     border: ${(props) =>
       ({
-        visible: `${toRem(1)}rem solid ${props.$palette['base.300']}`,
-        on_hover: `${toRem(1)}rem solid ${props.$palette['base.300']}`,
+        visible: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        on_hover: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
         invisible: 'none',
       }[props.$border])};
 
@@ -90,11 +89,14 @@ export default function Button({
   curve = 'normal',
   ...attr
 }: ButtonProps) {
+  const { palette } = usePalette();
+  const { theme } = useTheme();
+
   return (
     <Wrapper
       $border={border}
       $curve={curve}
-      $palette={Configs.palette[Configs.theme]}
+      $colorset={palette[theme]}
       {...attr}
     >
       {children}
