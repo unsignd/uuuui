@@ -2,7 +2,7 @@ import { css } from '@emotion/css';
 import { ReactNode } from 'react';
 import { toRem } from '../../utils';
 import { BorderType, CurveType } from '../../types';
-import { palette, theme } from '../../configs';
+import Configs from '../../configs';
 
 type ButtonProps = {
   children: ReactNode;
@@ -15,7 +15,10 @@ export default function Button({
   children,
   border = 'invisible',
   curve = 'normal',
+  ...attr
 }: ButtonProps) {
+  const palette = Configs.palette[Configs.theme];
+
   return (
     <button
       className={css`
@@ -29,22 +32,22 @@ export default function Button({
           }[border]}rem;
 
         color: ${{
-          visible: palette[theme]['base.500'],
-          on_hover: palette[theme]['base.500'],
-          invisible: palette[theme]['base.100'],
+          visible: palette['base.500'],
+          on_hover: palette['base.500'],
+          invisible: palette['base.100'],
         }[border]};
 
         background-color: ${{
-          visible: palette[theme]['base.100'],
-          on_hover: palette[theme]['base.100'],
-          invisible: palette[theme]['base.500'],
+          visible: palette['base.100'],
+          on_hover: palette['base.100'],
+          invisible: palette['base.500'],
         }[border]};
 
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         border: ${{
-          visible: `${toRem(1)}rem solid ${palette[theme]['base.300']}`,
+          visible: `${toRem(1)}rem solid ${palette['base.300']}`,
           on_hover: 'none',
           invisible: 'none',
         }[border]};
@@ -66,8 +69,8 @@ export default function Button({
             }[border]}rem;
 
           border: ${{
-            visible: `${toRem(1)}rem solid ${palette[theme]['base.300']}`,
-            on_hover: `${toRem(1)}rem solid ${palette[theme]['base.300']}`,
+            visible: `${toRem(1)}rem solid ${palette['base.300']}`,
+            on_hover: `${toRem(1)}rem solid ${palette['base.300']}`,
             invisible: 'none',
           }[border]};
 
@@ -78,6 +81,7 @@ export default function Button({
           scale: 1;
         }
       `}
+      {...attr}
     >
       {children}
     </button>
