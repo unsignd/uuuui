@@ -5,11 +5,15 @@ export function toRem(px: number): number {
   return px / 16;
 }
 
-export function getPalette(): PaletteType {
+export function getPalette(): {
+  [theme in ThemeType]: PaletteType;
+} {
   return Configs.palette;
 }
 
-export function setPalette(palette: PaletteType): void {
+export function setPalette(palette: {
+  [theme in ThemeType]: PaletteType;
+}): void {
   Configs.palette = palette;
 }
 

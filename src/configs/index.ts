@@ -1,7 +1,9 @@
 import { PaletteType, ThemeType } from '../types';
 
 export default class Configs {
-  static palette: PaletteType = {
+  static palette: {
+    [theme in ThemeType]: PaletteType;
+  } = {
     light: {
       'base.100': '#f2f3f5',
       'base.200': '',

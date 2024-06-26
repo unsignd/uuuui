@@ -1,6 +1,6 @@
 {
   "name": "@unsignd/uuuui",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -20,8 +20,9 @@
     "typescript": "^5.5.2"
   },
   "dependencies": {
-    "@emotion/css": "^11.11.2",
     "@types/react": "^18.3.3",
-    "react": "18.3.1"
+    "@unsignd/uuuui": "^0.0.2",
+    "react": "18.3.1",
+    "styled-components": "^6.1.11"
   }
 }
