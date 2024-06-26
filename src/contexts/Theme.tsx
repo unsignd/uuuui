@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { ThemeContextType } from '../types';
+import { ThemeContextType } from '../types/provider';
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(
   undefined

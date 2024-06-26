@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { PaletteContextType } from '../types';
+import { PaletteContextType } from '../types/provider';
 
 export const PaletteContext = createContext<PaletteContextType | undefined>(
   undefined

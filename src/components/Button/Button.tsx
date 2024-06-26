@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { toRem } from '../../utils';
-import { BorderType, CurveType, ColorsetType } from '../../types';
+import { BorderType, CurveType } from '../../types/style';
+import { ColorsetType } from '../../types/theme';
 import { usePalette, useTheme } from '../../contexts';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
