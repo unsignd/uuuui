@@ -57,7 +57,7 @@ const Wrapper = styled.button<{
         high: 'none',
       }[props.$priority])};
 
-    scale: 1.025;
+    scale: 1.04;
   }
 
   &:active {
