@@ -8,8 +8,6 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(
 export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
 
-  console.log(context);
-
   if (context === undefined) {
     throw new Error('useTheme() must be used within a Provider.');
   }

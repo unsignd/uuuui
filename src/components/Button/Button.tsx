@@ -30,27 +30,27 @@ const Wrapper = styled.button<{
 
   color: ${(props) =>
     ({
-      high: props.$colorset['base.500'],
+      low: props.$colorset['base.500'],
       medium: props.$colorset['base.500'],
-      low: props.$colorset['base.100'],
+      high: props.$colorset['base.100'],
     }[props.$priority])};
   background-color: ${(props) =>
     ({
-      high: props.$colorset['base.100'],
+      low: props.$colorset['base.100'],
       medium: props.$colorset['base.100'],
-      low: props.$colorset['base.500'],
+      high: props.$colorset['base.500'],
     }[props.$priority])};
 
   border: ${(props) =>
     ({
-      high: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+      low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
       medium: 'none',
-      low: 'none',
+      high: 'none',
     }[props.$priority])};
   border-radius: ${(props) =>
     ({
-      large: toRem(10),
-      small: toRem(20),
+      small: toRem(10),
+      large: toRem(20),
     }[props.$curve])}rem;
 
   transition: scale 100ms ease-in-out;
@@ -64,16 +64,16 @@ const Wrapper = styled.button<{
     padding: 0
       ${(props) =>
         ({
-          high: toRem(13),
+          low: toRem(13),
           medium: toRem(13),
-          low: toRem(14),
+          high: toRem(14),
         }[props.$priority])}rem;
 
     border: ${(props) =>
       ({
-        high: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
         medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
-        low: 'none',
+        high: 'none',
       }[props.$priority])};
 
     scale: 1.025;
