@@ -1,10 +1,5 @@
-export enum Curve {
-  NORMAL = 'normal',
-  FULL = 'full',
-}
+export type ThemeType = 'visible' | 'invisible';
 
-export enum Border {
-  INVISIBLE = 'invisible',
-  ON_HOVER = 'on_hover',
-  VISIBLE = 'visible',
-}
+export type CurveType = 'normal' | 'full';
+
+export type BorderType = 'visible' | 'on_hover' | 'invisible';
