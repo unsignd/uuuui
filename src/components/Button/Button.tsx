@@ -2,6 +2,7 @@ import { css } from '@emotion/css';
 import { ReactNode } from 'react';
 import { toRem } from '../../utils';
 import { BorderType, CurveType } from '../../types';
+import { palette, theme } from '../../configs';
 
 type ButtonProps = {
   children: ReactNode;
@@ -28,22 +29,22 @@ export default function Button({
           }[border]}rem;
 
         color: ${{
-          visible: `#08090a`,
-          on_hover: `#08090a`,
-          invisible: `#fff`,
+          visible: palette[theme]['base.500'],
+          on_hover: palette[theme]['base.500'],
+          invisible: palette[theme]['base.100'],
         }[border]};
 
         background-color: ${{
-          visible: `#fff`,
-          on_hover: `#fff`,
-          invisible: `#08090a`,
+          visible: palette[theme]['base.100'],
+          on_hover: palette[theme]['base.100'],
+          invisible: palette[theme]['base.500'],
         }[border]};
 
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         border: ${{
-          visible: `${toRem(1)}rem solid #ced0d6`,
+          visible: `${toRem(1)}rem solid ${palette[theme]['base.300']}`,
           on_hover: 'none',
           invisible: 'none',
         }[border]};
@@ -65,8 +66,8 @@ export default function Button({
             }[border]}rem;
 
           border: ${{
-            visible: `${toRem(1)}rem solid #ced0d6`,
-            on_hover: `${toRem(1)}rem solid #ced0`,
+            visible: `${toRem(1)}rem solid ${palette[theme]['base.300']}`,
+            on_hover: `${toRem(1)}rem solid ${palette[theme]['base.300']}`,
             invisible: 'none',
           }[border]};
 
