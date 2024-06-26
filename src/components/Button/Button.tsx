@@ -20,20 +20,12 @@ const Wrapper = styled.button<{
 }>`
   height: ${toRem(40)}rem;
 
-  padding: 0
-    ${(props) =>
-      ({
-        high: toRem(13),
-        medium: toRem(14),
-        low: toRem(14),
-      }[props.$priority])}rem;
+  padding: 0 ${toRem(14)}rem;
 
-  color: ${(props) =>
-    ({
-      low: props.$colorset['base.500'],
-      medium: props.$colorset['base.500'],
-      high: props.$colorset['base.100'],
-    }[props.$priority])};
+  display: flex;
+  align-items: center;
+  gap: ${toRem(7)}rem;
+
   background-color: ${(props) =>
     ({
       low: props.$colorset['base.100'],
@@ -43,8 +35,8 @@ const Wrapper = styled.button<{
 
   border: ${(props) =>
     ({
-      low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
-      medium: 'none',
+      low: 'none',
+      medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
       high: 'none',
     }[props.$priority])};
   border-radius: ${(props) =>
@@ -61,14 +53,6 @@ const Wrapper = styled.button<{
   -webkit-box-sizing: border-box;
 
   &:hover {
-    padding: 0
-      ${(props) =>
-        ({
-          low: toRem(13),
-          medium: toRem(13),
-          high: toRem(14),
-        }[props.$priority])}rem;
-
     border: ${(props) =>
       ({
         low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
@@ -81,6 +65,19 @@ const Wrapper = styled.button<{
 
   &:active {
     scale: 1;
+  }
+
+  & svg {
+    height: 16px;
+  }
+
+  & * {
+    color: ${(props) =>
+      ({
+        low: props.$colorset['base.500'],
+        medium: props.$colorset['base.500'],
+        high: props.$colorset['base.100'],
+      }[props.$priority])};
   }
 `;
 
