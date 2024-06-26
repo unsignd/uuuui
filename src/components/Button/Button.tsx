@@ -1,15 +1,15 @@
 import { css } from '@emotion/css';
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { toRem } from '../../utils';
 import { BorderType, CurveType } from '../../types';
 import Configs from '../../configs';
 
-type ButtonProps = {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 
   border?: BorderType;
   curve?: CurveType;
-};
+}
 
 export default function Button({
   children,
@@ -21,6 +21,7 @@ export default function Button({
 
   return (
     <button
+      {...attr}
       className={css`
         height: ${toRem(40)}rem;
 
@@ -81,7 +82,6 @@ export default function Button({
           scale: 1;
         }
       `}
-      {...attr}
     >
       {children}
     </button>
