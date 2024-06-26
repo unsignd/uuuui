@@ -5,10 +5,14 @@ import { ThemeContext } from '../../contexts/Theme';
 
 interface ProviderProps {
   children: ReactNode;
+
+  palette?: PaletteType;
+  theme?: ThemeType;
 }
 
-export default function Provider({ children }: ProviderProps) {
-  const [palette, setPalette] = useState<PaletteType>({
+export default function Provider({
+  children,
+  palette: initialPalette = {
     light: {
       'base.100': '#f2f3f5',
       'base.200': '',
@@ -23,8 +27,11 @@ export default function Provider({ children }: ProviderProps) {
       'base.400': '',
       'base.500': '#f2f3f5',
     },
-  });
-  const [theme, setTheme] = useState<ThemeType>('light');
+  },
+  theme: initialTheme = 'light',
+}: ProviderProps) {
+  const [palette, setPalette] = useState<PaletteType>(initialPalette);
+  const [theme, setTheme] = useState<ThemeType>(initialTheme);
 
   return (
     <PaletteContext.Provider value={{ palette, setPalette }}>
