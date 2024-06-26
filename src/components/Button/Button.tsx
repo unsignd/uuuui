@@ -55,7 +55,7 @@ export default function Button({
           [Type.Curve.FULL]: toRem(20),
         }[curve]}rem;
 
-        transition: scale 150ms ease-in-out 50ms;
+        transition: scale 100ms ease-in-out;
 
         cursor: pointer;
 
@@ -79,7 +79,7 @@ export default function Button({
             [Type.Border.INVISIBLE]: 'none',
           }[border]};
 
-          scale: 1.05;
+          scale: 1.025;
         }
 
         &:active {
