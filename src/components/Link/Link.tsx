@@ -29,10 +29,6 @@ const Wrapper = styled(_Link)<{
       high: props.$colorset['base.500'],
     }[props.$priority])};
 
-  & svg {
-    height: 16px;
-  }
-
   & * {
     margin: 0;
     padding: 0;
