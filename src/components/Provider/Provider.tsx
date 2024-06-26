@@ -2,7 +2,6 @@ import { ReactNode, useState } from 'react';
 import { PaletteType, ThemeType } from '../../types/theme';
 import { PaletteContext } from '../../contexts/Palette';
 import { ThemeContext } from '../../contexts/Theme';
-import { BrowserRouter } from 'react-router-dom';
 
 interface ProviderProps {
   children: ReactNode;
@@ -35,12 +34,10 @@ export default function Provider({
   const [theme, setTheme] = useState<ThemeType>(initialTheme);
 
   return (
-    <BrowserRouter>
-      <PaletteContext.Provider value={{ palette, setPalette }}>
-        <ThemeContext.Provider value={{ theme, setTheme }}>
-          {children}
-        </ThemeContext.Provider>
-      </PaletteContext.Provider>
-    </BrowserRouter>
+    <PaletteContext.Provider value={{ palette, setPalette }}>
+      <ThemeContext.Provider value={{ theme, setTheme }}>
+        {children}
+      </ThemeContext.Provider>
+    </PaletteContext.Provider>
   );
 }

@@ -13,7 +13,7 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   priority?: PriorityType;
 }
 
-const Wrapper = styled(_Link)<{
+const Container = styled.a<{
   $priority: PriorityType;
 
   $colorset: ColorsetType;
@@ -22,6 +22,7 @@ const Wrapper = styled(_Link)<{
   align-items: center;
   gap: ${toRem(7)}rem;
 
+  text-decoration: underline;
   text-decoration-color: ${(props) =>
     ({
       low: props.$colorset['base.400'],
@@ -52,8 +53,13 @@ export default function Link({
   const { theme } = useTheme();
 
   return (
-    <Wrapper $priority={priority} $colorset={palette[theme]} to={to} {...attr}>
+    <Container
+      $priority={priority}
+      $colorset={palette[theme]}
+      href={to}
+      {...attr}
+    >
       {children}
-    </Wrapper>
+    </Container>
   );
 }
