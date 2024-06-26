@@ -1,3 +1,3 @@
-export type CurveType = 'normal' | 'full';
+export type BorderCurveType = 'large' | 'small';
 
-export type BorderType = 'visible' | 'on_hover' | 'invisible';
+export type PriorityType = 'high' | 'medium' | 'low';

@@ -1,20 +1,20 @@
 import styled from 'styled-components';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 import { toRem } from '../../utils';
-import { BorderType, CurveType } from '../../types/style';
-import { ColorsetType } from '../../types/theme';
+import { PriorityType, BorderCurveType } from '../../types';
+import { ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
 
-  border?: BorderType;
-  curve?: CurveType;
+  priority?: PriorityType;
+  curve?: BorderCurveType;
 }
 
 const Wrapper = styled.button<{
-  $border: BorderType;
-  $curve: CurveType;
+  $priority: PriorityType;
+  $curve: BorderCurveType;
 
   $colorset: ColorsetType;
 }>`
@@ -23,34 +23,34 @@ const Wrapper = styled.button<{
   padding: 0
     ${(props) =>
       ({
-        visible: toRem(13),
-        on_hover: toRem(14),
-        invisible: toRem(14),
-      }[props.$border])}rem;
+        high: toRem(13),
+        medium: toRem(14),
+        low: toRem(14),
+      }[props.$priority])}rem;
 
   color: ${(props) =>
     ({
-      visible: props.$colorset['base.500'],
-      on_hover: props.$colorset['base.500'],
-      invisible: props.$colorset['base.100'],
-    }[props.$border])};
+      high: props.$colorset['base.500'],
+      medium: props.$colorset['base.500'],
+      low: props.$colorset['base.100'],
+    }[props.$priority])};
   background-color: ${(props) =>
     ({
-      visible: props.$colorset['base.100'],
-      on_hover: props.$colorset['base.100'],
-      invisible: props.$colorset['base.500'],
-    }[props.$border])};
+      high: props.$colorset['base.100'],
+      medium: props.$colorset['base.100'],
+      low: props.$colorset['base.500'],
+    }[props.$priority])};
 
   border: ${(props) =>
     ({
-      visible: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
-      on_hover: 'none',
-      invisible: 'none',
-    }[props.$border])};
+      high: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+      medium: 'none',
+      low: 'none',
+    }[props.$priority])};
   border-radius: ${(props) =>
     ({
-      normal: toRem(10),
-      full: toRem(20),
+      large: toRem(10),
+      small: toRem(20),
     }[props.$curve])}rem;
 
   transition: scale 100ms ease-in-out;
@@ -64,17 +64,17 @@ const Wrapper = styled.button<{
     padding: 0
       ${(props) =>
         ({
-          visible: toRem(13),
-          on_hover: toRem(13),
-          invisible: toRem(14),
-        }[props.$border])}rem;
+          high: toRem(13),
+          medium: toRem(13),
+          low: toRem(14),
+        }[props.$priority])}rem;
 
     border: ${(props) =>
       ({
-        visible: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
-        on_hover: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
-        invisible: 'none',
-      }[props.$border])};
+        high: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        low: 'none',
+      }[props.$priority])};
 
     scale: 1.025;
   }
@@ -86,8 +86,8 @@ const Wrapper = styled.button<{
 
 export default function Button({
   children,
-  border = 'invisible',
-  curve = 'normal',
+  priority = 'medium',
+  curve = 'small',
   ...attr
 }: ButtonProps) {
   const { palette } = usePalette();
@@ -95,7 +95,7 @@ export default function Button({
 
   return (
     <Wrapper
-      $border={border}
+      $priority={priority}
       $curve={curve}
       $colorset={palette[theme]}
       {...attr}
