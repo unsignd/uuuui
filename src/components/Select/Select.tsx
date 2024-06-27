@@ -21,7 +21,11 @@ interface SelectProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.button<{
+const Container = styled.div`
+  position: relative;
+`;
+
+const Button = styled.button<{
   $priority: PriorityType;
   $curve: BorderCurveType;
 
@@ -36,15 +40,6 @@ const Container = styled.button<{
   justify-content: center;
   gap: ${toRem(7)}rem;
 
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-size: ${toRem(14)}rem;
-
-  color: ${(props) =>
-    ({
-      low: props.$colorset['base.500'],
-      medium: props.$colorset['base.500'],
-      high: props.$colorset['base.100'],
-    }[props.$priority])};
   background-color: ${(props) =>
     ({
       low: props.$colorset['base.100'],
@@ -91,13 +86,55 @@ const Container = styled.button<{
   }
 `;
 
-const Text = styled.p`
+const Text = styled.p<{
+  $priority: PriorityType;
+
+  $colorset: ColorsetType;
+}>`
   margin: 0;
 
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-size: ${toRem(14)}rem;
   text-overflow: ellipsis;
+
+  color: ${(props) =>
+    ({
+      low: props.$colorset['base.500'],
+      medium: props.$colorset['base.500'],
+      high: props.$colorset['base.100'],
+    }[props.$priority])};
 
   overflow: hidden;
   white-space: nowrap;
+`;
+
+const DropdownContainer = styled.div<{
+  $colorset: ColorsetType;
+}>`
+  width: ${toRem(240)}rem;
+
+  padding: ${toRem(7)}rem 0;
+
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+
+  margin-top: ${toRem(7)}rem;
+
+  border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
+  border-radius: ${toRem(10)}rem;
+
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+`;
+
+const DropdownItem = styled.div<{
+  $colorset: ColorsetType;
+}>`
+  width: 100%;
+  height: ${toRem(40)}rem;
 `;
 
 export default function Select({
@@ -111,14 +148,29 @@ export default function Select({
   const { theme } = useTheme();
 
   return (
-    <Container
-      $priority={priority}
-      $curve={curve}
-      $colorset={palette[theme]}
-      {...attr}
-    >
-      <Text>{options[defaultOption].name}</Text>
-      <ArrowDownSVG />
+    <Container>
+      <Button
+        $priority={priority}
+        $curve={curve}
+        $colorset={palette[theme]}
+        {...attr}
+      >
+        <Text $priority={priority} $colorset={palette[theme]}>
+          {options[defaultOption].name}
+        </Text>
+        <ArrowDownSVG />
+      </Button>
+      <DropdownContainer $colorset={palette[theme]}>
+        {Object.keys(options).map((key) => (
+          <DropdownItem
+            key={key}
+            $colorset={palette[theme]}
+            onClick={() => options[key].onClick()}
+          >
+            {options[key].name}
+          </DropdownItem>
+        ))}
+      </DropdownContainer>
     </Container>
   );
 }

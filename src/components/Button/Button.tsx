@@ -33,9 +33,6 @@ const Container = styled.button<{
   justify-content: center;
   gap: ${toRem(7)}rem;
 
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-size: ${toRem(14)}rem;
-
   color: ${(props) =>
     ({
       low: props.$colorset['base.500'],
@@ -94,6 +91,8 @@ const Container = styled.button<{
 const Text = styled.p`
   margin: 0;
 
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-size: ${toRem(14)}rem;
   text-overflow: ellipsis;
 
   overflow: hidden;
