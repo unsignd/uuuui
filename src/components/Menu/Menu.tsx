@@ -7,7 +7,7 @@ import { toRem } from '../../utils';
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { ReactComponent as CheckSVG } from '../../assets/check_16.svg';
 
-interface SelectProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: undefined;
   options: {
     [key: string]: {
@@ -174,13 +174,13 @@ const DropdownText = styled.p<{
   white-space: nowrap;
 `;
 
-export default function Select({
+export default function Menu({
   options,
   selected = Object.keys(options)[0],
   priority = 'medium',
   curve = 'medium',
   ...attr
-}: SelectProps) {
+}: MenuProps) {
   const { palette } = usePalette();
   const { theme } = useTheme();
 
