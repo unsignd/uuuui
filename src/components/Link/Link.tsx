@@ -40,6 +40,15 @@ const Container = styled.a<{
     }[props.$priority])};
 `;
 
+const Text = styled.p`
+  margin: 0;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 export default function Link({
   children,
   to,
@@ -56,7 +65,7 @@ export default function Link({
       href={to}
       {...attr}
     >
-      {children}
+      <Text>{children}</Text>
     </Container>
   );
 }

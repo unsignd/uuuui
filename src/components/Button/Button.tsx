@@ -91,6 +91,15 @@ const Container = styled.button<{
   }
 `;
 
+const Text = styled.p`
+  margin: 0;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 export default function Button({
   children,
   icon: Icon,
@@ -111,7 +120,7 @@ export default function Button({
       {...attr}
     >
       {Icon ? <Icon /> : undefined}
-      {children}
+      <Text>{children}</Text>
     </Container>
   );
 }
