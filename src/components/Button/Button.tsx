@@ -57,7 +57,7 @@ const Container = styled.button<{
     }[props.$priority])};
   border-radius: ${(props) =>
     ({
-      small: toRem(10),
+      medium: toRem(10),
       large: toRem(20),
     }[props.$curve])}rem;
 
@@ -95,7 +95,7 @@ export default function Button({
   children,
   icon: Icon,
   priority = 'medium',
-  curve = 'small',
+  curve = 'medium',
   ...attr
 }: ButtonProps) {
   const { palette } = usePalette();

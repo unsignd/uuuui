@@ -1,3 +1,3 @@
-export type BorderCurveType = 'large' | 'small';
+export type BorderCurveType = 'large' | 'medium';
 
 export type PriorityType = 'high' | 'medium' | 'low';

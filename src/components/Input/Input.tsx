@@ -29,10 +29,11 @@ const Container = styled.div<{
   border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
   border-radius: ${(props) =>
     ({
-      small: toRem(10),
+      medium: toRem(10),
       large: toRem(20),
     }[props.$curve])}rem;
 
+  overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -64,7 +65,6 @@ const InputField = styled.input<{
   border: none;
 
   outline: none;
-  overflow: hidden;
 
   &::placeholder {
     color: ${(props) => props.$colorset['base.400']};
@@ -72,7 +72,7 @@ const InputField = styled.input<{
 `;
 
 export default function Input({
-  curve = 'small',
+  curve = 'medium',
   icon: Icon,
   ...attr
 }: InputProps) {
