@@ -30,8 +30,38 @@ const Container = styled.div<{
       large: toRem(20),
     }[props.$curve])}rem;
 
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+
   & svg {
-    height: 16px;
+    height: 18px;
+
+    color: ${(props) => props.$colorset['base.400']};
+  }
+
+  & * {
+    margin: 0;
+    padding: 0;
+  }
+`;
+
+const InputField = styled.input<{
+  $colorset: ColorsetType;
+}>`
+  height: ${toRem(40)}rem;
+
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-size: 14px;
+
+  color: ${(props) => props.$colorset['base.500']};
+  background-color: transparent;
+
+  border: none;
+  outline: none;
+
+  ::placeholder {
+    color: ${(props) => props.$colorset['base.400']};
   }
 `;
 
@@ -46,6 +76,7 @@ export default function Input({
   return (
     <Container $curve={curve} $colorset={palette[theme]}>
       {Icon ? <Icon /> : undefined}
+      <InputField $colorset={palette[theme]} {...attr} />
     </Container>
   );
 }

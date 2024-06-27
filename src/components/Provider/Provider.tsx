@@ -14,10 +14,10 @@ export default function Provider({
   children,
   palette: initialPalette = {
     light: {
-      'base.100': '#f2f3f5',
+      'base.100': '#ffffff',
       'base.200': '',
-      'base.300': '#ced0d6',
-      'base.400': '#8c94a3',
+      'base.300': '#dadce0',
+      'base.400': '#a0a4ad',
       'base.500': '#08090a',
     },
     dark: {
@@ -25,7 +25,7 @@ export default function Provider({
       'base.200': '',
       'base.300': '#202329',
       'base.400': '#4d525c',
-      'base.500': '#f2f3f5',
+      'base.500': '#ffffff',
     },
   },
   theme: initialTheme = 'light',

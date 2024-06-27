@@ -26,6 +26,9 @@ const Container = styled.button<{
   align-items: center;
   gap: ${toRem(7)}rem;
 
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-size: 14px;
+
   background-color: ${(props) =>
     ({
       low: props.$colorset['base.100'],
@@ -47,6 +50,9 @@ const Container = styled.button<{
 
   transition: scale 100ms ease-in-out;
 
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   cursor: pointer;
 
   &:hover {
@@ -65,7 +71,7 @@ const Container = styled.button<{
   }
 
   & svg {
-    height: 16px;
+    height: 18px;
   }
 
   & * {
