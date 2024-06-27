@@ -6,8 +6,9 @@ import { ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children: ReactNode;
+  children?: string;
 
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   priority?: PriorityType;
   curve?: BorderCurveType;
 }
@@ -29,6 +30,12 @@ const Container = styled.button<{
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
 
+  color: ${(props) =>
+    ({
+      low: props.$colorset['base.500'],
+      medium: props.$colorset['base.500'],
+      high: props.$colorset['base.100'],
+    }[props.$priority])};
   background-color: ${(props) =>
     ({
       low: props.$colorset['base.100'],
@@ -75,22 +82,11 @@ const Container = styled.button<{
 
     flex-shrink: 0;
   }
-
-  & * {
-    margin: 0;
-    padding: 0;
-
-    color: ${(props) =>
-      ({
-        low: props.$colorset['base.500'],
-        medium: props.$colorset['base.500'],
-        high: props.$colorset['base.100'],
-      }[props.$priority])};
-  }
 `;
 
 export default function Button({
   children,
+  icon: Icon,
   priority = 'medium',
   curve = 'small',
   ...attr
@@ -105,6 +101,7 @@ export default function Button({
       $colorset={palette[theme]}
       {...attr}
     >
+      {Icon ? <Icon /> : undefined}
       {children}
     </Container>
   );

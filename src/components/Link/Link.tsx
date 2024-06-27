@@ -7,7 +7,7 @@ import { Link as _Link } from 'react-router-dom';
 import { toRem } from '../../utils';
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
-  children: ReactNode;
+  children: string;
 
   to: string;
   priority?: PriorityType;
@@ -32,17 +32,12 @@ const Container = styled.a<{
       high: props.$colorset['base.500'],
     }[props.$priority])};
 
-  & * {
-    margin: 0;
-    padding: 0;
-
-    color: ${(props) =>
-      ({
-        low: props.$colorset['base.400'],
-        medium: props.$colorset['base.500'],
-        high: props.$colorset['base.500'],
-      }[props.$priority])};
-  }
+  color: ${(props) =>
+    ({
+      low: props.$colorset['base.400'],
+      medium: props.$colorset['base.500'],
+      high: props.$colorset['base.500'],
+    }[props.$priority])};
 `;
 
 export default function Link({

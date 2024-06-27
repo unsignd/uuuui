@@ -42,11 +42,6 @@ const Container = styled.div<{
 
     color: ${(props) => props.$colorset['base.400']};
   }
-
-  & * {
-    margin: 0;
-    padding: 0;
-  }
 `;
 
 const InputField = styled.input<{
