@@ -36,7 +36,9 @@ const Container = styled.div<{
   -webkit-box-sizing: border-box;
 
   & svg {
-    height: ${toRem(18)}rem;
+    height: ${toRem(16)}rem;
+
+    flex-shrink: 0;
 
     color: ${(props) => props.$colorset['base.400']};
   }

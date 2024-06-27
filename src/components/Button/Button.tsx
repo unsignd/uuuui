@@ -71,7 +71,9 @@ const Container = styled.button<{
   }
 
   & svg {
-    height: ${toRem(18)}rem;
+    height: ${toRem(16)}rem;
+
+    flex-shrink: 0;
   }
 
   & * {
