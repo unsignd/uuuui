@@ -12,7 +12,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Wrapper = styled.button<{
+const Container = styled.button<{
   $priority: PriorityType;
   $curve: BorderCurveType;
 
@@ -91,13 +91,13 @@ export default function Button({
   const { theme } = useTheme();
 
   return (
-    <Wrapper
+    <Container
       $priority={priority}
       $curve={curve}
       $colorset={palette[theme]}
       {...attr}
     >
       {children}
-    </Wrapper>
+    </Container>
   );
 }
