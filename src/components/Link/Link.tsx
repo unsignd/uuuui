@@ -23,7 +23,7 @@ const Container = styled.a<{
   gap: ${toRem(7)}rem;
 
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-size: 14px;
+  font-size: ${toRem(14)}rem;
   text-decoration: underline;
   text-decoration-color: ${(props) =>
     ({

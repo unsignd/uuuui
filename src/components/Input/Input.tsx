@@ -11,11 +11,12 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Container = styled.div<{
   $curve: BorderCurveType;
+
   $colorset: ColorsetType;
 }>`
   height: ${toRem(40)}rem;
 
-  padding: 0 ${toRem(14)}rem;
+  padding-left: ${toRem(14)}rem;
 
   display: flex;
   align-items: center;
@@ -35,7 +36,7 @@ const Container = styled.div<{
   -webkit-box-sizing: border-box;
 
   & svg {
-    height: 18px;
+    height: ${toRem(18)}rem;
 
     color: ${(props) => props.$colorset['base.400']};
   }
@@ -47,18 +48,24 @@ const Container = styled.div<{
 `;
 
 const InputField = styled.input<{
+  $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+
   $colorset: ColorsetType;
 }>`
   height: ${toRem(40)}rem;
 
+  padding: 0 ${toRem(14)}rem 0 ${(props) => (props.$icon ? toRem(7) : 0)}rem;
+
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-size: 14px;
+  font-size: ${toRem(14)}rem;
 
   color: ${(props) => props.$colorset['base.500']};
   background-color: transparent;
 
   border: none;
+
   outline: none;
+  overflow: hidden;
 
   ::placeholder {
     color: ${(props) => props.$colorset['base.400']};

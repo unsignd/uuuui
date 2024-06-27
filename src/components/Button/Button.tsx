@@ -27,7 +27,7 @@ const Container = styled.button<{
   gap: ${toRem(7)}rem;
 
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-size: 14px;
+  font-size: ${toRem(14)}rem;
 
   background-color: ${(props) =>
     ({
@@ -71,7 +71,7 @@ const Container = styled.button<{
   }
 
   & svg {
-    height: 18px;
+    height: ${toRem(18)}rem;
   }
 
   & * {
