@@ -4,8 +4,18 @@ import { BorderCurveType, ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
+import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
+
 interface DropdownProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: undefined;
+  options: {
+    [key: string | number]: {
+      name: string;
+      onClick: () => void;
+    };
+  };
+
+  defaultOption: string | number;
 
   curve?: BorderCurveType;
 }
@@ -37,6 +47,8 @@ const Container = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
+  transition: scale 100ms ease-in-out;
+
   overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -50,13 +62,27 @@ const Container = styled.button<{
   &:active {
     scale: 1;
   }
+
+  & svg {
+    color: ${(props) => props.$colorset['base.400']};
+
+    flex-shrink: 0;
+  }
 `;
 
-export default function Dropdown({ curve = 'medium', ...attr }: DropdownProps) {
+export default function Dropdown({
+  options,
+  defaultOption,
+  curve = 'medium',
+  ...attr
+}: DropdownProps) {
   const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
-    <Container $curve={curve} $colorset={palette[theme]} {...attr}></Container>
+    <Container $curve={curve} $colorset={palette[theme]} {...attr}>
+      {options[defaultOption].name}
+      <ArrowDownSVG />
+    </Container>
   );
 }
