@@ -17,7 +17,7 @@ export default function Provider({
       primary: '',
 
       'base.100': '#ffffff',
-      'base.200': '#e6e7eb',
+      'base.200': '#ebedf0',
       'base.300': '#ced0d6',
       'base.400': '#a0a4ad',
       'base.500': '#08080a',
@@ -26,7 +26,7 @@ export default function Provider({
       primary: '#1f63eb',
 
       'base.100': '#08080a',
-      'base.200': '#181a1f',
+      'base.200': '#14161a',
       'base.300': '#292c33',
       'base.400': '#4d525c',
       'base.500': '#ffffff',
