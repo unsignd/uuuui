@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { ButtonHTMLAttributes, ReactNode } from 'react';
+import styled from 'styled-components';
 import { toRem } from '../../utils';
 import { PriorityType, BorderCurveType } from '../../types';
 import { ColorsetType } from '../../types';
@@ -63,6 +63,7 @@ const Container = styled.button<{
 
   transition: scale 100ms ease-in-out;
 
+  overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
