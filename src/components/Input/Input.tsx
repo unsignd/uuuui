@@ -5,6 +5,8 @@ import { usePalette, useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  children?: undefined;
+
   curve?: BorderCurveType;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 }
