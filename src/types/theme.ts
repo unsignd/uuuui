@@ -1,4 +1,6 @@
 export type ColorsetType = {
+  primary: string;
+
   'base.100': string;
   'base.200': string;
   'base.300': string;

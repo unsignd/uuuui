@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { AnchorHTMLAttributes, ReactNode } from 'react';
+import styled from 'styled-components';
 import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType } from '../../types';
 import { PriorityType } from '../../types';

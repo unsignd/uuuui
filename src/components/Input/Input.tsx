@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { InputHTMLAttributes } from 'react';
+import styled from 'styled-components';
 import { BorderCurveType, ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 import { toRem } from '../../utils';
