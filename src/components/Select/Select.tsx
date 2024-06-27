@@ -66,7 +66,6 @@ const Container = styled.button<{
 
   transition: scale 100ms ease-in-out;
 
-  overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -92,6 +91,15 @@ const Container = styled.button<{
   }
 `;
 
+const Text = styled.p`
+  margin: 0;
+
+  text-overflow: ellipsis;
+
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 export default function Select({
   options,
   defaultOption,
@@ -109,7 +117,7 @@ export default function Select({
       $colorset={palette[theme]}
       {...attr}
     >
-      {options[defaultOption].name}
+      <Text>{options[defaultOption].name}</Text>
       <ArrowDownSVG />
     </Container>
   );
