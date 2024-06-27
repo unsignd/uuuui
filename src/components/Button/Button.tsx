@@ -7,24 +7,30 @@ import { usePalette, useTheme } from '../../contexts';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: string;
-
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+
   priority?: PriorityType;
   curve?: BorderCurveType;
 }
 
 const Container = styled.button<{
+  $children?: string;
+  $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+
   $priority: PriorityType;
   $curve: BorderCurveType;
 
   $colorset: ColorsetType;
 }>`
+  width: ${(props) =>
+    !props.$children && props.$icon ? `${toRem(40)}rem` : 'auto'};
   height: ${toRem(40)}rem;
 
   padding: 0 ${toRem(14)}rem;
 
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: ${toRem(7)}rem;
 
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
@@ -96,6 +102,8 @@ export default function Button({
 
   return (
     <Container
+      $children={children}
+      $icon={Icon}
       $priority={priority}
       $curve={curve}
       $colorset={palette[theme]}

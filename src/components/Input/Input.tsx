@@ -6,9 +6,9 @@ import { toRem } from '../../utils';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   children?: undefined;
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   curve?: BorderCurveType;
-  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 }
 
 const Container = styled.div<{
