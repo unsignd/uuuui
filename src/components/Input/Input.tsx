@@ -64,7 +64,7 @@ const InputField = styled.input<{
   outline: none;
   overflow: hidden;
 
-  ::placeholder {
+  &::placeholder {
     color: ${(props) => props.$colorset['base.400']};
   }
 `;
