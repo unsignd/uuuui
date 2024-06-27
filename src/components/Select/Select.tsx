@@ -1,12 +1,12 @@
 import { ButtonHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { BorderCurveType, ColorsetType } from '../../types';
+import { BorderCurveType, ColorsetType, PriorityType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 
-interface DropdownProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface SelectProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: undefined;
   options: {
     [key: string | number]: {
@@ -17,10 +17,12 @@ interface DropdownProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
   defaultOption: string | number;
 
+  priority?: PriorityType;
   curve?: BorderCurveType;
 }
 
 const Container = styled.button<{
+  $priority: PriorityType;
   $curve: BorderCurveType;
 
   $colorset: ColorsetType;
@@ -37,10 +39,25 @@ const Container = styled.button<{
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
 
-  color: ${(props) => props.$colorset['base.500']};
-  background-color: ${(props) => props.$colorset['base.100']};
+  color: ${(props) =>
+    ({
+      low: props.$colorset['base.500'],
+      medium: props.$colorset['base.100'],
+      high: props.$colorset['base.100'],
+    }[props.$priority])};
+  background-color: ${(props) =>
+    ({
+      low: props.$colorset['base.100'],
+      medium: props.$colorset['base.500'],
+      high: props.$colorset['base.500'],
+    }[props.$priority])};
 
-  border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
+  border: ${(props) =>
+    ({
+      low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+      medium: 'none',
+      high: 'none',
+    }[props.$priority])};
   border-radius: ${(props) =>
     ({
       medium: toRem(10),
@@ -64,23 +81,34 @@ const Container = styled.button<{
   }
 
   & svg {
-    color: ${(props) => props.$colorset['base.400']};
+    color: ${(props) =>
+      ({
+        low: props.$colorset['base.400'],
+        medium: props.$colorset['base.100'],
+        high: props.$colorset['base.100'],
+      }[props.$priority])};
 
     flex-shrink: 0;
   }
 `;
 
-export default function Dropdown({
+export default function Select({
   options,
   defaultOption,
+  priority = 'medium',
   curve = 'medium',
   ...attr
-}: DropdownProps) {
+}: SelectProps) {
   const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
-    <Container $curve={curve} $colorset={palette[theme]} {...attr}>
+    <Container
+      $priority={priority}
+      $curve={curve}
+      $colorset={palette[theme]}
+      {...attr}
+    >
       {options[defaultOption].name}
       <ArrowDownSVG />
     </Container>
