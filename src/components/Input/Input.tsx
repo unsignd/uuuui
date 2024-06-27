@@ -16,6 +16,7 @@ const Container = styled.div<{
 
   $colorset: ColorsetType;
 }>`
+  width: ${toRem(240)}rem;
   height: ${toRem(40)}rem;
 
   padding-left: ${toRem(14)}rem;

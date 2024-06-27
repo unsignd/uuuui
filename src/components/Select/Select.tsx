@@ -34,6 +34,7 @@ const Button = styled.button<{
 
   $colorset: ColorsetType;
 }>`
+  width: ${toRem(160)}rem;
   height: ${toRem(40)}rem;
 
   padding: 0 ${toRem(14)}rem;
@@ -168,6 +169,9 @@ const DropdownText = styled.p<{
   text-overflow: ellipsis;
 
   color: ${(props) => props.$colorset['base.500']};
+
+  overflow: hidden;
+  white-space: nowrap;
 `;
 
 export default function Select({
