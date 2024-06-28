@@ -126,7 +126,7 @@ const DropdownContainer = styled.div<{
   background-color: ${(props) => props.$colorset['base.100']};
 
   border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
-  border-radius: ${toRem(10)}rem;
+  border-radius: ${toRem(7)}rem;
 
   overflow: hidden;
   box-sizing: border-box;
