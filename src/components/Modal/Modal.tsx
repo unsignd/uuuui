@@ -8,7 +8,7 @@ import Text from '../Text';
 
 import { ReactComponent as XSVG } from '../../assets/x_16.svg';
 
-interface ModalProps {
+export interface ModalProps {
   children: ReactNode;
 
   title: string;
@@ -24,6 +24,7 @@ interface ReactModalProps {
 
 const Container = ReactModal.styled`
   width: ${toRem(400)}rem;
+  /* TODO */
 
   scale: ${(props: ReactModalProps) => props.$scale};
 

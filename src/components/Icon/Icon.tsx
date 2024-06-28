@@ -4,7 +4,7 @@ import { toRem } from '../../utils';
 import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType } from '../../types';
 
-interface IconProps extends SVGProps<SVGSVGElement> {
+export interface IconProps extends SVGProps<SVGSVGElement> {
   children?: undefined;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 }
@@ -12,6 +12,8 @@ interface IconProps extends SVGProps<SVGSVGElement> {
 const Container = styled.div<{
   $colorset: ColorsetType;
 }>`
+  height: ${toRem(16)}rem;
+
   & svg {
     height: ${toRem(16)}rem;
 

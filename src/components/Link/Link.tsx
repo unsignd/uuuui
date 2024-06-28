@@ -6,7 +6,7 @@ import { PriorityType } from '../../types';
 import { Link as _Link } from 'react-router-dom';
 import { toRem } from '../../utils';
 
-interface LinkProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface LinkProps extends HTMLAttributes<HTMLParagraphElement> {
   children: string;
 
   priority?: PriorityType;

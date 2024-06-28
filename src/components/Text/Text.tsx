@@ -4,7 +4,7 @@ import { ColorsetType, PriorityType } from '../../types';
 import { toRem } from '../../utils';
 import { usePalette, useTheme } from '../../contexts';
 
-interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
   children: string;
 
   priority?: PriorityType;

@@ -5,7 +5,7 @@ import { ThemeContext } from '../../contexts/Theme';
 import { ModalProvider } from 'styled-react-modal';
 import styled from 'styled-components';
 
-interface ProviderProps {
+export interface ProviderProps {
   children: ReactNode;
 
   palette?: PaletteType;

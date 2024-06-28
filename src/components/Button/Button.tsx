@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, useState } from 'react';
+import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
 import {
@@ -13,7 +13,7 @@ import { usePalette, useTheme } from '../../contexts';
 import { Popover } from 'react-tiny-popover';
 import SwitchButton from '../SwitchButton';
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children?: string;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   options?: {

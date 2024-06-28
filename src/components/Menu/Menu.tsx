@@ -14,7 +14,7 @@ import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { ReactComponent as CheckSVG } from '../../assets/check_16.svg';
 import { Popover } from 'react-tiny-popover';
 
-interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: undefined;
   options: {
     [key: string]: {

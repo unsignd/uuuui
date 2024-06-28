@@ -4,7 +4,7 @@ import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType, ColorType } from '../../types';
 import { toRem } from '../../utils';
 
-interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
+export interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
   children: string;
 
   color?: ColorType;
