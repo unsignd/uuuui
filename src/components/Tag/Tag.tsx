@@ -24,8 +24,8 @@ const Container = styled.p<{
   align-items: center;
 
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  font-size: ${toRem(12)}rem;
-  font-weight: 600;
+  font-size: ${toRem(14)}rem;
+  font-weight: 500;
   text-overflow: ellipsis;
   letter-spacing: ${toRem(-0.35)}rem;
 
