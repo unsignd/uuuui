@@ -1,14 +1,15 @@
 {
   "name": "@unsignd/uuuui",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "target": "es6",
   "scripts": {
-    "build": "rm -rf dist && npx tsc && cp -r src/assets dist/assets && npm pack",
-    "start": "node dist/index.js"
+    "build": "rm -rf dist && npx tsc && cp -r src/assets dist/assets",
+    "start": "node dist/index.js",
+    "test": "rm -rf dist && npx tsc && cp -r src/assets dist/assets && npm pack"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +23,7 @@
   "dependencies": {
     "@types/react": "^18.3.3",
     "react": "18.3.1",
+    "react-tiny-popover": "^8.0.4",
     "styled-components": "^6.1.11"
   }
 }

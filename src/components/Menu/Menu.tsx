@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { BorderCurveType, ColorsetType, PriorityType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
@@ -6,6 +6,7 @@ import { toRem } from '../../utils';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { ReactComponent as CheckSVG } from '../../assets/check_16.svg';
+import { Popover } from 'react-tiny-popover';
 
 interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: undefined;
@@ -22,11 +23,7 @@ interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.div`
-  position: relative;
-
-  transition: scale 100ms ease-in-out;
-`;
+const Container = styled.div``;
 
 const Button = styled.button<{
   $priority: PriorityType;
@@ -63,16 +60,18 @@ const Button = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
+  transition: scale 100ms ease-in-out;
+
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   cursor: pointer;
 
-  div:has(> &:hover) {
+  &:hover {
     scale: 1.04;
   }
 
-  div:has(> &:active) {
+  &:active {
     scale: 1;
   }
 
@@ -119,10 +118,6 @@ const DropdownContainer = styled.div<{
 
   display: flex;
   flex-direction: column;
-
-  position: absolute;
-
-  margin-top: ${toRem(7)}rem;
 
   background-color: ${(props) => props.$colorset['base.100']};
 
@@ -181,39 +176,54 @@ export default function Menu({
   curve = 'medium',
   ...attr
 }: MenuProps) {
+  const [isActive, setIsActive] = useState<boolean>(false);
+
   const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
-    <Container>
-      <Button
-        $priority={priority}
-        $curve={curve}
-        $colorset={palette[theme]}
-        {...attr}
-      >
-        <Text $priority={priority} $colorset={palette[theme]}>
-          {options[selected].name}
-        </Text>
-        <ArrowDownSVG />
-      </Button>
-      <DropdownContainer $colorset={palette[theme]}>
-        {Object.keys(options).map((key) => (
-          <DropdownItem
-            key={key}
-            $colorset={palette[theme]}
-            onClick={() =>
-              options[key].onClick ? options[key].onClick() : undefined
-            }
-          >
-            <DropdownText $colorset={palette[theme]}>
-              {options[key].name}
-              {key === selected}
-            </DropdownText>
-            {key === selected ? <CheckSVG /> : undefined}
-          </DropdownItem>
-        ))}
-      </DropdownContainer>
-    </Container>
+    <Popover
+      isOpen={isActive}
+      positions={['bottom']}
+      align={'start'}
+      padding={7}
+      onClickOutside={() => setIsActive(false)}
+      content={
+        <DropdownContainer $colorset={palette[theme]}>
+          {Object.keys(options).map((key) => (
+            <DropdownItem
+              key={key}
+              $colorset={palette[theme]}
+              onClick={() => {
+                options[key].onClick ? options[key].onClick() : undefined;
+
+                setIsActive(false);
+              }}
+            >
+              <DropdownText $colorset={palette[theme]}>
+                {options[key].name}
+                {key === selected}
+              </DropdownText>
+              {key === selected ? <CheckSVG /> : undefined}
+            </DropdownItem>
+          ))}
+        </DropdownContainer>
+      }
+    >
+      <Container>
+        <Button
+          $priority={priority}
+          $curve={curve}
+          $colorset={palette[theme]}
+          onClick={() => setIsActive(!isActive)}
+          {...attr}
+        >
+          <Text $priority={priority} $colorset={palette[theme]}>
+            {options[selected].name}
+          </Text>
+          <ArrowDownSVG />
+        </Button>
+      </Container>
+    </Popover>
   );
 }
