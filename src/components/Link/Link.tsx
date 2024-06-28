@@ -23,18 +23,23 @@ const Container = styled.a<{
 
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
-  text-decoration: none;
+  text-decoration: ${(props) =>
+    ({
+      low: 'none',
+      medium: 'underline',
+      high: 'none',
+    }[props.$priority])};
   text-decoration-color: ${(props) =>
     ({
       low: props.$colorset['base.400'],
-      medium: props.$colorset['base.500'],
+      medium: props.$colorset['base.400'],
       high: props.$colorset['base.500'],
     }[props.$priority])};
 
   color: ${(props) =>
     ({
       low: props.$colorset['base.400'],
-      medium: props.$colorset['base.500'],
+      medium: props.$colorset['base.400'],
       high: props.$colorset['base.500'],
     }[props.$priority])};
 
