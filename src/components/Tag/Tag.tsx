@@ -19,11 +19,11 @@ const Container = styled.p<{
   display: flex;
   align-items: center;
 
-  font-family: ui-monospace, SFMono-Bold, Menlo, Monaco, Consolas,
-    Liberation Mono, Courier New, monospace;
+  font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
   font-size: ${toRem(14)}rem;
   font-weight: 600;
   text-overflow: ellipsis;
+  letter-spacing: ${toRem(-0.7)}rem;
 
   color: ${(props) => props.$colorset['base.400']};
   background-color: ${(props) => props.$colorset['base.200']};
