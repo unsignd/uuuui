@@ -25,7 +25,7 @@ interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Container = styled.div``;
 
-const Button = styled.button<{
+const ButtonContainer = styled.button<{
   $priority: PriorityType;
   $curve: BorderCurveType;
 
@@ -210,7 +210,6 @@ export default function Menu({
             >
               <DropdownText $colorset={palette[theme]}>
                 {options[key].name}
-                {key === selected}
               </DropdownText>
               {key === selected ? <CheckSVG /> : undefined}
             </DropdownItem>
@@ -219,7 +218,7 @@ export default function Menu({
       }
     >
       <Container>
-        <Button
+        <ButtonContainer
           $priority={priority}
           $curve={curve}
           $colorset={palette[theme]}
@@ -230,7 +229,7 @@ export default function Menu({
             {options[selected].name}
           </Text>
           <ArrowDownSVG />
-        </Button>
+        </ButtonContainer>
       </Container>
     </Popover>
   );
