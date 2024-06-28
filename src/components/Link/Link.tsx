@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType } from '../../types';
@@ -6,17 +6,19 @@ import { PriorityType } from '../../types';
 import { Link as _Link } from 'react-router-dom';
 import { toRem } from '../../utils';
 
-interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps extends HTMLAttributes<HTMLParagraphElement> {
   children: string;
 
   priority?: PriorityType;
 }
 
-const Container = styled.a<{
+const Container = styled.p<{
   $priority: PriorityType;
 
   $colorset: ColorsetType;
 }>`
+  margin: 0;
+
   display: flex;
   align-items: center;
   gap: ${toRem(7)}rem;
@@ -35,6 +37,7 @@ const Container = styled.a<{
       medium: props.$colorset['base.400'],
       high: props.$colorset['base.500'],
     }[props.$priority])};
+  text-overflow: ellipsis;
 
   color: ${(props) =>
     ({
@@ -43,20 +46,13 @@ const Container = styled.a<{
       high: props.$colorset['base.500'],
     }[props.$priority])};
 
+  overflow: hidden;
+  white-space: nowrap;
   cursor: pointer;
 
   &:hover {
     text-decoration: underline;
   }
-`;
-
-const Text = styled.p`
-  margin: 0;
-
-  text-overflow: ellipsis;
-
-  overflow: hidden;
-  white-space: nowrap;
 `;
 
 export default function Link({
@@ -69,7 +65,7 @@ export default function Link({
 
   return (
     <Container $priority={priority} $colorset={palette[theme]} {...attr}>
-      <Text>{children}</Text>
+      {children}
     </Container>
   );
 }
