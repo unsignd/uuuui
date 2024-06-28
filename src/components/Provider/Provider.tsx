@@ -40,6 +40,9 @@ export default function Provider({
       'primary.100': '#d6e4ff',
       'primary.200': '#3377ff',
 
+      'danger.100': '#fbd4d4',
+      'danger.200': '#eb2626',
+
       'base.100': '#ffffff',
       'base.200': '#f2f3f5',
       'base.300': '#ced0d6',
@@ -49,6 +52,9 @@ export default function Provider({
     dark: {
       'primary.100': '#0d1a37',
       'primary.200': '#1f63eb',
+
+      'danger.100': '#310d0f',
+      'danger.200': '#d62222',
 
       'base.100': '#08080a',
       'base.200': '#14161a',

@@ -26,11 +26,13 @@ const Container = styled.div<{
     ({
       base: props.$colorset['base.400'],
       primary: props.$colorset['primary.200'],
+      danger: props.$colorset['danger.200'],
     }[props.$color])};
   background-color: ${(props) =>
     ({
       base: props.$colorset['base.200'],
       primary: props.$colorset['primary.100'],
+      danger: props.$colorset['danger.100'],
     }[props.$color])};
 
   border-radius: ${toRem(7)}rem;

@@ -66,6 +66,7 @@ const Container = styled.button<{
       high: {
         base: props.$colorset['base.500'],
         primary: props.$colorset['primary.200'],
+        danger: props.$colorset['danger.200'],
       }[props.$color],
     }[props.$priority])};
 
@@ -107,6 +108,10 @@ const Container = styled.button<{
             light: props.$colorset['base.100'],
             dark: props.$colorset['base.500'],
           }[props.$theme],
+          danger: {
+            light: props.$colorset['base.100'],
+            dark: props.$colorset['base.500'],
+          }[props.$theme],
         }[props.$color],
       }[props.$priority])};
 
@@ -134,6 +139,10 @@ const Text = styled.p<{
       high: {
         base: props.$colorset['base.100'],
         primary: {
+          light: props.$colorset['base.100'],
+          dark: props.$colorset['base.500'],
+        }[props.$theme],
+        danger: {
           light: props.$colorset['base.100'],
           dark: props.$colorset['base.500'],
         }[props.$theme],
