@@ -7,7 +7,7 @@ import { toRem } from '../../utils';
 interface SwitchButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: undefined;
 
-  isActive: boolean;
+  isActive?: boolean;
 }
 
 const Container = styled.button<{
@@ -74,7 +74,7 @@ const Circle = styled.div<{
 `;
 
 export default function SwitchButtonProps({
-  isActive,
+  isActive = false,
   ...attr
 }: SwitchButtonProps) {
   const { palette } = usePalette();
