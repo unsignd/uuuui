@@ -12,16 +12,24 @@ interface ProviderProps {
   theme?: ThemeType;
 }
 
-const ModalBackground = styled.div`
+const ModalBackground = styled.div<{
+  $opacity: number;
+}>`
+  width: 100vw;
+  height: 100vh;
+
   display: flex;
+  align-items: center;
+  justify-content: center;
+
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+
+  background-color: #08080acc;
+
+  opacity: ${(props) => props.$opacity};
   z-index: 999;
-  opacity: 0.8;
-  background-color: #08080a;
 `;
 
 export default function Provider({
