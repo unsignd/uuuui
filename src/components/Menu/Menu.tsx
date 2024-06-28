@@ -25,7 +25,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     };
   };
 
-  selected?: string;
+  selection?: string;
 
   color?: ColorType;
   priority?: PriorityType;
@@ -33,7 +33,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Container = styled.button<{
-  $isActive: boolean;
+  $active: boolean;
 
   $color: ColorType;
   $priority: PriorityType;
@@ -54,10 +54,10 @@ const Container = styled.button<{
 
   background-color: ${(props) =>
     ({
-      low: props.$isActive
+      low: props.$active
         ? props.$colorset['base.200']
         : props.$colorset['base.100'],
-      medium: props.$isActive
+      medium: props.$active
         ? props.$colorset['base.200']
         : props.$colorset['base.100'],
       high: {
@@ -210,24 +210,24 @@ const DropdownText = styled.p<{
 
 export default function Menu({
   options,
-  selected = Object.keys(options)[0],
+  selection = Object.keys(options)[0],
   color = 'base',
   priority = 'medium',
   curve = 'medium',
   ...attr
 }: MenuProps) {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [active, setActive] = useState<boolean>(false);
 
   const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
     <Popover
-      isOpen={isActive}
+      isOpen={active}
       positions={['bottom']}
       align={'start'}
       padding={7}
-      onClickOutside={() => setIsActive(false)}
+      onClickOutside={() => setActive(false)}
       content={
         <DropdownContainer $colorset={palette[theme]}>
           {Object.keys(options).map((key) => (
@@ -237,27 +237,27 @@ export default function Menu({
               onClick={(event) => {
                 options[key].onClick ? options[key].onClick(event) : undefined;
 
-                setIsActive(false);
+                setActive(false);
               }}
               tabIndex={-1}
             >
               <DropdownText $colorset={palette[theme]}>
                 {options[key].name}
               </DropdownText>
-              {key === selected ? <CheckSVG /> : undefined}
+              {key === selection ? <CheckSVG /> : undefined}
             </DropdownItem>
           ))}
         </DropdownContainer>
       }
     >
       <Container
-        $isActive={isActive}
+        $active={active}
         $color={color}
         $priority={priority}
         $curve={curve}
         $theme={theme}
         $colorset={palette[theme]}
-        onClick={() => setIsActive(!isActive)}
+        onClick={() => setActive(!active)}
         tabIndex={-1}
         {...attr}
       >
@@ -267,7 +267,7 @@ export default function Menu({
           $theme={theme}
           $colorset={palette[theme]}
         >
-          {options[selected].name}
+          {options[selection].name}
         </Text>
         <ArrowDownSVG />
       </Container>

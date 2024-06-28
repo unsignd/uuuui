@@ -12,7 +12,7 @@ export interface ModalProps {
   children: ReactNode;
 
   title: string;
-  isActive?: boolean;
+  active?: boolean;
   onCloseRequest?: () => void;
 
   width?: number;
@@ -82,7 +82,7 @@ const Body = styled.div`
 export default function Modal({
   children,
   title,
-  isActive = false,
+  active = false,
   onCloseRequest,
   width = 400,
 }: ModalProps) {
@@ -98,7 +98,7 @@ export default function Modal({
       $width={width}
       $colorset={palette[theme]}
       backgroundProps={{ $opacity: opacity }}
-      isOpen={isActive}
+      isOpen={active}
       afterOpen={() => {
         setTimeout(() => {
           setOpacity(1);

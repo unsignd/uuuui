@@ -8,11 +8,11 @@ export interface SwitchButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: undefined;
 
-  isActive?: boolean;
+  active?: boolean;
 }
 
 const Container = styled.button<{
-  $isActive: boolean;
+  $active: boolean;
 
   $theme: ThemeType;
   $colorset: ColorsetType;
@@ -27,10 +27,10 @@ const Container = styled.button<{
 
   background-color: ${(props) =>
     ({
-      light: props.$isActive
+      light: props.$active
         ? props.$colorset['base.500']
         : props.$colorset['base.300'],
-      dark: props.$isActive
+      dark: props.$active
         ? props.$colorset['primary.200']
         : props.$colorset['base.100'],
     }[props.$theme])};
@@ -38,7 +38,7 @@ const Container = styled.button<{
   border: ${(props) =>
     ({
       light: 'none',
-      dark: props.$isActive
+      dark: props.$active
         ? 'none'
         : `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
     }[props.$theme])};
@@ -53,7 +53,7 @@ const Container = styled.button<{
 `;
 
 const Circle = styled.div<{
-  $isActive: boolean;
+  $active: boolean;
 
   $theme: ThemeType;
   $colorset: ColorsetType;
@@ -61,7 +61,7 @@ const Circle = styled.div<{
   width: ${toRem(20)}rem;
   height: ${toRem(20)}rem;
 
-  margin-left: ${(props) => (props.$isActive ? toRem(12) : 0)}rem;
+  margin-left: ${(props) => (props.$active ? toRem(12) : 0)}rem;
 
   background-color: ${(props) =>
     ({
@@ -75,7 +75,7 @@ const Circle = styled.div<{
 `;
 
 export default function SwitchButtonProps({
-  isActive = false,
+  active = false,
   ...attr
 }: SwitchButtonProps) {
   const { palette } = usePalette();
@@ -83,13 +83,13 @@ export default function SwitchButtonProps({
 
   return (
     <Container
-      $isActive={isActive}
+      $active={active}
       $theme={theme}
       $colorset={palette[theme]}
       tabIndex={-1}
       {...attr}
     >
-      <Circle $isActive={isActive} $theme={theme} $colorset={palette[theme]} />
+      <Circle $active={active} $theme={theme} $colorset={palette[theme]} />
     </Container>
   );
 }

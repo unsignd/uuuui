@@ -20,12 +20,14 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     [key: string]: {
       name: string;
       type?: DropdownType;
-      isActive?: boolean;
+      active?: boolean;
       onClick?: (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
       ) => void;
     };
   };
+
+  disabled?: boolean;
 
   color?: ColorType;
   priority?: PriorityType;
@@ -36,7 +38,7 @@ const Container = styled.button<{
   $children?: string;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
-  $isActive?: boolean;
+  $active?: boolean;
 
   $color: ColorType;
   $priority: PriorityType;
@@ -70,10 +72,10 @@ const Container = styled.button<{
     }[props.$priority])};
   background-color: ${(props) =>
     ({
-      low: props.$isActive
+      low: props.$active
         ? props.$colorset['base.200']
         : props.$colorset['base.100'],
-      medium: props.$isActive
+      medium: props.$active
         ? props.$colorset['base.200']
         : props.$colorset['base.100'],
       high: {
@@ -203,23 +205,24 @@ export default function Button({
   children,
   icon: Icon,
   options,
+  disabled = false,
   color = 'base',
   priority = 'medium',
   curve = 'medium',
   ...attr
 }: ButtonProps) {
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [active, setActive] = useState<boolean>(false);
 
   const { palette } = usePalette();
   const { theme } = useTheme();
 
   return options ? (
     <Popover
-      isOpen={isActive}
+      isOpen={active}
       positions={['bottom']}
       align={'start'}
       padding={7}
-      onClickOutside={() => setIsActive(false)}
+      onClickOutside={() => setActive(false)}
       content={
         <DropdownContainer $colorset={palette[theme]}>
           {Object.keys(options).map((key) => (
@@ -234,7 +237,7 @@ export default function Button({
                       ? options[key].onClick(event)
                       : undefined;
 
-                    setIsActive(false);
+                    setActive(false);
 
                     break;
                   }
@@ -253,7 +256,7 @@ export default function Button({
                     text: undefined,
                     'switch-button': (
                       <SwitchButton
-                        isActive={options[key].isActive ?? false}
+                        active={options[key].active ?? false}
                         onClick={(event) => {
                           options[key].onClick
                             ? options[key].onClick(event)
@@ -272,7 +275,7 @@ export default function Button({
       <Container
         $children={children}
         $icon={Icon}
-        $isActive={isActive}
+        $active={active}
         $color={color}
         $priority={priority}
         $curve={curve}
@@ -284,7 +287,7 @@ export default function Button({
             attr.onClick(event);
           }
 
-          setIsActive(!isActive);
+          setActive(!active);
         }}
         {...attr}
       >
