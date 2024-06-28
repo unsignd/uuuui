@@ -149,7 +149,7 @@ const DropdownItem = styled.button<{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: ${toRem(7)}rem;
+  gap: ${toRem(14)}rem;
 
   background-color: transparent;
 
