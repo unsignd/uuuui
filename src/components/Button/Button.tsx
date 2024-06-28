@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, ReactNode, useState } from 'react';
+import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
 import { PriorityType, BorderCurveType } from '../../types';

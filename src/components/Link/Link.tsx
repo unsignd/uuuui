@@ -1,4 +1,4 @@
-import { AnchorHTMLAttributes, ReactNode } from 'react';
+import { AnchorHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType } from '../../types';
