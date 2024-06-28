@@ -2,6 +2,8 @@ import { ReactNode, useState } from 'react';
 import { PaletteType, ThemeType } from '../../types/theme';
 import { PaletteContext } from '../../contexts/Palette';
 import { ThemeContext } from '../../contexts/Theme';
+import { ModalProvider } from 'styled-react-modal';
+import styled from 'styled-components';
 
 interface ProviderProps {
   children: ReactNode;
@@ -9,6 +11,18 @@ interface ProviderProps {
   palette?: PaletteType;
   theme?: ThemeType;
 }
+
+const ModalBackground = styled.div`
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  opacity: 0.8;
+  background-color: #08080a;
+`;
 
 export default function Provider({
   children,
@@ -40,7 +54,9 @@ export default function Provider({
   return (
     <PaletteContext.Provider value={{ palette, setPalette }}>
       <ThemeContext.Provider value={{ theme, setTheme }}>
-        {children}
+        <ModalProvider backgroundComponent={ModalBackground}>
+          {children}
+        </ModalProvider>
       </ThemeContext.Provider>
     </PaletteContext.Provider>
   );
