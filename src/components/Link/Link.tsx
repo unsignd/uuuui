@@ -23,7 +23,7 @@ const Container = styled.a<{
 
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
-  text-decoration: underline;
+  text-decoration: none;
   text-decoration-color: ${(props) =>
     ({
       low: props.$colorset['base.400'],
@@ -37,6 +37,12 @@ const Container = styled.a<{
       medium: props.$colorset['base.400'],
       high: props.$colorset['base.500'],
     }[props.$priority])};
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 const Text = styled.p`
