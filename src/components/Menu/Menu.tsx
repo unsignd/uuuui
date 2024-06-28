@@ -76,12 +76,10 @@ const ButtonContainer = styled.button<{
         medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
         high: 'none',
       }[props.$priority])};
-
-    scale: 1.04;
   }
 
   &:active {
-    scale: 1;
+    scale: 0.96;
   }
 
   & svg {
