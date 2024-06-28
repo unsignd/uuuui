@@ -25,7 +25,18 @@ const Container = styled.p<{
     }[props.$priority])};
 
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  font-size: ${toRem(14)}rem;
+  font-size: ${(props) =>
+    ({
+      low: toRem(14),
+      medium: toRem(14),
+      high: toRem(24),
+    }[props.$priority])}rem;
+  font-weight: ${(props) =>
+    ({
+      low: 400,
+      medium: 400,
+      high: 600,
+    }[props.$priority])};
   text-overflow: ellipsis;
 
   overflow: hidden;
