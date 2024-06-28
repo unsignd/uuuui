@@ -31,7 +31,6 @@ const ModalBackground = styled.div<{
   transition: opacity 100ms ease-in-out;
 
   opacity: ${(props) => props.$opacity};
-  z-index: 999;
 `;
 
 export default function Provider({
