@@ -26,7 +26,9 @@ const ModalBackground = styled.div<{
   top: 0;
   left: 0;
 
-  background-color: #08080acc;
+  background-color: #08080a66;
+
+  transition: opacity 100ms ease-in-out;
 
   opacity: ${(props) => props.$opacity};
   z-index: 999;
