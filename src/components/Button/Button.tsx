@@ -240,6 +240,7 @@ export default function Button({
                     undefined;
                 }
               }}
+              tabIndex={-1}
             >
               <DropdownText $colorset={palette[theme]}>
                 {options[key].name}
@@ -275,6 +276,7 @@ export default function Button({
         $curve={curve}
         $theme={theme}
         $colorset={palette[theme]}
+        tabIndex={-1}
         onClick={(event) => {
           if (attr.onClick && typeof attr.onClick === 'function') {
             attr.onClick(event);
@@ -297,6 +299,7 @@ export default function Button({
       $curve={curve}
       $theme={theme}
       $colorset={palette[theme]}
+      tabIndex={-1}
       {...attr}
     >
       {Icon ? <Icon /> : undefined}

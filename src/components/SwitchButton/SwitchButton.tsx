@@ -86,6 +86,7 @@ export default function SwitchButtonProps({
       $isActive={isActive}
       $theme={theme}
       $colorset={palette[theme]}
+      tabIndex={-1}
       {...attr}
     >
       <Circle $isActive={isActive} $theme={theme} $colorset={palette[theme]} />

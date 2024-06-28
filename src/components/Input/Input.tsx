@@ -83,7 +83,7 @@ export default function Input({
   return (
     <Container $curve={curve} $colorset={palette[theme]}>
       {Icon ? <Icon /> : undefined}
-      <InputField $colorset={palette[theme]} {...attr} />
+      <InputField $colorset={palette[theme]} tabIndex={-1} {...attr} />
     </Container>
   );
 }

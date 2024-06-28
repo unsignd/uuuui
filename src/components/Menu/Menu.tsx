@@ -237,6 +237,7 @@ export default function Menu({
 
                 setIsActive(false);
               }}
+              tabIndex={-1}
             >
               <DropdownText $colorset={palette[theme]}>
                 {options[key].name}
@@ -255,6 +256,7 @@ export default function Menu({
         $theme={theme}
         $colorset={palette[theme]}
         onClick={() => setIsActive(!isActive)}
+        tabIndex={-1}
         {...attr}
       >
         <Text
