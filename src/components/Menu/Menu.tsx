@@ -50,7 +50,7 @@ const Button = styled.button<{
 
   border: ${(props) =>
     ({
-      low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+      low: 'none',
       medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
       high: 'none',
     }[props.$priority])};
@@ -68,6 +68,13 @@ const Button = styled.button<{
   cursor: pointer;
 
   &:hover {
+    border: ${(props) =>
+      ({
+        low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        high: 'none',
+      }[props.$priority])};
+
     scale: 1.04;
   }
 
@@ -124,6 +131,7 @@ const DropdownContainer = styled.div<{
   border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
   border-radius: ${toRem(10)}rem;
 
+  overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
