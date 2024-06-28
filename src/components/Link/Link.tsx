@@ -9,7 +9,6 @@ import { toRem } from '../../utils';
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   children: string;
 
-  to: string;
   priority?: PriorityType;
 }
 
@@ -51,7 +50,6 @@ const Text = styled.p`
 
 export default function Link({
   children,
-  to,
   priority = 'medium',
   ...attr
 }: LinkProps) {
@@ -59,12 +57,7 @@ export default function Link({
   const { theme } = useTheme();
 
   return (
-    <Container
-      $priority={priority}
-      $colorset={palette[theme]}
-      href={to}
-      {...attr}
-    >
+    <Container $priority={priority} $colorset={palette[theme]} {...attr}>
       <Text>{children}</Text>
     </Container>
   );
