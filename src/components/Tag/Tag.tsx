@@ -20,10 +20,10 @@ const Container = styled.p<{
   align-items: center;
 
   font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  font-size: ${toRem(14)}rem;
+  font-size: ${toRem(12)}rem;
   font-weight: 600;
   text-overflow: ellipsis;
-  letter-spacing: ${toRem(-0.7)}rem;
+  letter-spacing: ${toRem(-0.35)}rem;
 
   color: ${(props) => props.$colorset['base.400']};
   background-color: ${(props) => props.$colorset['base.200']};
