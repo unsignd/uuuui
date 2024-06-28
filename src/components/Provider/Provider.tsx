@@ -41,7 +41,7 @@ export default function Provider({
       'primary.200': '#3377ff',
 
       'base.100': '#ffffff',
-      'base.200': '#ebedf0',
+      'base.200': '#f2f3f5',
       'base.300': '#ced0d6',
       'base.400': '#a0a4ad',
       'base.500': '#08080a',
