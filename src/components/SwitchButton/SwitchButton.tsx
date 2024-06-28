@@ -30,7 +30,7 @@ const Container = styled.button<{
         ? props.$colorset['base.500']
         : props.$colorset['base.300'],
       dark: props.$isActive
-        ? props.$colorset['primary']
+        ? props.$colorset['primary.200']
         : props.$colorset['base.100'],
     }[props.$theme])};
 

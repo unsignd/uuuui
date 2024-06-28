@@ -37,7 +37,8 @@ export default function Provider({
   children,
   palette: initialPalette = {
     light: {
-      primary: '',
+      'primary.100': '#d6e4ff',
+      'primary.200': '#3377ff',
 
       'base.100': '#ffffff',
       'base.200': '#ebedf0',
@@ -46,7 +47,8 @@ export default function Provider({
       'base.500': '#08080a',
     },
     dark: {
-      primary: '#1f63eb',
+      'primary.100': '#0d1a37',
+      'primary.200': '#1f63eb',
 
       'base.100': '#08080a',
       'base.200': '#14161a',
