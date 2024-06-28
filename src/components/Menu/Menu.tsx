@@ -19,6 +19,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options: {
     [key: string]: {
       name: string;
+      disabled?: boolean;
       onClick?: (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
       ) => void;
@@ -26,6 +27,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   };
 
   selection?: string;
+  disabled?: boolean;
 
   color?: ColorType;
   priority?: PriorityType;
@@ -34,6 +36,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Container = styled.button<{
   $active: boolean;
+  $disabled: boolean;
 
   $color: ColorType;
   $priority: PriorityType;
@@ -81,17 +84,15 @@ const Container = styled.button<{
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  cursor: pointer;
+  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
     background-color: ${(props) =>
       ({
         low: props.$colorset['base.200'],
         medium: props.$colorset['base.200'],
-        high: {
-          base: props.$colorset['base.500'],
-          primary: props.$colorset['primary.200'],
-        }[props.$color],
+        high: undefined,
       }[props.$priority])};
   }
 
@@ -165,6 +166,8 @@ const DropdownContainer = styled.div<{
 `;
 
 const DropdownItem = styled.button<{
+  $disabled: boolean;
+
   $colorset: ColorsetType;
 }>`
   height: ${toRem(40)}rem;
@@ -180,10 +183,12 @@ const DropdownItem = styled.button<{
 
   border: none;
 
-  cursor: pointer;
+  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
-    background-color: ${(props) => props.$colorset['base.200']};
+    background-color: ${(props) =>
+      props.$disabled ? undefined : props.$colorset['base.200']};
   }
 
   & svg {
@@ -211,6 +216,7 @@ const DropdownText = styled.p<{
 export default function Menu({
   options,
   selection = Object.keys(options)[0],
+  disabled = false,
   color = 'base',
   priority = 'medium',
   curve = 'medium',
@@ -233,7 +239,9 @@ export default function Menu({
           {Object.keys(options).map((key) => (
             <DropdownItem
               key={key}
+              $disabled={options[key].disabled ?? false}
               $colorset={palette[theme]}
+              disabled={options[key].disabled ?? false}
               onClick={(event) => {
                 options[key].onClick ? options[key].onClick(event) : undefined;
 
@@ -252,12 +260,14 @@ export default function Menu({
     >
       <Container
         $active={active}
+        $disabled={disabled}
         $color={color}
         $priority={priority}
         $curve={curve}
         $theme={theme}
         $colorset={palette[theme]}
         onClick={() => setActive(!active)}
+        disabled={disabled}
         tabIndex={-1}
         {...attr}
       >

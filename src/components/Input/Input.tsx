@@ -8,10 +8,14 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   children?: undefined;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
+  disabled?: boolean;
+
   curve?: BorderCurveType;
 }
 
 const Container = styled.div<{
+  $disabled: boolean;
+
   $curve: BorderCurveType;
 
   $colorset: ColorsetType;
@@ -38,6 +42,8 @@ const Container = styled.div<{
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
+  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'auto')};
 
   & svg {
     height: ${toRem(16)}rem;
@@ -73,17 +79,23 @@ const InputField = styled.input<{
 `;
 
 export default function Input({
-  curve = 'medium',
   icon: Icon,
+  disabled = false,
+  curve = 'medium',
   ...attr
 }: InputProps) {
   const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
-    <Container $curve={curve} $colorset={palette[theme]}>
+    <Container $disabled={disabled} $curve={curve} $colorset={palette[theme]}>
       {Icon ? <Icon /> : undefined}
-      <InputField $colorset={palette[theme]} tabIndex={-1} {...attr} />
+      <InputField
+        $colorset={palette[theme]}
+        tabIndex={-1}
+        disabled={disabled}
+        {...attr}
+      />
     </Container>
   );
 }

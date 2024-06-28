@@ -21,6 +21,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
       name: string;
       type?: DropdownType;
       active?: boolean;
+      disabled?: boolean;
       onClick?: (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
       ) => void;
@@ -39,6 +40,7 @@ const Container = styled.button<{
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   $active?: boolean;
+  $disabled: boolean;
 
   $color: ColorType;
   $priority: PriorityType;
@@ -100,18 +102,18 @@ const Container = styled.button<{
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  cursor: pointer;
+  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
     background-color: ${(props) =>
-      ({
-        low: props.$colorset['base.200'],
-        medium: props.$colorset['base.200'],
-        high: {
-          base: props.$colorset['base.500'],
-          primary: props.$colorset['primary.200'],
-        }[props.$color],
-      }[props.$priority])};
+      props.$disabled
+        ? undefined
+        : {
+            low: props.$colorset['base.200'],
+            medium: props.$colorset['base.200'],
+            high: undefined,
+          }[props.$priority]};
   }
 
   & svg {
@@ -154,6 +156,8 @@ const DropdownContainer = styled.div<{
 `;
 
 const DropdownItem = styled.button<{
+  $disabled: boolean;
+
   $type: DropdownType;
 
   $colorset: ColorsetType;
@@ -171,14 +175,19 @@ const DropdownItem = styled.button<{
 
   border: none;
 
+  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
   cursor: ${(props) =>
-    ({ text: 'pointer', 'switch-button': 'auto' }[props.$type])};
+    props.$disabled
+      ? 'not-allowed'
+      : { text: 'pointer', 'switch-button': 'auto' }[props.$type]};
 
   &:hover {
     background-color: ${(props) =>
-      ({ text: props.$colorset['base.200'], 'switch-button': 'transparent' }[
-        props.$type
-      ])};
+      props.$disabled
+        ? undefined
+        : { text: props.$colorset['base.200'], 'switch-button': undefined }[
+            props.$type
+          ]};
   }
 `;
 
@@ -228,8 +237,10 @@ export default function Button({
           {Object.keys(options).map((key) => (
             <DropdownItem
               key={key}
+              $disabled={options[key].disabled ?? false}
               $type={options[key].type ?? 'text'}
               $colorset={palette[theme]}
+              disabled={options[key].disabled ?? false}
               onClick={(event) => {
                 switch (options[key].type) {
                   case 'text': {
@@ -276,11 +287,13 @@ export default function Button({
         $children={children}
         $icon={Icon}
         $active={active}
+        $disabled={disabled}
         $color={color}
         $priority={priority}
         $curve={curve}
         $theme={theme}
         $colorset={palette[theme]}
+        disabled={disabled}
         tabIndex={-1}
         onClick={(event) => {
           if (attr.onClick && typeof attr.onClick === 'function') {
@@ -299,11 +312,13 @@ export default function Button({
     <Container
       $children={children}
       $icon={Icon}
+      $disabled={disabled}
       $color={color}
       $priority={priority}
       $curve={curve}
       $theme={theme}
       $colorset={palette[theme]}
+      disabled={disabled}
       tabIndex={-1}
       {...attr}
     >

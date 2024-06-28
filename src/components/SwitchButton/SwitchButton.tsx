@@ -9,10 +9,12 @@ export interface SwitchButtonProps
   children?: undefined;
 
   active?: boolean;
+  disabled?: boolean;
 }
 
 const Container = styled.button<{
   $active: boolean;
+  $disabled: boolean;
 
   $theme: ThemeType;
   $colorset: ColorsetType;
@@ -49,7 +51,8 @@ const Container = styled.button<{
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  cursor: pointer;
+  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
 `;
 
 const Circle = styled.div<{
@@ -76,6 +79,7 @@ const Circle = styled.div<{
 
 export default function SwitchButtonProps({
   active = false,
+  disabled = false,
   ...attr
 }: SwitchButtonProps) {
   const { palette } = usePalette();
@@ -84,8 +88,10 @@ export default function SwitchButtonProps({
   return (
     <Container
       $active={active}
+      $disabled={disabled}
       $theme={theme}
       $colorset={palette[theme]}
+      disabled={disabled}
       tabIndex={-1}
       {...attr}
     >
