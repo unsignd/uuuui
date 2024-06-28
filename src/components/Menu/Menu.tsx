@@ -57,7 +57,9 @@ const Container = styled.button<{
       low: props.$isActive
         ? props.$colorset['base.200']
         : props.$colorset['base.100'],
-      medium: props.$colorset['base.100'],
+      medium: props.$isActive
+        ? props.$colorset['base.200']
+        : props.$colorset['base.100'],
       high: {
         base: props.$colorset['base.500'],
         primary: props.$colorset['primary.200'],
