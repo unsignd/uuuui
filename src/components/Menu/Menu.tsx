@@ -1,6 +1,12 @@
 import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import { BorderCurveType, ColorsetType, PriorityType } from '../../types';
+import {
+  BorderCurveType,
+  ColorsetType,
+  ColorType,
+  PriorityType,
+  ThemeType,
+} from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
@@ -21,6 +27,7 @@ interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
   selected?: string;
 
+  color?: ColorType;
   priority?: PriorityType;
   curve?: BorderCurveType;
 }
@@ -28,9 +35,11 @@ interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Container = styled.div``;
 
 const ButtonContainer = styled.button<{
+  $color: ColorType;
   $priority: PriorityType;
   $curve: BorderCurveType;
 
+  $theme: ThemeType;
   $colorset: ColorsetType;
 }>`
   width: ${toRem(160)}rem;
@@ -47,7 +56,10 @@ const ButtonContainer = styled.button<{
     ({
       low: props.$colorset['base.100'],
       medium: props.$colorset['base.100'],
-      high: props.$colorset['base.500'],
+      high: {
+        base: props.$colorset['base.500'],
+        primary: props.$colorset['primary.200'],
+      }[props.$color],
     }[props.$priority])};
 
   border: ${(props) =>
@@ -87,7 +99,13 @@ const ButtonContainer = styled.button<{
       ({
         low: props.$colorset['base.400'],
         medium: props.$colorset['base.400'],
-        high: props.$colorset['base.100'],
+        high: {
+          base: props.$colorset['base.100'],
+          primary: {
+            light: props.$colorset['base.100'],
+            dark: props.$colorset['base.500'],
+          }[props.$theme],
+        }[props.$color],
       }[props.$priority])};
 
     flex-shrink: 0;
@@ -95,8 +113,10 @@ const ButtonContainer = styled.button<{
 `;
 
 const Text = styled.p<{
+  $color: ColorType;
   $priority: PriorityType;
 
+  $theme: ThemeType;
   $colorset: ColorsetType;
 }>`
   margin: 0;
@@ -109,7 +129,13 @@ const Text = styled.p<{
     ({
       low: props.$colorset['base.500'],
       medium: props.$colorset['base.500'],
-      high: props.$colorset['base.100'],
+      high: {
+        base: props.$colorset['base.100'],
+        primary: {
+          light: props.$colorset['base.100'],
+          dark: props.$colorset['base.500'],
+        }[props.$theme],
+      }[props.$color],
     }[props.$priority])};
 
   overflow: hidden;
@@ -184,6 +210,7 @@ const DropdownText = styled.p<{
 export default function Menu({
   options,
   selected = Object.keys(options)[0],
+  color = 'base',
   priority = 'medium',
   curve = 'medium',
   ...attr
@@ -223,13 +250,20 @@ export default function Menu({
     >
       <Container>
         <ButtonContainer
+          $color={color}
           $priority={priority}
           $curve={curve}
+          $theme={theme}
           $colorset={palette[theme]}
           onClick={() => setIsActive(!isActive)}
           {...attr}
         >
-          <Text $priority={priority} $colorset={palette[theme]}>
+          <Text
+            $color={color}
+            $priority={priority}
+            $theme={theme}
+            $colorset={palette[theme]}
+          >
             {options[selected].name}
           </Text>
           <ArrowDownSVG />

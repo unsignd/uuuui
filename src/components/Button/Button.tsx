@@ -1,7 +1,13 @@
 import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
-import { PriorityType, BorderCurveType, DropdownType } from '../../types';
+import {
+  PriorityType,
+  BorderCurveType,
+  DropdownType,
+  ColorType,
+  ThemeType,
+} from '../../types';
 import { ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 import { Popover } from 'react-tiny-popover';
@@ -21,6 +27,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     };
   };
 
+  color?: ColorType;
   priority?: PriorityType;
   curve?: BorderCurveType;
 }
@@ -31,9 +38,11 @@ const ButtonContainer = styled.button<{
   $children?: string;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
+  $color: ColorType;
   $priority: PriorityType;
   $curve: BorderCurveType;
 
+  $theme: ThemeType;
   $colorset: ColorsetType;
 }>`
   width: ${(props) =>
@@ -51,13 +60,22 @@ const ButtonContainer = styled.button<{
     ({
       low: props.$colorset['base.500'],
       medium: props.$colorset['base.500'],
-      high: props.$colorset['base.100'],
+      high: {
+        base: props.$colorset['base.100'],
+        primary: {
+          light: props.$colorset['base.100'],
+          dark: props.$colorset['base.500'],
+        }[props.$theme],
+      }[props.$color],
     }[props.$priority])};
   background-color: ${(props) =>
     ({
       low: props.$colorset['base.100'],
       medium: props.$colorset['base.100'],
-      high: props.$colorset['base.500'],
+      high: {
+        base: props.$colorset['base.500'],
+        primary: props.$colorset['primary.200'],
+      }[props.$color],
     }[props.$priority])};
 
   border: ${(props) =>
@@ -184,6 +202,7 @@ export default function Button({
   children,
   icon: Icon,
   options,
+  color = 'base',
   priority = 'medium',
   curve = 'medium',
   ...attr
@@ -251,9 +270,11 @@ export default function Button({
       <Container>
         <ButtonContainer
           $children={children}
+          $color={color}
           $icon={Icon}
           $priority={priority}
           $curve={curve}
+          $theme={theme}
           $colorset={palette[theme]}
           onClick={(event) => {
             if (attr.onClick && typeof attr.onClick === 'function') {
@@ -274,8 +295,10 @@ export default function Button({
       <ButtonContainer
         $children={children}
         $icon={Icon}
+        $color={color}
         $priority={priority}
         $curve={curve}
+        $theme={theme}
         $colorset={palette[theme]}
         {...attr}
       >
