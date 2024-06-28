@@ -35,6 +35,8 @@ interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Container = styled.div``;
 
 const ButtonContainer = styled.button<{
+  $isActive: boolean;
+
   $color: ColorType;
   $priority: PriorityType;
   $curve: BorderCurveType;
@@ -54,7 +56,9 @@ const ButtonContainer = styled.button<{
 
   background-color: ${(props) =>
     ({
-      low: props.$colorset['base.100'],
+      low: props.$isActive
+        ? props.$colorset['base.200']
+        : props.$colorset['base.100'],
       medium: props.$colorset['base.100'],
       high: {
         base: props.$colorset['base.500'],
@@ -82,9 +86,19 @@ const ButtonContainer = styled.button<{
   cursor: pointer;
 
   &:hover {
+    background-color: ${(props) =>
+      ({
+        low: props.$colorset['base.200'],
+        medium: props.$colorset['base.100'],
+        high: {
+          base: props.$colorset['base.500'],
+          primary: props.$colorset['primary.200'],
+        }[props.$color],
+      }[props.$priority])};
+
     border: ${(props) =>
       ({
-        low: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        low: 'none',
         medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
         high: 'none',
       }[props.$priority])};
@@ -250,6 +264,7 @@ export default function Menu({
     >
       <Container>
         <ButtonContainer
+          $isActive={isActive}
           $color={color}
           $priority={priority}
           $curve={curve}
