@@ -1,14 +1,18 @@
 import { HTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { usePalette, useTheme } from '../../contexts';
-import { ColorsetType } from '../../types';
+import { ColorsetType, PriorityType } from '../../types';
 import { toRem } from '../../utils';
 
 interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
   children: string;
+
+  priority?: PriorityType;
 }
 
 const Container = styled.p<{
+  $priority: PriorityType;
+
   $colorset: ColorsetType;
 }>`
   height: ${toRem(24)}rem;
@@ -25,8 +29,18 @@ const Container = styled.p<{
   text-overflow: ellipsis;
   letter-spacing: ${toRem(-0.35)}rem;
 
-  color: ${(props) => props.$colorset['base.400']};
-  background-color: ${(props) => props.$colorset['base.200']};
+  color: ${(props) =>
+    ({
+      low: props.$colorset['base.400'],
+      medium: props.$colorset['primary.200'],
+      high: props.$colorset['base.100'],
+    }[props.$priority])};
+  background-color: ${(props) =>
+    ({
+      low: props.$colorset['base.200'],
+      medium: props.$colorset['primary.100'],
+      high: props.$colorset['base.500'],
+    }[props.$priority])};
 
   border-radius: ${toRem(7)}rem;
 
@@ -34,12 +48,16 @@ const Container = styled.p<{
   white-space: nowrap;
 `;
 
-export default function Tag({ children, ...attr }: TagProps) {
+export default function Tag({
+  children,
+  priority = 'medium',
+  ...attr
+}: TagProps) {
   const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
-    <Container $colorset={palette[theme]} {...attr}>
+    <Container $priority={priority} $colorset={palette[theme]} {...attr}>
       {children}
     </Container>
   );
