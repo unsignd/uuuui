@@ -1,10 +1,11 @@
 import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
-import { PriorityType, BorderCurveType } from '../../types';
+import { PriorityType, BorderCurveType, DropdownType } from '../../types';
 import { ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 import { Popover } from 'react-tiny-popover';
+import SwitchButton from '../SwitchButton';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: string;
@@ -12,7 +13,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options?: {
     [key: string]: {
       name: string;
-      onClick?: () => void;
+      type?: DropdownType;
+      isActive?: boolean;
+      onClick?: (
+        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+      ) => void;
     };
   };
 
@@ -129,7 +134,9 @@ const DropdownContainer = styled.div<{
   -webkit-box-sizing: border-box;
 `;
 
-const DropdownItem = styled.div<{
+const DropdownItem = styled.button<{
+  $type: DropdownType;
+
   $colorset: ColorsetType;
 }>`
   height: ${toRem(40)}rem;
@@ -139,18 +146,20 @@ const DropdownItem = styled.div<{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: ${toRem(7)}rem;
+  gap: ${toRem(14)}rem;
 
-  cursor: pointer;
+  background-color: transparent;
+
+  border: none;
+
+  cursor: ${(props) =>
+    ({ text: 'pointer', 'switch-button': 'auto' }[props.$type])};
 
   &:hover {
-    background-color: ${(props) => props.$colorset['base.200']};
-  }
-
-  & svg {
-    color: ${(props) => props.$colorset['base.400']};
-
-    flex-shrink: 0;
+    background-color: ${(props) =>
+      ({ text: props.$colorset['base.200'], 'switch-button': 'transparent' }[
+        props.$type
+      ])};
   }
 `;
 
@@ -167,6 +176,10 @@ const DropdownText = styled.p<{
 
   overflow: hidden;
   white-space: nowrap;
+`;
+
+const DropdownUtilWrapper = styled.div`
+  flex-shrink: 0;
 `;
 
 export default function Button({
@@ -194,16 +207,44 @@ export default function Button({
           {Object.keys(options).map((key) => (
             <DropdownItem
               key={key}
+              $type={options[key].type ?? 'text'}
               $colorset={palette[theme]}
-              onClick={() => {
-                options[key].onClick ? options[key].onClick() : undefined;
+              onClick={(event) => {
+                switch (options[key].type) {
+                  case 'text': {
+                    options[key].onClick
+                      ? options[key].onClick(event)
+                      : undefined;
 
-                setIsActive(false);
+                    setIsActive(false);
+
+                    break;
+                  }
+                  default:
+                    undefined;
+                }
               }}
             >
               <DropdownText $colorset={palette[theme]}>
                 {options[key].name}
               </DropdownText>
+              <DropdownUtilWrapper>
+                {
+                  {
+                    text: undefined,
+                    'switch-button': (
+                      <SwitchButton
+                        isActive={options[key].isActive ?? false}
+                        onClick={(event) => {
+                          options[key].onClick
+                            ? options[key].onClick(event)
+                            : undefined;
+                        }}
+                      />
+                    ),
+                  }[options[key].type ?? 'text']
+                }
+              </DropdownUtilWrapper>
             </DropdownItem>
           ))}
         </DropdownContainer>
