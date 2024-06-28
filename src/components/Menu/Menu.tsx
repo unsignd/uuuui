@@ -13,7 +13,9 @@ interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options: {
     [key: string]: {
       name: string;
-      onClick?: () => void;
+      onClick?: (
+        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+      ) => void;
     };
   };
 
@@ -137,7 +139,7 @@ const DropdownContainer = styled.div<{
   -webkit-box-sizing: border-box;
 `;
 
-const DropdownItem = styled.div<{
+const DropdownItem = styled.button<{
   $colorset: ColorsetType;
 }>`
   height: ${toRem(40)}rem;
@@ -148,6 +150,10 @@ const DropdownItem = styled.div<{
   align-items: center;
   justify-content: space-between;
   gap: ${toRem(7)}rem;
+
+  background-color: transparent;
+
+  border: none;
 
   cursor: pointer;
 
@@ -202,8 +208,8 @@ export default function Menu({
             <DropdownItem
               key={key}
               $colorset={palette[theme]}
-              onClick={() => {
-                options[key].onClick ? options[key].onClick() : undefined;
+              onClick={(event) => {
+                options[key].onClick ? options[key].onClick(event) : undefined;
 
                 setIsActive(false);
               }}

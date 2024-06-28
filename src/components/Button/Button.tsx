@@ -1,19 +1,28 @@
-import { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
 import { PriorityType, BorderCurveType } from '../../types';
 import { ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
+import { Popover } from 'react-tiny-popover';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children?: string;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+  options?: {
+    [key: string]: {
+      name: string;
+      onClick?: () => void;
+    };
+  };
 
   priority?: PriorityType;
   curve?: BorderCurveType;
 }
 
-const Container = styled.button<{
+const Container = styled.div``;
+
+const ButtonContainer = styled.button<{
   $children?: string;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -99,27 +108,141 @@ const Text = styled.p`
   white-space: nowrap;
 `;
 
+const DropdownContainer = styled.div<{
+  $colorset: ColorsetType;
+}>`
+  width: ${toRem(240)}rem;
+
+  padding: ${toRem(7)}rem 0;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: ${(props) => props.$colorset['base.100']};
+
+  border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
+  border-radius: ${toRem(10)}rem;
+
+  overflow: hidden;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+`;
+
+const DropdownItem = styled.div<{
+  $colorset: ColorsetType;
+}>`
+  height: ${toRem(40)}rem;
+
+  padding: 0 ${toRem(14)}rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: ${toRem(7)}rem;
+
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${(props) => props.$colorset['base.200']};
+  }
+
+  & svg {
+    color: ${(props) => props.$colorset['base.400']};
+
+    flex-shrink: 0;
+  }
+`;
+
+const DropdownText = styled.p<{
+  $colorset: ColorsetType;
+}>`
+  margin: 0;
+
+  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+  font-size: ${toRem(14)}rem;
+  text-overflow: ellipsis;
+
+  color: ${(props) => props.$colorset['base.500']};
+
+  overflow: hidden;
+  white-space: nowrap;
+`;
+
 export default function Button({
   children,
   icon: Icon,
+  options,
   priority = 'medium',
   curve = 'medium',
   ...attr
 }: ButtonProps) {
+  const [isActive, setIsActive] = useState<boolean>(false);
+
   const { palette } = usePalette();
   const { theme } = useTheme();
 
-  return (
-    <Container
-      $children={children}
-      $icon={Icon}
-      $priority={priority}
-      $curve={curve}
-      $colorset={palette[theme]}
-      {...attr}
+  return options ? (
+    <Popover
+      isOpen={isActive}
+      positions={['bottom']}
+      align={'start'}
+      padding={7}
+      onClickOutside={() => setIsActive(false)}
+      content={
+        <DropdownContainer $colorset={palette[theme]}>
+          {Object.keys(options).map((key) => (
+            <DropdownItem
+              key={key}
+              $colorset={palette[theme]}
+              onClick={() => {
+                options[key].onClick ? options[key].onClick() : undefined;
+
+                setIsActive(false);
+              }}
+            >
+              <DropdownText $colorset={palette[theme]}>
+                {options[key].name}
+              </DropdownText>
+            </DropdownItem>
+          ))}
+        </DropdownContainer>
+      }
     >
-      {Icon ? <Icon /> : undefined}
-      <Text>{children}</Text>
+      <Container>
+        <ButtonContainer
+          $children={children}
+          $icon={Icon}
+          $priority={priority}
+          $curve={curve}
+          $colorset={palette[theme]}
+          onClick={(event) => {
+            if (attr.onClick && typeof attr.onClick === 'function') {
+              attr.onClick(event);
+            }
+
+            setIsActive(!isActive);
+          }}
+          {...attr}
+        >
+          {Icon ? <Icon /> : undefined}
+          <Text>{children}</Text>
+        </ButtonContainer>
+      </Container>
+    </Popover>
+  ) : (
+    <Container>
+      <ButtonContainer
+        $children={children}
+        $icon={Icon}
+        $priority={priority}
+        $curve={curve}
+        $colorset={palette[theme]}
+        {...attr}
+      >
+        {Icon ? <Icon /> : undefined}
+        <Text>{children}</Text>
+      </ButtonContainer>
     </Container>
   );
 }
