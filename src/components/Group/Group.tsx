@@ -18,6 +18,12 @@ export interface GroupProps extends HTMLAttributes<HTMLDivElement> {
 const Container = styled.div`
   display: flex;
 
+  & > :not(:only-child):not(:first-child):not(:last-child),
+  & > :not(:only-child):not(:first-child):not(:last-child) * {
+    border-width: ${toRem(1)}rem ${toRem(0.5)}rem;
+    border-radius: 0;
+  }
+
   & > :first-child:not(:only-child),
   & > :first-child:not(:only-child) * {
     border-right-width: ${toRem(0.5)}rem;
