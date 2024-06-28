@@ -32,9 +32,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.div``;
-
-const ButtonContainer = styled.button<{
+const Container = styled.button<{
   $isActive: boolean;
 
   $color: ColorType;
@@ -78,8 +76,6 @@ const ButtonContainer = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
-  transition: scale 100ms ease-in-out;
-
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -89,23 +85,12 @@ const ButtonContainer = styled.button<{
     background-color: ${(props) =>
       ({
         low: props.$colorset['base.200'],
-        medium: props.$colorset['base.100'],
+        medium: props.$colorset['base.200'],
         high: {
           base: props.$colorset['base.500'],
           primary: props.$colorset['primary.200'],
         }[props.$color],
       }[props.$priority])};
-
-    border: ${(props) =>
-      ({
-        low: 'none',
-        medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
-        high: 'none',
-      }[props.$priority])};
-  }
-
-  &:active {
-    scale: 0.96;
   }
 
   & svg {
@@ -262,27 +247,25 @@ export default function Menu({
         </DropdownContainer>
       }
     >
-      <Container>
-        <ButtonContainer
-          $isActive={isActive}
+      <Container
+        $isActive={isActive}
+        $color={color}
+        $priority={priority}
+        $curve={curve}
+        $theme={theme}
+        $colorset={palette[theme]}
+        onClick={() => setIsActive(!isActive)}
+        {...attr}
+      >
+        <Text
           $color={color}
           $priority={priority}
-          $curve={curve}
           $theme={theme}
           $colorset={palette[theme]}
-          onClick={() => setIsActive(!isActive)}
-          {...attr}
         >
-          <Text
-            $color={color}
-            $priority={priority}
-            $theme={theme}
-            $colorset={palette[theme]}
-          >
-            {options[selected].name}
-          </Text>
-          <ArrowDownSVG />
-        </ButtonContainer>
+          {options[selected].name}
+        </Text>
+        <ArrowDownSVG />
       </Container>
     </Popover>
   );

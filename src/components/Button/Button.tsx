@@ -32,9 +32,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.div``;
-
-const ButtonContainer = styled.button<{
+const Container = styled.button<{
   $children?: string;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -94,8 +92,6 @@ const ButtonContainer = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
-  transition: scale 100ms ease-in-out;
-
   overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -106,23 +102,12 @@ const ButtonContainer = styled.button<{
     background-color: ${(props) =>
       ({
         low: props.$colorset['base.200'],
-        medium: props.$colorset['base.100'],
+        medium: props.$colorset['base.200'],
         high: {
           base: props.$colorset['base.500'],
           primary: props.$colorset['primary.200'],
         }[props.$color],
       }[props.$priority])};
-
-    border: ${(props) =>
-      ({
-        low: 'none',
-        medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
-        high: 'none',
-      }[props.$priority])};
-  }
-
-  &:active {
-    scale: 0.96;
   }
 
   & svg {
@@ -281,45 +266,41 @@ export default function Button({
         </DropdownContainer>
       }
     >
-      <Container>
-        <ButtonContainer
-          $children={children}
-          $icon={Icon}
-          $isActive={isActive}
-          $color={color}
-          $priority={priority}
-          $curve={curve}
-          $theme={theme}
-          $colorset={palette[theme]}
-          onClick={(event) => {
-            if (attr.onClick && typeof attr.onClick === 'function') {
-              attr.onClick(event);
-            }
-
-            setIsActive(!isActive);
-          }}
-          {...attr}
-        >
-          {Icon ? <Icon /> : undefined}
-          <Text>{children}</Text>
-        </ButtonContainer>
-      </Container>
-    </Popover>
-  ) : (
-    <Container>
-      <ButtonContainer
+      <Container
         $children={children}
         $icon={Icon}
+        $isActive={isActive}
         $color={color}
         $priority={priority}
         $curve={curve}
         $theme={theme}
         $colorset={palette[theme]}
+        onClick={(event) => {
+          if (attr.onClick && typeof attr.onClick === 'function') {
+            attr.onClick(event);
+          }
+
+          setIsActive(!isActive);
+        }}
         {...attr}
       >
         {Icon ? <Icon /> : undefined}
         <Text>{children}</Text>
-      </ButtonContainer>
+      </Container>
+    </Popover>
+  ) : (
+    <Container
+      $children={children}
+      $icon={Icon}
+      $color={color}
+      $priority={priority}
+      $curve={curve}
+      $theme={theme}
+      $colorset={palette[theme]}
+      {...attr}
+    >
+      {Icon ? <Icon /> : undefined}
+      <Text>{children}</Text>
     </Container>
   );
 }
