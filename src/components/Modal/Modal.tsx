@@ -14,17 +14,19 @@ export interface ModalProps {
   title: string;
   isActive?: boolean;
   onCloseRequest?: () => void;
+
+  width?: number;
 }
 
 interface ReactModalProps {
   $scale: number;
+  $width: number;
 
   $colorset: ColorsetType;
 }
 
 const Container = ReactModal.styled`
-  width: ${toRem(400)}rem;
-  /* TODO */
+  width: ${(props: ReactModalProps) => toRem(props.$width)}rem;
 
   scale: ${(props: ReactModalProps) => props.$scale};
 
@@ -82,6 +84,7 @@ export default function Modal({
   title,
   isActive = false,
   onCloseRequest,
+  width = 400,
 }: ModalProps) {
   const [opacity, setOpacity] = useState<number>(0);
   const [scale, setScale] = useState<number>(1.2);
@@ -91,8 +94,9 @@ export default function Modal({
 
   return (
     <Container
-      $colorset={palette[theme]}
       $scale={scale}
+      $width={width}
+      $colorset={palette[theme]}
       backgroundProps={{ $opacity: opacity }}
       isOpen={isActive}
       afterOpen={() => {
