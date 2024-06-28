@@ -1,7 +1,8 @@
 <div align="center">
-  <img src="/banner.png" width="100%"/>
+  <img src="/src/assets//banner.png" width="100%"/>
 
 # uuuui
+
 </div>
 
 **uuuui** is an open-source React Typescript component library.
