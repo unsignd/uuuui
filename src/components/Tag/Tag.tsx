@@ -10,24 +10,17 @@ interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
   color?: ColorType;
 }
 
-const Container = styled.p<{
+const Container = styled.div<{
   $color: ColorType;
 
   $colorset: ColorsetType;
 }>`
   height: ${toRem(24)}rem;
 
-  margin: 0;
   padding: 0 ${toRem(7)}rem;
 
   display: flex;
   align-items: center;
-
-  font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
-  font-size: ${toRem(14)}rem;
-  font-weight: 500;
-  text-overflow: ellipsis;
-  letter-spacing: ${toRem(-0.35)}rem;
 
   color: ${(props) =>
     ({
@@ -41,6 +34,16 @@ const Container = styled.p<{
     }[props.$color])};
 
   border-radius: ${toRem(7)}rem;
+`;
+
+const Text = styled.p`
+  margin: 0;
+
+  font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  font-size: ${toRem(14)}rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  letter-spacing: ${toRem(-0.35)}rem;
 
   overflow: hidden;
   white-space: nowrap;
@@ -51,8 +54,8 @@ export default function Tag({ children, color = 'base', ...attr }: TagProps) {
   const { theme } = useTheme();
 
   return (
-    <Container $color={color} $colorset={palette[theme]} {...attr}>
-      {children}
+    <Container $color={color} $colorset={palette[theme]}>
+      <Text {...attr}>{children}</Text>
     </Container>
   );
 }
