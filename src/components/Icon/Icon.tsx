@@ -4,7 +4,7 @@ import { toRem } from '../../utils';
 import { useTheme } from '../../contexts';
 import { ColorType, PriorityType, ThemeType } from '../../types';
 
-export interface IconProps extends SVGProps<SVGSVGElement> {
+interface IconProps extends SVGProps<SVGSVGElement> {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 
   color?: ColorType;

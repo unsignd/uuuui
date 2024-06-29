@@ -5,7 +5,7 @@ import { toRem } from '../../utils';
 import { useTheme } from '../../contexts';
 import { Sans } from '../../global';
 
-export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
+interface HeadingProps extends HTMLAttributes<HTMLParagraphElement> {
   children: ReactNode;
 
   color?: ColorType;
@@ -21,7 +21,7 @@ const Wrapper = styled(Sans)<{
   font-weight: 700;
 `;
 
-export default function Heading({ children, ...attr }: TextProps) {
+export default function Heading({ children, ...attr }: HeadingProps) {
   const { theme } = useTheme();
 
   return (

@@ -6,7 +6,7 @@ import { PriorityType } from '../../types';
 import { toRem } from '../../utils';
 import { Sans } from '../../global';
 
-export interface LinkProps extends HTMLAttributes<HTMLParagraphElement> {
+interface LinkProps extends HTMLAttributes<HTMLParagraphElement> {
   children: ReactNode;
 
   color?: ColorType;

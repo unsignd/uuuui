@@ -4,7 +4,7 @@ import { BorderCurveType, ThemeType } from '../../types';
 import { useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   disabled?: boolean;

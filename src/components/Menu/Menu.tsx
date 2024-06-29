@@ -14,7 +14,7 @@ import { toRem } from '../../utils';
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { OptionProps } from '../../global/Dropdown';
 
-export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options: {
     [key: string]: {
       text: string;

@@ -4,8 +4,7 @@ import { useTheme } from '../../contexts';
 import { ThemeType } from '../../types';
 import { toRem } from '../../utils';
 
-export interface SwitchButtonProps
-  extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface SwitchButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   disabled?: boolean;
 }

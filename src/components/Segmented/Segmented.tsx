@@ -1,17 +1,12 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
-import {
-  BorderCurveType,
-  ColorType,
-  PriorityType,
-  ThemeType,
-} from '../../types';
+import { BorderCurveType, ColorType, ThemeType } from '../../types';
 import { toRem } from '../../utils';
 import { Sans } from '../../global';
 import { useTheme } from '../../contexts';
 import Icon from '../Icon';
 
-export interface SegmentedProps extends HTMLAttributes<HTMLDivElement> {
+interface SegmentedProps extends HTMLAttributes<HTMLDivElement> {
   options: {
     [key: string]: {
       disabled?: boolean;

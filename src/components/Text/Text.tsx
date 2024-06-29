@@ -5,7 +5,7 @@ import { toRem } from '../../utils';
 import { useTheme } from '../../contexts';
 import { Sans } from '../../global';
 
-export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
+interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
   children: ReactNode;
 
   color?: ColorType;

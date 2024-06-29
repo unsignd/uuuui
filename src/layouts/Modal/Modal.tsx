@@ -8,7 +8,7 @@ import Text from '../../components/Text';
 
 import { ReactComponent as XSVG } from '../../assets/x_14.svg';
 
-export interface ModalProps {
+interface ModalProps {
   children: ReactNode;
 
   title: string;

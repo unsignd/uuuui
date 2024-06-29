@@ -12,7 +12,7 @@ import { Popover } from 'react-tiny-popover';
 import { Dropdown, Sans } from '../../global';
 import { OptionProps } from '../../global/Dropdown';
 
-export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   options?: {
