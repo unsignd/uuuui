@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {
   BorderCurveType,
   ColorsetType,
-  ColorType,
   PriorityType,
   ThemeType,
 } from '../../types';
@@ -29,7 +28,6 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   selection?: string;
   disabled?: boolean;
 
-  color?: ColorType;
   priority?: PriorityType;
   curve?: BorderCurveType;
 }
@@ -40,7 +38,6 @@ const ButtonContainer = styled.button<{
   $active: boolean;
   $disabled: boolean;
 
-  $color: ColorType;
   $priority: PriorityType;
   $curve: BorderCurveType;
 
@@ -65,11 +62,7 @@ const ButtonContainer = styled.button<{
       medium: props.$active
         ? props.$colorset['base.200']
         : props.$colorset['base.100'],
-      high: {
-        base: props.$colorset['base.500'],
-        primary: props.$colorset['primary.200'],
-        danger: props.$colorset['danger.200'],
-      }[props.$color],
+      high: props.$colorset['base.500'],
     }[props.$priority])};
 
   border: ${(props) =>
@@ -111,17 +104,7 @@ const ButtonContainer = styled.button<{
       ({
         low: props.$colorset['base.400'],
         medium: props.$colorset['base.400'],
-        high: {
-          base: props.$colorset['base.100'],
-          primary: {
-            light: props.$colorset['base.100'],
-            dark: props.$colorset['base.500'],
-          }[props.$theme],
-          danger: {
-            light: props.$colorset['base.100'],
-            dark: props.$colorset['base.500'],
-          }[props.$theme],
-        }[props.$color],
+        high: props.$colorset['base.100'],
       }[props.$priority])};
 
     flex-shrink: 0;
@@ -129,7 +112,6 @@ const ButtonContainer = styled.button<{
 `;
 
 const Text = styled.p<{
-  $color: ColorType;
   $priority: PriorityType;
 
   $theme: ThemeType;
@@ -145,17 +127,7 @@ const Text = styled.p<{
     ({
       low: props.$colorset['base.500'],
       medium: props.$colorset['base.500'],
-      high: {
-        base: props.$colorset['base.100'],
-        primary: {
-          light: props.$colorset['base.100'],
-          dark: props.$colorset['base.500'],
-        }[props.$theme],
-        danger: {
-          light: props.$colorset['base.100'],
-          dark: props.$colorset['base.500'],
-        }[props.$theme],
-      }[props.$color],
+      high: props.$colorset['base.100'],
     }[props.$priority])};
 
   overflow: hidden;
@@ -235,7 +207,6 @@ export default function Menu({
   options,
   selection = Object.keys(options)[0],
   disabled = false,
-  color = 'base',
   priority = 'medium',
   curve = 'medium',
   ...attr
@@ -280,7 +251,6 @@ export default function Menu({
         <ButtonContainer
           $active={active}
           $disabled={disabled}
-          $color={color}
           $priority={priority}
           $curve={curve}
           $theme={theme}
@@ -290,12 +260,7 @@ export default function Menu({
           tabIndex={-1}
           {...attr}
         >
-          <Text
-            $color={color}
-            $priority={priority}
-            $theme={theme}
-            $colorset={palette[theme]}
-          >
+          <Text $priority={priority} $theme={theme} $colorset={palette[theme]}>
             {options[selection].name}
           </Text>
           <ArrowDownSVG />
