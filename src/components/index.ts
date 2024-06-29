@@ -9,5 +9,4 @@ export { default as Text } from './Text';
 export { default as Tag } from './Tag';
 export { default as Icon } from './Icon';
 export { default as Heading } from './Heading';
-
-export { default as Modal } from '../layouts/Modal';
+export { default as Segmented } from './Segmented';
