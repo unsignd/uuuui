@@ -9,7 +9,7 @@ import { SwitchButton } from '../components';
 import { ReactComponent as CheckSVG } from '../assets/check_16.svg';
 
 export interface OptionProps extends HTMLAttributes<HTMLButtonElement> {
-  name: string;
+  text: string;
   type?: DropdownType;
 
   active?: boolean;
@@ -114,7 +114,7 @@ const UtilityWrapper = styled.div`
 `;
 
 function DropdownItem({
-  name,
+  text,
   type = 'text',
   active = false,
   disabled = false,
@@ -158,7 +158,7 @@ function DropdownItem({
       }}
     >
       <Text $color={color ?? 'base'} $theme={theme}>
-        {name}
+        {text}
       </Text>
       <UtilityWrapper>
         {

@@ -17,7 +17,7 @@ import { OptionProps } from '../../global/Dropdown';
 export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options: {
     [key: string]: {
-      name: string;
+      text: string;
       color?: ColorType;
       disabled?: boolean;
       onClick?: (
@@ -150,7 +150,7 @@ export default function Menu({
           options={{
             ...Object.keys(options).reduce((acc, key) => {
               acc[key] = {
-                name: options[key].name,
+                text: options[key].text,
                 type: key === selection ? 'select' : 'text',
                 active: false,
                 disabled: options[key].disabled,
@@ -182,7 +182,7 @@ export default function Menu({
           tabIndex={-1}
         >
           <Text $priority={priority} $theme={theme}>
-            {options[selection].name}
+            {options[selection].text}
           </Text>
           <ArrowDownSVG />
         </ButtonContainer>
