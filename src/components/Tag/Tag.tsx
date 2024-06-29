@@ -6,7 +6,7 @@ import { toRem } from '../../utils';
 import { Mono } from '../../global';
 
 export interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
-  children: ReactNode;
+  children?: ReactNode;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   color?: ColorType;
