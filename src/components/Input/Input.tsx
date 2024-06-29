@@ -89,7 +89,7 @@ export default function Input({
   return (
     <Wrapper $disabled={disabled} $curve={curve} $theme={theme}>
       {Icon ? <Icon /> : undefined}
-      <InputField $theme={theme} tabIndex={-1} disabled={disabled} {...attr} />
+      <InputField {...attr} $theme={theme} tabIndex={-1} disabled={disabled} />
     </Wrapper>
   );
 }

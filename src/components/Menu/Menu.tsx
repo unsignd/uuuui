@@ -244,6 +244,7 @@ export default function Menu({
     >
       <Wrapper>
         <ButtonContainer
+          {...attr}
           $active={active}
           $disabled={disabled}
           $priority={priority}
@@ -252,7 +253,6 @@ export default function Menu({
           onClick={() => setActive(!active)}
           disabled={disabled}
           tabIndex={-1}
-          {...attr}
         >
           <Text $priority={priority} $theme={theme}>
             {options[selection].name}

@@ -119,21 +119,21 @@ function DropdownItem({
 
   return (
     <Item
+      {...attr}
       $disabled={disabled ?? false}
       $type={type ?? 'text'}
       $theme={theme}
       disabled={disabled ?? false}
       tabIndex={-1}
       onClick={(event) => {
+        event.stopPropagation();
+
         switch (type) {
           case 'text': {
             if (attr.onClick && typeof attr.onClick === 'function') {
               attr.onClick(event);
-
-              console.log('oi oi oi');
             }
 
-            console.log('huh');
             onCloseRequest();
 
             break;
@@ -142,7 +142,6 @@ function DropdownItem({
             undefined;
         }
       }}
-      {...attr}
     >
       <Text $color={color ?? 'base'} $theme={theme}>
         {name}
@@ -175,9 +174,10 @@ export default function Dropdown({ options, onCloseRequest }: DropdownProps) {
     <Wrapper $theme={theme}>
       {Object.keys(options).map((key) => (
         <DropdownItem
+          {...options[key]}
           key={key}
           onCloseRequest={() => onCloseRequest()}
-          {...options[key]}
+          onClick={undefined}
         />
       ))}
     </Wrapper>

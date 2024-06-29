@@ -157,6 +157,7 @@ export default function Button({
     >
       <Wrapper>
         <ButtonContainer
+          {...attr}
           $children={children}
           $icon={Icon}
           $active={active}
@@ -174,7 +175,6 @@ export default function Button({
 
             setActive(!active);
           }}
-          {...attr}
         >
           {Icon ? <Icon /> : undefined}
           {children ? <Text>{children}</Text> : undefined}
@@ -184,6 +184,7 @@ export default function Button({
   ) : (
     <Wrapper>
       <ButtonContainer
+        {...attr}
         $children={children}
         $icon={Icon}
         $disabled={disabled}
@@ -193,7 +194,6 @@ export default function Button({
         $theme={theme}
         disabled={disabled}
         tabIndex={-1}
-        {...attr}
       >
         {Icon ? <Icon /> : undefined}
         {children ? <Text>{children}</Text> : undefined}

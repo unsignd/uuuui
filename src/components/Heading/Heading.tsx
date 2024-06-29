@@ -25,7 +25,7 @@ export default function Heading({ children, ...attr }: TextProps) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper $theme={theme} {...attr}>
+    <Wrapper {...attr} $theme={theme}>
       {children}
     </Wrapper>
   );

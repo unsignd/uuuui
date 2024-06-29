@@ -46,7 +46,7 @@ export default function Link({
   const { theme } = useTheme();
 
   return (
-    <Wrapper $color={color} $priority={priority} $theme={theme} {...attr}>
+    <Wrapper {...attr} $color={color} $priority={priority} $theme={theme}>
       {children}
     </Wrapper>
   );

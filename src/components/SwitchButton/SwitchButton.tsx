@@ -82,12 +82,12 @@ export default function SwitchButtonProps({
 
   return (
     <Wrapper
+      {...attr}
       $active={active}
       $disabled={disabled}
       $theme={theme}
       disabled={disabled}
       tabIndex={-1}
-      {...attr}
     >
       <Circle $active={active} $theme={theme} />
     </Wrapper>
