@@ -12,7 +12,6 @@ import { useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
-import { ReactComponent as CheckSVG } from '../../assets/check_16.svg';
 import { OptionProps } from '../../global/Dropdown';
 
 export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -125,76 +124,6 @@ const Text = styled(Sans)<{
       medium: props.theme[props.$theme]['base.500'],
       high: props.theme[props.$theme]['base.100'],
     }[props.$priority])};
-`;
-
-const DropdownContainer = styled.div<{
-  $theme: ThemeType;
-}>`
-  width: ${toRem(240)}rem;
-
-  padding: ${toRem(7)}rem 0;
-
-  display: flex;
-  flex-direction: column;
-
-  background-color: ${(props) => props.theme[props.$theme]['base.100']};
-
-  border: ${toRem(1)}rem solid
-    ${(props) => props.theme[props.$theme]['base.300']};
-  border-radius: ${toRem(7)}rem;
-
-  overflow: hidden;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-`;
-
-const DropdownItem = styled.button<{
-  $disabled: boolean;
-
-  $theme: ThemeType;
-}>`
-  height: ${toRem(40)}rem;
-
-  padding: 0 ${toRem(14)}rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${toRem(14)}rem;
-
-  background-color: transparent;
-
-  border: none;
-
-  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
-  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
-
-  &:hover {
-    background-color: ${(props) =>
-      props.$disabled ? undefined : props.theme[props.$theme]['base.200']};
-  }
-
-  & svg {
-    color: ${(props) => props.theme[props.$theme]['base.400']};
-
-    flex-shrink: 0;
-  }
-`;
-
-const DropdownText = styled(Sans)<{
-  $color: ColorType;
-
-  $theme: ThemeType;
-}>`
-  font-size: ${toRem(14)}rem;
-
-  color: ${(props) =>
-    ({
-      base: props.theme[props.$theme]['base.500'],
-      primary: props.theme[props.$theme]['primary.200'],
-      danger: props.theme[props.$theme]['danger.200'],
-    }[props.$color])};
 `;
 
 export default function Menu({

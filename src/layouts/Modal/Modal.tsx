@@ -13,9 +13,10 @@ export interface ModalProps {
 
   title: string;
   active?: boolean;
-  onCloseRequest?: () => void;
 
   width?: number;
+
+  onCloseRequest?: () => void;
 }
 
 interface ReactModalProps {
@@ -110,7 +111,7 @@ export default function Modal({
         new Promise((resolve) => {
           setOpacity(0);
           setScale(1.2);
-          setTimeout(resolve, 100);
+          setTimeout(resolve, 150);
         })
       }
       onBackgroundClick={() => (onCloseRequest ? onCloseRequest() : undefined)}

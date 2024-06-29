@@ -43,7 +43,7 @@ const Wrapper = styled.button<{
     }[props.$theme])};
   border-radius: ${toRem(12)}rem;
 
-  transition: background-color 100ms ease-in-out;
+  transition: background-color 150ms ease-in-out;
 
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -70,7 +70,7 @@ const Circle = styled.div<{
 
   border-radius: ${toRem(10)}rem;
 
-  transition: margin-left 100ms ease-in-out;
+  transition: margin-left 150ms ease-in-out;
 `;
 
 export default function SwitchButtonProps({
