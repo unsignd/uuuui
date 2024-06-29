@@ -1,3 +1,1 @@
-export function toRem(px: number): number {
-  return px / 16;
-}
+export { default as toRem } from './toRem';

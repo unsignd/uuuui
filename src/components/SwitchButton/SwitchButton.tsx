@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ButtonHTMLAttributes } from 'react';
-import { usePalette, useTheme } from '../../contexts';
-import { ColorsetType, ThemeType } from '../../types';
+import { useTheme } from '../../contexts';
+import { ThemeType } from '../../types';
 import { toRem } from '../../utils';
 
 export interface SwitchButtonProps
@@ -15,7 +15,6 @@ const Wrapper = styled.button<{
   $disabled: boolean;
 
   $theme: ThemeType;
-  $colorset: ColorsetType;
 }>`
   width: ${toRem(36)}rem;
   height: ${toRem(24)}rem;
@@ -28,11 +27,11 @@ const Wrapper = styled.button<{
   background-color: ${(props) =>
     ({
       light: props.$active
-        ? props.$colorset['base.500']
-        : props.$colorset['base.300'],
+        ? props.theme[props.$theme]['base.500']
+        : props.theme[props.$theme]['base.300'],
       dark: props.$active
-        ? props.$colorset['primary.200']
-        : props.$colorset['base.100'],
+        ? props.theme[props.$theme]['primary.200']
+        : props.theme[props.$theme]['base.100'],
     }[props.$theme])};
 
   border: ${(props) =>
@@ -40,7 +39,7 @@ const Wrapper = styled.button<{
       light: 'none',
       dark: props.$active
         ? 'none'
-        : `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+        : `${toRem(1)}rem solid ${props.theme[props.$theme]['base.300']}`,
     }[props.$theme])};
   border-radius: ${toRem(12)}rem;
 
@@ -57,7 +56,6 @@ const Circle = styled.div<{
   $active: boolean;
 
   $theme: ThemeType;
-  $colorset: ColorsetType;
 }>`
   width: ${toRem(20)}rem;
   height: ${toRem(20)}rem;
@@ -66,8 +64,8 @@ const Circle = styled.div<{
 
   background-color: ${(props) =>
     ({
-      light: props.$colorset['base.100'],
-      dark: props.$colorset['base.500'],
+      light: props.theme[props.$theme]['base.100'],
+      dark: props.theme[props.$theme]['base.500'],
     }[props.$theme])};
 
   border-radius: ${toRem(10)}rem;
@@ -80,7 +78,6 @@ export default function SwitchButtonProps({
   disabled = false,
   ...attr
 }: SwitchButtonProps) {
-  const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
@@ -88,12 +85,11 @@ export default function SwitchButtonProps({
       $active={active}
       $disabled={disabled}
       $theme={theme}
-      $colorset={palette[theme]}
       disabled={disabled}
       tabIndex={-1}
       {...attr}
     >
-      <Circle $active={active} $theme={theme} $colorset={palette[theme]} />
+      <Circle $active={active} $theme={theme} />
     </Wrapper>
   );
 }

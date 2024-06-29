@@ -1,18 +1,13 @@
 import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
-import {
-  BorderCurveType,
-  ColorsetType,
-  PriorityType,
-  ThemeType,
-} from '../../types';
-import { usePalette, useTheme } from '../../contexts';
+import { Popover } from 'react-tiny-popover';
+import { Sans } from '../../global';
+import { BorderCurveType, PriorityType, ThemeType } from '../../types';
+import { useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { ReactComponent as CheckSVG } from '../../assets/check_16.svg';
-import { Popover } from 'react-tiny-popover';
-import { Sans } from '../../global';
 
 export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options: {
@@ -42,7 +37,6 @@ const ButtonContainer = styled.button<{
   $curve: BorderCurveType;
 
   $theme: ThemeType;
-  $colorset: ColorsetType;
 }>`
   width: ${toRem(160)}rem;
   height: ${toRem(40)}rem;
@@ -57,18 +51,18 @@ const ButtonContainer = styled.button<{
   background-color: ${(props) =>
     ({
       low: props.$active
-        ? props.$colorset['base.200']
-        : props.$colorset['base.100'],
+        ? props.theme[props.$theme]['base.200']
+        : props.theme[props.$theme]['base.100'],
       medium: props.$active
-        ? props.$colorset['base.200']
-        : props.$colorset['base.100'],
-      high: props.$colorset['base.500'],
+        ? props.theme[props.$theme]['base.200']
+        : props.theme[props.$theme]['base.100'],
+      high: props.theme[props.$theme]['base.500'],
     }[props.$priority])};
 
   border: ${(props) =>
     ({
       low: 'none',
-      medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+      medium: `${toRem(1)}rem solid ${props.theme[props.$theme]['base.300']}`,
       high: 'none',
     }[props.$priority])};
   border-radius: ${(props) =>
@@ -89,8 +83,8 @@ const ButtonContainer = styled.button<{
   &:hover {
     background-color: ${(props) =>
       ({
-        low: props.$colorset['base.200'],
-        medium: props.$colorset['base.200'],
+        low: props.theme[props.$theme]['base.200'],
+        medium: props.theme[props.$theme]['base.200'],
         high: undefined,
       }[props.$priority])};
   }
@@ -102,9 +96,9 @@ const ButtonContainer = styled.button<{
   & svg {
     color: ${(props) =>
       ({
-        low: props.$colorset['base.400'],
-        medium: props.$colorset['base.400'],
-        high: props.$colorset['base.100'],
+        low: props.theme[props.$theme]['base.400'],
+        medium: props.theme[props.$theme]['base.400'],
+        high: props.theme[props.$theme]['base.100'],
       }[props.$priority])};
 
     flex-shrink: 0;
@@ -115,20 +109,19 @@ const Text = styled(Sans)<{
   $priority: PriorityType;
 
   $theme: ThemeType;
-  $colorset: ColorsetType;
 }>`
   font-size: ${toRem(14)}rem;
 
   color: ${(props) =>
     ({
-      low: props.$colorset['base.500'],
-      medium: props.$colorset['base.500'],
-      high: props.$colorset['base.100'],
+      low: props.theme[props.$theme]['base.500'],
+      medium: props.theme[props.$theme]['base.500'],
+      high: props.theme[props.$theme]['base.100'],
     }[props.$priority])};
 `;
 
 const DropdownContainer = styled.div<{
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   width: ${toRem(240)}rem;
 
@@ -137,9 +130,10 @@ const DropdownContainer = styled.div<{
   display: flex;
   flex-direction: column;
 
-  background-color: ${(props) => props.$colorset['base.100']};
+  background-color: ${(props) => props.theme[props.$theme]['base.100']};
 
-  border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
+  border: ${toRem(1)}rem solid
+    ${(props) => props.theme[props.$theme]['base.300']};
   border-radius: ${toRem(7)}rem;
 
   overflow: hidden;
@@ -151,7 +145,7 @@ const DropdownContainer = styled.div<{
 const DropdownItem = styled.button<{
   $disabled: boolean;
 
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   height: ${toRem(40)}rem;
 
@@ -171,22 +165,22 @@ const DropdownItem = styled.button<{
 
   &:hover {
     background-color: ${(props) =>
-      props.$disabled ? undefined : props.$colorset['base.200']};
+      props.$disabled ? undefined : props.theme[props.$theme]['base.200']};
   }
 
   & svg {
-    color: ${(props) => props.$colorset['base.400']};
+    color: ${(props) => props.theme[props.$theme]['base.400']};
 
     flex-shrink: 0;
   }
 `;
 
 const DropdownText = styled(Sans)<{
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   font-size: ${toRem(14)}rem;
 
-  color: ${(props) => props.$colorset['base.500']};
+  color: ${(props) => props.theme[props.$theme]['base.500']};
 `;
 
 export default function Menu({
@@ -199,7 +193,6 @@ export default function Menu({
 }: MenuProps) {
   const [active, setActive] = useState<boolean>(false);
 
-  const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
@@ -210,12 +203,12 @@ export default function Menu({
       padding={7}
       onClickOutside={() => setActive(false)}
       content={
-        <DropdownContainer $colorset={palette[theme]}>
+        <DropdownContainer $theme={theme}>
           {Object.keys(options).map((key) => (
             <DropdownItem
               key={key}
               $disabled={options[key].disabled ?? false}
-              $colorset={palette[theme]}
+              $theme={theme}
               disabled={options[key].disabled ?? false}
               onClick={(event) => {
                 options[key].onClick ? options[key].onClick(event) : undefined;
@@ -224,9 +217,7 @@ export default function Menu({
               }}
               tabIndex={-1}
             >
-              <DropdownText $colorset={palette[theme]}>
-                {options[key].name}
-              </DropdownText>
+              <DropdownText $theme={theme}>{options[key].name}</DropdownText>
               {key === selection ? <CheckSVG /> : undefined}
             </DropdownItem>
           ))}
@@ -240,13 +231,12 @@ export default function Menu({
           $priority={priority}
           $curve={curve}
           $theme={theme}
-          $colorset={palette[theme]}
           onClick={() => setActive(!active)}
           disabled={disabled}
           tabIndex={-1}
           {...attr}
         >
-          <Text $priority={priority} $theme={theme} $colorset={palette[theme]}>
+          <Text $priority={priority} $theme={theme}>
             {options[selection].name}
           </Text>
           <ArrowDownSVG />

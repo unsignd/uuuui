@@ -3,7 +3,7 @@ import { PaletteType, ThemeType } from '../../types/theme';
 import { PaletteContext } from '../../contexts/Palette';
 import { ThemeContext } from '../../contexts/Theme';
 import { ModalProvider } from 'styled-react-modal';
-import styled from 'styled-components';
+import styled, { ThemeProvider } from 'styled-components';
 
 export interface ProviderProps {
   children: ReactNode;
@@ -69,12 +69,14 @@ export default function Provider({
   const [theme, setTheme] = useState<ThemeType>(initialTheme);
 
   return (
-    <PaletteContext.Provider value={{ palette, setPalette }}>
-      <ThemeContext.Provider value={{ theme, setTheme }}>
-        <ModalProvider backgroundComponent={ModalBackground}>
-          {children}
-        </ModalProvider>
-      </ThemeContext.Provider>
-    </PaletteContext.Provider>
+    <ThemeProvider theme={palette}>
+      <PaletteContext.Provider value={{ palette, setPalette }}>
+        <ThemeContext.Provider value={{ theme, setTheme }}>
+          <ModalProvider backgroundComponent={ModalBackground}>
+            {children}
+          </ModalProvider>
+        </ThemeContext.Provider>
+      </PaletteContext.Provider>
+    </ThemeProvider>
   );
 }

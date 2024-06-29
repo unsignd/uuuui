@@ -2,7 +2,7 @@ import { ReactNode, useState } from 'react';
 import ReactModal from 'styled-react-modal';
 import { toRem } from '../../utils';
 import { usePalette, useTheme } from '../../contexts';
-import { ColorsetType } from '../../types';
+import { ColorsetType, ThemeType } from '../../types';
 import styled from 'styled-components';
 import Text from '../Text';
 
@@ -45,7 +45,7 @@ const Wrapper = ReactModal.styled`
 `;
 
 const Header = styled.div<{
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   height: ${toRem(40)}rem;
 
@@ -56,9 +56,10 @@ const Header = styled.div<{
   justify-content: space-between;
   gap: ${toRem(14)}rem;
 
-  background-color: ${(props) => props.$colorset['base.200']};
+  background-color: ${(props) => props.theme[props.$theme]['base.200']};
 
-  border-bottom: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
+  border-bottom: ${toRem(1)}rem solid
+    ${(props) => props.theme[props.$theme]['base.300']};
 
   overflow: hidden;
   box-sizing: border-box;
@@ -66,7 +67,7 @@ const Header = styled.div<{
   -webkit-box-sizing: border-box;
 
   & svg {
-    color: ${(props) => props.$colorset['base.400']};
+    color: ${(props) => props.theme[props.$theme]['base.400']};
 
     flex-shrink: 0;
     cursor: pointer;
@@ -115,7 +116,7 @@ export default function Modal({
       onBackgroundClick={() => (onCloseRequest ? onCloseRequest() : undefined)}
       onEscapeKeydown={() => (onCloseRequest ? onCloseRequest() : undefined)}
     >
-      <Header $colorset={palette[theme]}>
+      <Header $theme={theme}>
         <Text>{title}</Text>
         <XSVG onClick={() => (onCloseRequest ? onCloseRequest() : undefined)} />
       </Header>

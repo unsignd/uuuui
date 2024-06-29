@@ -1,7 +1,7 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
-import { usePalette, useTheme } from '../../contexts';
-import { ColorsetType, ColorType } from '../../types';
+import { useTheme } from '../../contexts';
+import { ColorType, ThemeType } from '../../types';
 import { toRem } from '../../utils';
 import { Mono } from '../../global';
 
@@ -14,7 +14,7 @@ export interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
 const Wrapper = styled.div<{
   $color: ColorType;
 
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   height: ${toRem(24)}rem;
 
@@ -25,15 +25,15 @@ const Wrapper = styled.div<{
 
   color: ${(props) =>
     ({
-      base: props.$colorset['base.400'],
-      primary: props.$colorset['primary.200'],
-      danger: props.$colorset['danger.200'],
+      base: props.theme[props.$theme]['base.400'],
+      primary: props.theme[props.$theme]['primary.200'],
+      danger: props.theme[props.$theme]['danger.200'],
     }[props.$color])};
   background-color: ${(props) =>
     ({
-      base: props.$colorset['base.200'],
-      primary: props.$colorset['primary.100'],
-      danger: props.$colorset['danger.100'],
+      base: props.theme[props.$theme]['base.200'],
+      primary: props.theme[props.$theme]['primary.100'],
+      danger: props.theme[props.$theme]['danger.100'],
     }[props.$color])};
 
   border-radius: ${toRem(7)}rem;
@@ -45,11 +45,10 @@ const Text = styled(Mono)`
 `;
 
 export default function Tag({ children, color = 'base', ...attr }: TagProps) {
-  const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
-    <Wrapper $color={color} $colorset={palette[theme]}>
+    <Wrapper $color={color} $theme={theme}>
       <Text {...attr}>{children}</Text>
     </Wrapper>
   );

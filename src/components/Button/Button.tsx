@@ -8,8 +8,7 @@ import {
   ColorType,
   ThemeType,
 } from '../../types';
-import { ColorsetType } from '../../types';
-import { usePalette, useTheme } from '../../contexts';
+import { useTheme } from '../../contexts';
 import { Popover } from 'react-tiny-popover';
 import SwitchButton from '../SwitchButton';
 import { Sans } from '../../global';
@@ -50,7 +49,6 @@ const ButtonContainer = styled.button<{
   $curve: BorderCurveType;
 
   $theme: ThemeType;
-  $colorset: ColorsetType;
 }>`
   width: ${(props) =>
     !props.$children && props.$icon ? `${toRem(40)}rem` : 'auto'};
@@ -65,39 +63,39 @@ const ButtonContainer = styled.button<{
 
   color: ${(props) =>
     ({
-      low: props.$colorset['base.500'],
-      medium: props.$colorset['base.500'],
+      low: props.theme[props.$theme]['base.500'],
+      medium: props.theme[props.$theme]['base.500'],
       high: {
-        base: props.$colorset['base.100'],
+        base: props.theme[props.$theme]['base.100'],
         primary: {
-          light: props.$colorset['base.100'],
-          dark: props.$colorset['base.500'],
+          light: props.theme[props.$theme]['base.100'],
+          dark: props.theme[props.$theme]['base.500'],
         }[props.$theme],
         danger: {
-          light: props.$colorset['base.100'],
-          dark: props.$colorset['base.500'],
+          light: props.theme[props.$theme]['base.100'],
+          dark: props.theme[props.$theme]['base.500'],
         }[props.$theme],
       }[props.$color],
     }[props.$priority])};
   background-color: ${(props) =>
     ({
       low: props.$active
-        ? props.$colorset['base.200']
-        : props.$colorset['base.100'],
+        ? props.theme[props.$theme]['base.200']
+        : props.theme[props.$theme]['base.100'],
       medium: props.$active
-        ? props.$colorset['base.200']
-        : props.$colorset['base.100'],
+        ? props.theme[props.$theme]['base.200']
+        : props.theme[props.$theme]['base.100'],
       high: {
-        base: props.$colorset['base.500'],
-        primary: props.$colorset['primary.200'],
-        danger: props.$colorset['danger.200'],
+        base: props.theme[props.$theme]['base.500'],
+        primary: props.theme[props.$theme]['primary.200'],
+        danger: props.theme[props.$theme]['danger.200'],
       }[props.$color],
     }[props.$priority])};
 
   border: ${(props) =>
     ({
       low: 'none',
-      medium: `${toRem(1)}rem solid ${props.$colorset['base.300']}`,
+      medium: `${toRem(1)}rem solid ${props.theme[props.$theme]['base.300']}`,
       high: 'none',
     }[props.$priority])};
   border-radius: ${(props) =>
@@ -120,8 +118,8 @@ const ButtonContainer = styled.button<{
       props.$disabled
         ? undefined
         : {
-            low: props.$colorset['base.200'],
-            medium: props.$colorset['base.200'],
+            low: props.theme[props.$theme]['base.200'],
+            medium: props.theme[props.$theme]['base.200'],
             high: undefined,
           }[props.$priority]};
   }
@@ -142,7 +140,7 @@ const Text = styled(Sans)`
 `;
 
 const DropdownContainer = styled.div<{
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   width: ${toRem(240)}rem;
 
@@ -151,9 +149,10 @@ const DropdownContainer = styled.div<{
   display: flex;
   flex-direction: column;
 
-  background-color: ${(props) => props.$colorset['base.100']};
+  background-color: ${(props) => props.theme[props.$theme]['base.100']};
 
-  border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
+  border: ${toRem(1)}rem solid
+    ${(props) => props.theme[props.$theme]['base.300']};
   border-radius: ${toRem(7)}rem;
 
   overflow: hidden;
@@ -167,7 +166,7 @@ const DropdownItem = styled.button<{
 
   $type: DropdownType;
 
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   height: ${toRem(40)}rem;
 
@@ -192,18 +191,19 @@ const DropdownItem = styled.button<{
     background-color: ${(props) =>
       props.$disabled
         ? undefined
-        : { text: props.$colorset['base.200'], 'switch-button': undefined }[
-            props.$type
-          ]};
+        : {
+            text: props.theme[props.$theme]['base.200'],
+            'switch-button': undefined,
+          }[props.$type]};
   }
 `;
 
 const DropdownText = styled(Sans)<{
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   font-size: ${toRem(14)}rem;
 
-  color: ${(props) => props.$colorset['base.500']};
+  color: ${(props) => props.theme[props.$theme]['base.500']};
 `;
 
 const DropdownUtilWrapper = styled.div`
@@ -222,7 +222,6 @@ export default function Button({
 }: ButtonProps) {
   const [active, setActive] = useState<boolean>(false);
 
-  const { palette } = usePalette();
   const { theme } = useTheme();
 
   return options ? (
@@ -233,13 +232,13 @@ export default function Button({
       padding={7}
       onClickOutside={() => setActive(false)}
       content={
-        <DropdownContainer $colorset={palette[theme]}>
+        <DropdownContainer $theme={theme}>
           {Object.keys(options).map((key) => (
             <DropdownItem
               key={key}
               $disabled={options[key].disabled ?? false}
               $type={options[key].type ?? 'text'}
-              $colorset={palette[theme]}
+              $theme={theme}
               disabled={options[key].disabled ?? false}
               onClick={(event) => {
                 switch (options[key].type) {
@@ -258,9 +257,7 @@ export default function Button({
               }}
               tabIndex={-1}
             >
-              <DropdownText $colorset={palette[theme]}>
-                {options[key].name}
-              </DropdownText>
+              <DropdownText $theme={theme}>{options[key].name}</DropdownText>
               <DropdownUtilWrapper>
                 {
                   {
@@ -293,7 +290,6 @@ export default function Button({
           $priority={priority}
           $curve={curve}
           $theme={theme}
-          $colorset={palette[theme]}
           disabled={disabled}
           tabIndex={-1}
           onClick={(event) => {
@@ -320,7 +316,6 @@ export default function Button({
         $priority={priority}
         $curve={curve}
         $theme={theme}
-        $colorset={palette[theme]}
         disabled={disabled}
         tabIndex={-1}
         {...attr}

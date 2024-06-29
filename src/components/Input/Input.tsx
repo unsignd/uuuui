@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
-import { BorderCurveType, ColorsetType } from '../../types';
-import { usePalette, useTheme } from '../../contexts';
+import { BorderCurveType, ThemeType } from '../../types';
+import { useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
@@ -17,7 +17,7 @@ const Wrapper = styled.div<{
 
   $curve: BorderCurveType;
 
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   width: ${toRem(240)}rem;
   height: ${toRem(40)}rem;
@@ -28,9 +28,10 @@ const Wrapper = styled.div<{
   align-items: center;
   gap: ${toRem(7)}rem;
 
-  background-color: ${(props) => props.$colorset['base.100']};
+  background-color: ${(props) => props.theme[props.$theme]['base.100']};
 
-  border: ${toRem(1)}rem solid ${(props) => props.$colorset['base.300']};
+  border: ${toRem(1)}rem solid
+    ${(props) => props.theme[props.$theme]['base.300']};
   border-radius: ${(props) =>
     ({
       medium: toRem(10),
@@ -49,14 +50,14 @@ const Wrapper = styled.div<{
 
     flex-shrink: 0;
 
-    color: ${(props) => props.$colorset['base.400']};
+    color: ${(props) => props.theme[props.$theme]['base.400']};
   }
 `;
 
 const InputField = styled.input<{
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
-  $colorset: ColorsetType;
+  $theme: ThemeType;
 }>`
   height: ${toRem(40)}rem;
 
@@ -65,7 +66,7 @@ const InputField = styled.input<{
   font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
 
-  color: ${(props) => props.$colorset['base.500']};
+  color: ${(props) => props.theme[props.$theme]['base.500']};
   background-color: transparent;
 
   border: none;
@@ -73,7 +74,7 @@ const InputField = styled.input<{
   outline: none;
 
   &::placeholder {
-    color: ${(props) => props.$colorset['base.400']};
+    color: ${(props) => props.theme[props.$theme]['base.400']};
   }
 `;
 
@@ -83,18 +84,12 @@ export default function Input({
   curve = 'medium',
   ...attr
 }: InputProps) {
-  const { palette } = usePalette();
   const { theme } = useTheme();
 
   return (
-    <Wrapper $disabled={disabled} $curve={curve} $colorset={palette[theme]}>
+    <Wrapper $disabled={disabled} $curve={curve} $theme={theme}>
       {Icon ? <Icon /> : undefined}
-      <InputField
-        $colorset={palette[theme]}
-        tabIndex={-1}
-        disabled={disabled}
-        {...attr}
-      />
+      <InputField $theme={theme} tabIndex={-1} disabled={disabled} {...attr} />
     </Wrapper>
   );
 }
