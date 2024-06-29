@@ -127,6 +127,7 @@ export default function Segmented({
           onClick={(event) =>
             options[key].onClick ? options[key].onClick(event) : undefined
           }
+          disabled={options[key].disabled ?? false}
           tabIndex={-1}
         >
           {options[key].icon ? <Icon icon={options[key].icon} /> : undefined}
