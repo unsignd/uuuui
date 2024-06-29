@@ -6,7 +6,7 @@ import { ColorsetType, ThemeType } from '../../types';
 import styled from 'styled-components';
 import Text from '../../components/Text';
 
-import { ReactComponent as XSVG } from '../../assets/x_16.svg';
+import { ReactComponent as XSVG } from '../../assets/x_14.svg';
 
 export interface ModalProps {
   children: ReactNode;
@@ -86,7 +86,7 @@ export default function Modal({
   title,
   active = false,
   onCloseRequest,
-  width = 400,
+  width = 480,
 }: ModalProps) {
   const [opacity, setOpacity] = useState<number>(0);
   const [scale, setScale] = useState<number>(1.2);
@@ -118,7 +118,7 @@ export default function Modal({
       onEscapeKeydown={() => (onCloseRequest ? onCloseRequest() : undefined)}
     >
       <Header $theme={theme}>
-        <Text>{title}</Text>
+        <Text priority={'low'}>{title}</Text>
         <XSVG onClick={() => (onCloseRequest ? onCloseRequest() : undefined)} />
       </Header>
       <Body>{children}</Body>
