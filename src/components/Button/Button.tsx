@@ -35,7 +35,9 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.button<{
+const Container = styled.div``;
+
+const ButtonContainer = styled.button<{
   $children?: string;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -103,6 +105,8 @@ const Container = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
+  transition: scale 100ms ease-in-out;
+
   overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -119,6 +123,10 @@ const Container = styled.button<{
             medium: props.$colorset['base.200'],
             high: undefined,
           }[props.$priority]};
+  }
+
+  &:active {
+    scale: 0.96;
   }
 
   & svg {
@@ -288,10 +296,38 @@ export default function Button({
         </DropdownContainer>
       }
     >
-      <Container
+      <Container>
+        <ButtonContainer
+          $children={children}
+          $icon={Icon}
+          $active={active}
+          $disabled={disabled}
+          $color={color}
+          $priority={priority}
+          $curve={curve}
+          $theme={theme}
+          $colorset={palette[theme]}
+          disabled={disabled}
+          tabIndex={-1}
+          onClick={(event) => {
+            if (attr.onClick && typeof attr.onClick === 'function') {
+              attr.onClick(event);
+            }
+
+            setActive(!active);
+          }}
+          {...attr}
+        >
+          {Icon ? <Icon /> : undefined}
+          {children ? <Text>{children}</Text> : undefined}
+        </ButtonContainer>
+      </Container>
+    </Popover>
+  ) : (
+    <Container>
+      <ButtonContainer
         $children={children}
         $icon={Icon}
-        $active={active}
         $disabled={disabled}
         $color={color}
         $priority={priority}
@@ -300,35 +336,11 @@ export default function Button({
         $colorset={palette[theme]}
         disabled={disabled}
         tabIndex={-1}
-        onClick={(event) => {
-          if (attr.onClick && typeof attr.onClick === 'function') {
-            attr.onClick(event);
-          }
-
-          setActive(!active);
-        }}
         {...attr}
       >
         {Icon ? <Icon /> : undefined}
-        <Text>{children}</Text>
-      </Container>
-    </Popover>
-  ) : (
-    <Container
-      $children={children}
-      $icon={Icon}
-      $disabled={disabled}
-      $color={color}
-      $priority={priority}
-      $curve={curve}
-      $theme={theme}
-      $colorset={palette[theme]}
-      disabled={disabled}
-      tabIndex={-1}
-      {...attr}
-    >
-      {Icon ? <Icon /> : undefined}
-      <Text>{children}</Text>
+        {children ? <Text>{children}</Text> : undefined}
+      </ButtonContainer>
     </Container>
   );
 }

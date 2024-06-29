@@ -34,7 +34,9 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.button<{
+const Container = styled.div``;
+
+const ButtonContainer = styled.button<{
   $active: boolean;
   $disabled: boolean;
 
@@ -82,6 +84,9 @@ const Container = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
+  transition: scale 100ms ease-in-out;
+
+  overflow: hidden;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -95,6 +100,10 @@ const Container = styled.button<{
         medium: props.$colorset['base.200'],
         high: undefined,
       }[props.$priority])};
+  }
+
+  &:active {
+    scale: 0.96;
   }
 
   & svg {
@@ -267,28 +276,30 @@ export default function Menu({
         </DropdownContainer>
       }
     >
-      <Container
-        $active={active}
-        $disabled={disabled}
-        $color={color}
-        $priority={priority}
-        $curve={curve}
-        $theme={theme}
-        $colorset={palette[theme]}
-        onClick={() => setActive(!active)}
-        disabled={disabled}
-        tabIndex={-1}
-        {...attr}
-      >
-        <Text
+      <Container>
+        <ButtonContainer
+          $active={active}
+          $disabled={disabled}
           $color={color}
           $priority={priority}
+          $curve={curve}
           $theme={theme}
           $colorset={palette[theme]}
+          onClick={() => setActive(!active)}
+          disabled={disabled}
+          tabIndex={-1}
+          {...attr}
         >
-          {options[selection].name}
-        </Text>
-        <ArrowDownSVG />
+          <Text
+            $color={color}
+            $priority={priority}
+            $theme={theme}
+            $colorset={palette[theme]}
+          >
+            {options[selection].name}
+          </Text>
+          <ArrowDownSVG />
+        </ButtonContainer>
       </Container>
     </Popover>
   );
