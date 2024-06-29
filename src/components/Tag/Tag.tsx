@@ -41,7 +41,7 @@ const Wrapper = styled.div<{
 
 const Text = styled(Mono)`
   font-size: ${toRem(14)}rem;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 export default function Tag({ children, color = 'base', ...attr }: TagProps) {
