@@ -59,6 +59,7 @@ const InputField = styled.input<{
 
   $theme: ThemeType;
 }>`
+  width: 100%;
   height: ${toRem(40)}rem;
 
   padding: 0 ${toRem(14)}rem 0 ${(props) => (props.$icon ? toRem(7) : 0)}rem;
@@ -87,9 +88,23 @@ export default function Input({
   const { theme } = useTheme();
 
   return (
-    <Wrapper $disabled={disabled} $curve={curve} $theme={theme}>
+    <Wrapper
+      $disabled={disabled}
+      $curve={curve}
+      $theme={theme}
+      style={{
+        ...attr.style,
+      }}
+    >
       {Icon ? <Icon /> : undefined}
-      <InputField {...attr} $theme={theme} tabIndex={-1} disabled={disabled} />
+      <InputField
+        {...attr}
+        $icon={Icon}
+        $theme={theme}
+        tabIndex={-1}
+        disabled={disabled}
+        style={{}}
+      />
     </Wrapper>
   );
 }
