@@ -20,6 +20,7 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
     [key: string]: {
       name: string;
       type?: DropdownType;
+      color?: ColorType;
       active?: boolean;
       disabled?: boolean;
       onClick?: (
@@ -199,11 +200,18 @@ const DropdownItem = styled.button<{
 `;
 
 const DropdownText = styled(Sans)<{
+  $color: ColorType;
+
   $theme: ThemeType;
 }>`
   font-size: ${toRem(14)}rem;
 
-  color: ${(props) => props.theme[props.$theme]['base.500']};
+  color: ${(props) =>
+    ({
+      base: props.theme[props.$theme]['base.500'],
+      primary: props.theme[props.$theme]['primary.200'],
+      danger: props.theme[props.$theme]['danger.200'],
+    }[props.$color])};
 `;
 
 const DropdownUtilWrapper = styled.div`
@@ -257,7 +265,12 @@ export default function Button({
               }}
               tabIndex={-1}
             >
-              <DropdownText $theme={theme}>{options[key].name}</DropdownText>
+              <DropdownText
+                $color={options[key].color ?? 'base'}
+                $theme={theme}
+              >
+                {options[key].name}
+              </DropdownText>
               <DropdownUtilWrapper>
                 {
                   {

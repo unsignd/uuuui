@@ -2,7 +2,12 @@ import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { Popover } from 'react-tiny-popover';
 import { Sans } from '../../global';
-import { BorderCurveType, PriorityType, ThemeType } from '../../types';
+import {
+  BorderCurveType,
+  ColorType,
+  PriorityType,
+  ThemeType,
+} from '../../types';
 import { useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
@@ -13,6 +18,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options: {
     [key: string]: {
       name: string;
+      color?: ColorType;
       disabled?: boolean;
       onClick?: (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -176,11 +182,18 @@ const DropdownItem = styled.button<{
 `;
 
 const DropdownText = styled(Sans)<{
+  $color: ColorType;
+
   $theme: ThemeType;
 }>`
   font-size: ${toRem(14)}rem;
 
-  color: ${(props) => props.theme[props.$theme]['base.500']};
+  color: ${(props) =>
+    ({
+      base: props.theme[props.$theme]['base.500'],
+      primary: props.theme[props.$theme]['primary.200'],
+      danger: props.theme[props.$theme]['danger.200'],
+    }[props.$color])};
 `;
 
 export default function Menu({
@@ -217,7 +230,12 @@ export default function Menu({
               }}
               tabIndex={-1}
             >
-              <DropdownText $theme={theme}>{options[key].name}</DropdownText>
+              <DropdownText
+                $color={options[key].color ?? 'base'}
+                $theme={theme}
+              >
+                {options[key].name}
+              </DropdownText>
               {key === selection ? <CheckSVG /> : undefined}
             </DropdownItem>
           ))}
