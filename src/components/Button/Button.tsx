@@ -55,7 +55,7 @@ const ButtonContainer = styled.button<{
     !props.$children && props.$icon ? `${toRem(40)}rem` : 'auto'};
   height: ${toRem(40)}rem;
 
-  padding: 0 ${toRem(14)}rem;
+  padding: 0 ${(props) => (!props.$children && props.$icon ? 0 : toRem(14))}rem;
 
   display: flex;
   align-items: center;

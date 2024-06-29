@@ -24,7 +24,7 @@ const Wrapper = styled.div<{
     !props.$children && props.$icon ? `${toRem(24)}rem` : 'auto'};
   height: ${toRem(24)}rem;
 
-  padding: 0 ${toRem(7)}rem;
+  padding: 0 ${(props) => (!props.$children && props.$icon ? 0 : toRem(7))}rem;
 
   display: flex;
   align-items: center;
