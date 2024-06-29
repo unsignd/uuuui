@@ -46,7 +46,7 @@ export default function Provider({
       'base.100': '#ffffff',
       'base.200': '#f2f3f5',
       'base.300': '#ced0d6',
-      'base.400': '#a0a4ad',
+      'base.400': '#8a8f99',
       'base.500': '#08080a',
     },
     dark: {
@@ -57,9 +57,9 @@ export default function Provider({
       'danger.200': '#d62222',
 
       'base.100': '#08080a',
-      'base.200': '#14161a',
+      'base.200': '#181a1f',
       'base.300': '#292c33',
-      'base.400': '#4d525c',
+      'base.400': '#606570',
       'base.500': '#ffffff',
     },
   },
