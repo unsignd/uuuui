@@ -95,7 +95,7 @@ const ButtonContainer = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
-  transition: scale 100ms ease-in-out;
+  transition: scale 100ms ease-in-out, background-color 150ms ease-in-out;
 
   overflow: hidden;
   box-sizing: border-box;

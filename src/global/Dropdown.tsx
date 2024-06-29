@@ -72,6 +72,8 @@ const Item = styled.button<{
 
   border: none;
 
+  transition: background-color 150ms ease-in-out;
+
   opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
   cursor: ${(props) =>
     props.$disabled

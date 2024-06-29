@@ -70,7 +70,7 @@ const Circle = styled.div<{
 
   border-radius: ${toRem(10)}rem;
 
-  transition: margin-left 150ms ease-in-out;
+  transition: margin-left 100ms ease-in-out;
 `;
 
 export default function SwitchButtonProps({
