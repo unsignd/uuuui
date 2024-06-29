@@ -21,7 +21,11 @@ const Wrapper = styled(Sans)<{
   color: ${(props) =>
     ({
       low: props.theme[props.$theme]['base.400'],
-      medium: props.theme[props.$theme]['base.400'],
+      medium: {
+        base: props.theme[props.$theme]['base.500'],
+        primary: props.theme[props.$theme]['primary.200'],
+        danger: props.theme[props.$theme]['danger.200'],
+      }[props.$color],
       high: {
         base: props.theme[props.$theme]['base.500'],
         primary: props.theme[props.$theme]['primary.200'],

@@ -2,15 +2,17 @@ import React, { SVGProps } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
 import { useTheme } from '../../contexts';
-import { PriorityType, ThemeType } from '../../types';
+import { ColorType, PriorityType, ThemeType } from '../../types';
 
 export interface IconProps extends SVGProps<SVGSVGElement> {
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 
+  color?: ColorType;
   priority?: PriorityType;
 }
 
 const Wrapper = styled.div<{
+  $color: ColorType;
   $priority: PriorityType;
 
   $theme: ThemeType;
@@ -23,8 +25,16 @@ const Wrapper = styled.div<{
     color: ${(props) =>
       ({
         low: props.theme[props.$theme]['base.400'],
-        medium: props.theme[props.$theme]['base.500'],
-        high: props.theme[props.$theme]['base.500'],
+        medium: {
+          base: props.theme[props.$theme]['base.500'],
+          primary: props.theme[props.$theme]['primary.200'],
+          danger: props.theme[props.$theme]['danger.200'],
+        }[props.$color],
+        high: {
+          base: props.theme[props.$theme]['base.500'],
+          primary: props.theme[props.$theme]['primary.200'],
+          danger: props.theme[props.$theme]['danger.200'],
+        }[props.$color],
       }[props.$priority])};
 
     flex-shrink: 0;
@@ -33,13 +43,14 @@ const Wrapper = styled.div<{
 
 export default function Icon({
   icon: Icon,
+  color = 'base',
   priority = 'medium',
   ...attr
 }: IconProps) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper $priority={priority} $theme={theme}>
+    <Wrapper $color={color} $priority={priority} $theme={theme}>
       <Icon {...attr} />
     </Wrapper>
   );
