@@ -4,7 +4,7 @@ import { toRem } from '../../utils';
 import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType, ThemeType } from '../../types';
 import styled from 'styled-components';
-import Text from '../Text';
+import Text from '../../components/Text';
 
 import { ReactComponent as XSVG } from '../../assets/x_16.svg';
 
