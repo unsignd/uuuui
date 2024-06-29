@@ -20,8 +20,6 @@ export interface SegmentedProps extends HTMLAttributes<HTMLDivElement> {
       icon?: React.FC<React.SVGProps<SVGSVGElement>>;
       color?: ColorType;
 
-      curve?: BorderCurveType;
-
       onClick?: (
         event: React.MouseEvent<HTMLButtonElement, MouseEvent>
       ) => void;
@@ -29,12 +27,15 @@ export interface SegmentedProps extends HTMLAttributes<HTMLDivElement> {
   };
 
   selection?: string;
+
+  curve?: BorderCurveType;
 }
 
 const Wrapper = styled.div`
   height: ${toRem(40)}rem;
 
   display: flex;
+  gap: ${toRem(7)}rem;
 `;
 
 const ButtonContainer = styled.button<{
@@ -72,7 +73,8 @@ const ButtonContainer = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
-  transition: scale 100ms ease-in-out;
+  transition: scale 100ms ease-in-out, color 150ms ease-in-out,
+    background-color 150ms ease-in-out;
 
   overflow: hidden;
   box-sizing: border-box;
@@ -82,6 +84,8 @@ const ButtonContainer = styled.button<{
   cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
+    color: ${(props) =>
+      props.$active ? undefined : props.theme[props.$theme]['base.400']};
     background-color: ${(props) =>
       props.$disabled ? undefined : props.theme[props.$theme]['base.200']};
   }
@@ -103,7 +107,8 @@ const Text = styled(Sans)`
 
 export default function Segmented({
   options,
-  selection,
+  selection = Object.keys(options)[0],
+  curve = 'medium',
   ...attr
 }: SegmentedProps) {
   const { theme } = useTheme();
@@ -117,8 +122,11 @@ export default function Segmented({
           $icon={options[key].icon}
           $active={selection === key}
           $disabled={options[key].disabled ?? false}
-          $curve={options[key].curve ?? 'medium'}
+          $curve={curve}
           $theme={theme}
+          onClick={(event) =>
+            options[key].onClick ? options[key].onClick(event) : undefined
+          }
         >
           {options[key].icon ? <Icon icon={options[key].icon} /> : undefined}
           {options[key].text ? <Text>{options[key].text}</Text> : undefined}
