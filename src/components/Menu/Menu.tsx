@@ -35,7 +35,7 @@ interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const Wrapper = styled.div``;
 
-const ButtonContainer = styled.button<{
+const ButtonWrapper = styled.button<{
   $active: boolean;
   $disabled: boolean;
 
@@ -164,7 +164,7 @@ export default function Menu({
       }
     >
       <Wrapper>
-        <ButtonContainer
+        <ButtonWrapper
           {...attr}
           $active={active}
           $disabled={disabled}
@@ -185,7 +185,7 @@ export default function Menu({
             {options[selection].text}
           </Text>
           <ArrowDownSVG />
-        </ButtonContainer>
+        </ButtonWrapper>
       </Wrapper>
     </Popover>
   );

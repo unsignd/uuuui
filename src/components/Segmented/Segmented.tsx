@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   gap: ${toRem(7)}rem;
 `;
 
-const ButtonContainer = styled.button<{
+const ButtonWrapper = styled.button<{
   $children?: ReactNode;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -119,7 +119,7 @@ export default function Segmented({
   return (
     <Wrapper {...attr}>
       {Object.keys(options).map((key) => (
-        <ButtonContainer
+        <ButtonWrapper
           key={key}
           $children={options[key].text}
           $icon={options[key].icon}
@@ -135,7 +135,7 @@ export default function Segmented({
         >
           {options[key].icon ? <Icon icon={options[key].icon} /> : undefined}
           {options[key].text ? <Text>{options[key].text}</Text> : undefined}
-        </ButtonContainer>
+        </ButtonWrapper>
       ))}
     </Wrapper>
   );

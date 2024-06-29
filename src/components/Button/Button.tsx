@@ -28,7 +28,7 @@ interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
 
 const Wrapper = styled.div``;
 
-const ButtonContainer = styled.button<{
+const ButtonWrapper = styled.button<{
   $children?: ReactNode;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
@@ -156,7 +156,7 @@ export default function Button({
       }
     >
       <Wrapper>
-        <ButtonContainer
+        <ButtonWrapper
           {...attr}
           $children={children}
           $icon={Icon}
@@ -178,12 +178,12 @@ export default function Button({
         >
           {Icon ? <Icon /> : undefined}
           {children ? <Text>{children}</Text> : undefined}
-        </ButtonContainer>
+        </ButtonWrapper>
       </Wrapper>
     </Popover>
   ) : (
     <Wrapper>
-      <ButtonContainer
+      <ButtonWrapper
         {...attr}
         $children={children}
         $icon={Icon}
@@ -197,7 +197,7 @@ export default function Button({
       >
         {Icon ? <Icon /> : undefined}
         {children ? <Text>{children}</Text> : undefined}
-      </ButtonContainer>
+      </ButtonWrapper>
     </Wrapper>
   );
 }
