@@ -97,7 +97,15 @@ const ButtonContainer = styled.button<{
   & svg {
     height: ${toRem(16)}rem;
 
+    transition: scale 100ms ease-in-out, color 150ms ease-in-out,
+      background-color 150ms ease-in-out;
+
     flex-shrink: 0;
+  }
+
+  &:hover svg {
+    color: ${(props) =>
+      props.$active ? undefined : props.theme[props.$theme]['base.400']};
   }
 `;
 
