@@ -7,21 +7,29 @@ import { Mono } from '../../global';
 
 export interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
   children: ReactNode;
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   color?: ColorType;
 }
 
 const Wrapper = styled.div<{
+  $children?: ReactNode;
+  $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+
   $color: ColorType;
 
   $theme: ThemeType;
 }>`
+  width: ${(props) =>
+    !props.$children && props.$icon ? `${toRem(40)}rem` : 'auto'};
   height: ${toRem(24)}rem;
 
   padding: 0 ${toRem(7)}rem;
 
   display: flex;
   align-items: center;
+  justify-content: center;
+  gap: ${toRem(7)}rem;
 
   color: ${(props) =>
     ({
@@ -37,6 +45,12 @@ const Wrapper = styled.div<{
     }[props.$color])};
 
   border-radius: ${toRem(7)}rem;
+
+  & svg {
+    height: ${toRem(16)}rem;
+
+    flex-shrink: 0;
+  }
 `;
 
 const Text = styled(Mono)`
@@ -44,12 +58,18 @@ const Text = styled(Mono)`
   font-weight: 600;
 `;
 
-export default function Tag({ children, color = 'base', ...attr }: TagProps) {
+export default function Tag({
+  children,
+  icon: Icon,
+  color = 'base',
+  ...attr
+}: TagProps) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper $color={color} $theme={theme}>
-      <Text {...attr}>{children}</Text>
+    <Wrapper $children={children} $icon={Icon} $color={color} $theme={theme}>
+      {Icon ? <Icon /> : undefined}
+      {children ? <Text {...attr}>{children}</Text> : undefined}
     </Wrapper>
   );
 }
