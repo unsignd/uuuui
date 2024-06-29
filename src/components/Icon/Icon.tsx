@@ -5,13 +5,12 @@ import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType, PriorityType } from '../../types';
 
 export interface IconProps extends SVGProps<SVGSVGElement> {
-  children?: undefined;
   icon: React.FC<React.SVGProps<SVGSVGElement>>;
 
   priority?: PriorityType;
 }
 
-const Container = styled.div<{
+const Wrapper = styled.div<{
   $priority: PriorityType;
 
   $colorset: ColorsetType;
@@ -41,8 +40,8 @@ export default function Icon({
   const { theme } = useTheme();
 
   return (
-    <Container $priority={priority} $colorset={palette[theme]}>
+    <Wrapper $priority={priority} $colorset={palette[theme]}>
       <Icon {...attr} />
-    </Container>
+    </Wrapper>
   );
 }

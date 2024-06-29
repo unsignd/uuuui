@@ -5,7 +5,6 @@ import { usePalette, useTheme } from '../../contexts';
 import { toRem } from '../../utils';
 
 export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  children?: undefined;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   disabled?: boolean;
@@ -13,7 +12,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.div<{
+const Wrapper = styled.div<{
   $disabled: boolean;
 
   $curve: BorderCurveType;
@@ -88,7 +87,7 @@ export default function Input({
   const { theme } = useTheme();
 
   return (
-    <Container $disabled={disabled} $curve={curve} $colorset={palette[theme]}>
+    <Wrapper $disabled={disabled} $curve={curve} $colorset={palette[theme]}>
       {Icon ? <Icon /> : undefined}
       <InputField
         $colorset={palette[theme]}
@@ -96,6 +95,6 @@ export default function Input({
         disabled={disabled}
         {...attr}
       />
-    </Container>
+    </Wrapper>
   );
 }

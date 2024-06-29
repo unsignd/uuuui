@@ -1,29 +1,23 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
 import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType } from '../../types';
 import { PriorityType } from '../../types';
 import { Link as _Link } from 'react-router-dom';
 import { toRem } from '../../utils';
+import { Sans } from '../../global';
 
 export interface LinkProps extends HTMLAttributes<HTMLParagraphElement> {
-  children: string;
+  children: ReactNode;
 
   priority?: PriorityType;
 }
 
-const Container = styled.p<{
+const Wrapper = styled(Sans)<{
   $priority: PriorityType;
 
   $colorset: ColorsetType;
 }>`
-  margin: 0;
-
-  display: flex;
-  align-items: center;
-  gap: ${toRem(7)}rem;
-
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
   text-decoration: ${(props) =>
     ({
@@ -37,7 +31,6 @@ const Container = styled.p<{
       medium: props.$colorset['base.400'],
       high: props.$colorset['base.500'],
     }[props.$priority])};
-  text-overflow: ellipsis;
 
   color: ${(props) =>
     ({
@@ -46,8 +39,6 @@ const Container = styled.p<{
       high: props.$colorset['base.500'],
     }[props.$priority])};
 
-  overflow: hidden;
-  white-space: nowrap;
   cursor: pointer;
 
   &:hover {
@@ -64,8 +55,8 @@ export default function Link({
   const { theme } = useTheme();
 
   return (
-    <Container $priority={priority} $colorset={palette[theme]} {...attr}>
+    <Wrapper $priority={priority} $colorset={palette[theme]} {...attr}>
       {children}
-    </Container>
+    </Wrapper>
   );
 }

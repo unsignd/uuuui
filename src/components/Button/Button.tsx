@@ -1,4 +1,4 @@
-import { HTMLAttributes, useState } from 'react';
+import { HTMLAttributes, ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
 import {
@@ -12,9 +12,10 @@ import { ColorsetType } from '../../types';
 import { usePalette, useTheme } from '../../contexts';
 import { Popover } from 'react-tiny-popover';
 import SwitchButton from '../SwitchButton';
+import { Sans } from '../../global';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
-  children?: string;
+  children?: ReactNode;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   options?: {
     [key: string]: {
@@ -35,10 +36,10 @@ export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.div``;
+const Wrapper = styled.div``;
 
 const ButtonContainer = styled.button<{
-  $children?: string;
+  $children?: ReactNode;
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   $active?: boolean;
@@ -136,15 +137,8 @@ const ButtonContainer = styled.button<{
   }
 `;
 
-const Text = styled.p`
-  margin: 0;
-
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
+const Text = styled(Sans)`
   font-size: ${toRem(14)}rem;
-  text-overflow: ellipsis;
-
-  overflow: hidden;
-  white-space: nowrap;
 `;
 
 const DropdownContainer = styled.div<{
@@ -204,19 +198,12 @@ const DropdownItem = styled.button<{
   }
 `;
 
-const DropdownText = styled.p<{
+const DropdownText = styled(Sans)<{
   $colorset: ColorsetType;
 }>`
-  margin: 0;
-
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
-  text-overflow: ellipsis;
 
   color: ${(props) => props.$colorset['base.500']};
-
-  overflow: hidden;
-  white-space: nowrap;
 `;
 
 const DropdownUtilWrapper = styled.div`
@@ -296,7 +283,7 @@ export default function Button({
         </DropdownContainer>
       }
     >
-      <Container>
+      <Wrapper>
         <ButtonContainer
           $children={children}
           $icon={Icon}
@@ -321,10 +308,10 @@ export default function Button({
           {Icon ? <Icon /> : undefined}
           {children ? <Text>{children}</Text> : undefined}
         </ButtonContainer>
-      </Container>
+      </Wrapper>
     </Popover>
   ) : (
-    <Container>
+    <Wrapper>
       <ButtonContainer
         $children={children}
         $icon={Icon}
@@ -341,6 +328,6 @@ export default function Button({
         {Icon ? <Icon /> : undefined}
         {children ? <Text>{children}</Text> : undefined}
       </ButtonContainer>
-    </Container>
+    </Wrapper>
   );
 }

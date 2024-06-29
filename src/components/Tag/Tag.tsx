@@ -1,16 +1,17 @@
-import { HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
 import { usePalette, useTheme } from '../../contexts';
 import { ColorsetType, ColorType } from '../../types';
 import { toRem } from '../../utils';
+import { Mono } from '../../global';
 
 export interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
-  children: string;
+  children: ReactNode;
 
   color?: ColorType;
 }
 
-const Container = styled.div<{
+const Wrapper = styled.div<{
   $color: ColorType;
 
   $colorset: ColorsetType;
@@ -38,17 +39,9 @@ const Container = styled.div<{
   border-radius: ${toRem(7)}rem;
 `;
 
-const Text = styled.p`
-  margin: 0;
-
-  font-family: Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+const Text = styled(Mono)`
   font-size: ${toRem(14)}rem;
   font-weight: 500;
-  text-overflow: ellipsis;
-  letter-spacing: ${toRem(-0.35)}rem;
-
-  overflow: hidden;
-  white-space: nowrap;
 `;
 
 export default function Tag({ children, color = 'base', ...attr }: TagProps) {
@@ -56,8 +49,8 @@ export default function Tag({ children, color = 'base', ...attr }: TagProps) {
   const { theme } = useTheme();
 
   return (
-    <Container $color={color} $colorset={palette[theme]}>
+    <Wrapper $color={color} $colorset={palette[theme]}>
       <Text {...attr}>{children}</Text>
-    </Container>
+    </Wrapper>
   );
 }

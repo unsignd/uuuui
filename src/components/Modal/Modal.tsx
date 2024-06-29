@@ -25,7 +25,7 @@ interface ReactModalProps {
   $colorset: ColorsetType;
 }
 
-const Container = ReactModal.styled`
+const Wrapper = ReactModal.styled`
   width: ${(props: ReactModalProps) => toRem(props.$width)}rem;
 
   scale: ${(props: ReactModalProps) => props.$scale};
@@ -93,7 +93,7 @@ export default function Modal({
   const { theme } = useTheme();
 
   return (
-    <Container
+    <Wrapper
       $scale={scale}
       $width={width}
       $colorset={palette[theme]}
@@ -120,6 +120,6 @@ export default function Modal({
         <XSVG onClick={() => (onCloseRequest ? onCloseRequest() : undefined)} />
       </Header>
       <Body>{children}</Body>
-    </Container>
+    </Wrapper>
   );
 }

@@ -6,13 +6,11 @@ import { toRem } from '../../utils';
 
 export interface SwitchButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: undefined;
-
   active?: boolean;
   disabled?: boolean;
 }
 
-const Container = styled.button<{
+const Wrapper = styled.button<{
   $active: boolean;
   $disabled: boolean;
 
@@ -86,7 +84,7 @@ export default function SwitchButtonProps({
   const { theme } = useTheme();
 
   return (
-    <Container
+    <Wrapper
       $active={active}
       $disabled={disabled}
       $theme={theme}
@@ -96,6 +94,6 @@ export default function SwitchButtonProps({
       {...attr}
     >
       <Circle $active={active} $theme={theme} $colorset={palette[theme]} />
-    </Container>
+    </Wrapper>
   );
 }

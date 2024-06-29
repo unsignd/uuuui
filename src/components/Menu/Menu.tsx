@@ -12,9 +12,9 @@ import { toRem } from '../../utils';
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { ReactComponent as CheckSVG } from '../../assets/check_16.svg';
 import { Popover } from 'react-tiny-popover';
+import { Sans } from '../../global';
 
 export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: undefined;
   options: {
     [key: string]: {
       name: string;
@@ -32,7 +32,7 @@ export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   curve?: BorderCurveType;
 }
 
-const Container = styled.div``;
+const Wrapper = styled.div``;
 
 const ButtonContainer = styled.button<{
   $active: boolean;
@@ -111,17 +111,13 @@ const ButtonContainer = styled.button<{
   }
 `;
 
-const Text = styled.p<{
+const Text = styled(Sans)<{
   $priority: PriorityType;
 
   $theme: ThemeType;
   $colorset: ColorsetType;
 }>`
-  margin: 0;
-
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
-  text-overflow: ellipsis;
 
   color: ${(props) =>
     ({
@@ -129,9 +125,6 @@ const Text = styled.p<{
       medium: props.$colorset['base.500'],
       high: props.$colorset['base.100'],
     }[props.$priority])};
-
-  overflow: hidden;
-  white-space: nowrap;
 `;
 
 const DropdownContainer = styled.div<{
@@ -188,19 +181,12 @@ const DropdownItem = styled.button<{
   }
 `;
 
-const DropdownText = styled.p<{
+const DropdownText = styled(Sans)<{
   $colorset: ColorsetType;
 }>`
-  margin: 0;
-
-  font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
   font-size: ${toRem(14)}rem;
-  text-overflow: ellipsis;
 
   color: ${(props) => props.$colorset['base.500']};
-
-  overflow: hidden;
-  white-space: nowrap;
 `;
 
 export default function Menu({
@@ -247,7 +233,7 @@ export default function Menu({
         </DropdownContainer>
       }
     >
-      <Container>
+      <Wrapper>
         <ButtonContainer
           $active={active}
           $disabled={disabled}
@@ -265,7 +251,7 @@ export default function Menu({
           </Text>
           <ArrowDownSVG />
         </ButtonContainer>
-      </Container>
+      </Wrapper>
     </Popover>
   );
 }
