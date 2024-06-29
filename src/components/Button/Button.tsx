@@ -4,29 +4,19 @@ import { toRem } from '../../utils';
 import {
   PriorityType,
   BorderCurveType,
-  DropdownType,
   ColorType,
   ThemeType,
 } from '../../types';
 import { useTheme } from '../../contexts';
 import { Popover } from 'react-tiny-popover';
-import SwitchButton from '../SwitchButton';
-import { Sans } from '../../global';
+import { Dropdown, Sans } from '../../global';
+import { OptionProps } from '../../global/Dropdown';
 
 export interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
   options?: {
-    [key: string]: {
-      name: string;
-      type?: DropdownType;
-      color?: ColorType;
-      active?: boolean;
-      disabled?: boolean;
-      onClick?: (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-      ) => void;
-    };
+    [key: string]: OptionProps;
   };
 
   disabled?: boolean;
@@ -140,84 +130,6 @@ const Text = styled(Sans)`
   font-size: ${toRem(14)}rem;
 `;
 
-const DropdownContainer = styled.div<{
-  $theme: ThemeType;
-}>`
-  width: ${toRem(240)}rem;
-
-  padding: ${toRem(7)}rem 0;
-
-  display: flex;
-  flex-direction: column;
-
-  background-color: ${(props) => props.theme[props.$theme]['base.100']};
-
-  border: ${toRem(1)}rem solid
-    ${(props) => props.theme[props.$theme]['base.300']};
-  border-radius: ${toRem(7)}rem;
-
-  overflow: hidden;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-`;
-
-const DropdownItem = styled.button<{
-  $disabled: boolean;
-
-  $type: DropdownType;
-
-  $theme: ThemeType;
-}>`
-  height: ${toRem(40)}rem;
-
-  padding: 0 ${toRem(14)}rem;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${toRem(14)}rem;
-
-  background-color: transparent;
-
-  border: none;
-
-  opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
-  cursor: ${(props) =>
-    props.$disabled
-      ? 'not-allowed'
-      : { text: 'pointer', 'switch-button': 'auto' }[props.$type]};
-
-  &:hover {
-    background-color: ${(props) =>
-      props.$disabled
-        ? undefined
-        : {
-            text: props.theme[props.$theme]['base.200'],
-            'switch-button': undefined,
-          }[props.$type]};
-  }
-`;
-
-const DropdownText = styled(Sans)<{
-  $color: ColorType;
-
-  $theme: ThemeType;
-}>`
-  font-size: ${toRem(14)}rem;
-
-  color: ${(props) =>
-    ({
-      base: props.theme[props.$theme]['base.500'],
-      primary: props.theme[props.$theme]['primary.200'],
-      danger: props.theme[props.$theme]['danger.200'],
-    }[props.$color])};
-`;
-
-const DropdownUtilWrapper = styled.div`
-  flex-shrink: 0;
-`;
-
 export default function Button({
   children,
   icon: Icon,
@@ -240,57 +152,7 @@ export default function Button({
       padding={7}
       onClickOutside={() => setActive(false)}
       content={
-        <DropdownContainer $theme={theme}>
-          {Object.keys(options).map((key) => (
-            <DropdownItem
-              key={key}
-              $disabled={options[key].disabled ?? false}
-              $type={options[key].type ?? 'text'}
-              $theme={theme}
-              disabled={options[key].disabled ?? false}
-              onClick={(event) => {
-                switch (options[key].type) {
-                  case 'text': {
-                    options[key].onClick
-                      ? options[key].onClick(event)
-                      : undefined;
-
-                    setActive(false);
-
-                    break;
-                  }
-                  default:
-                    undefined;
-                }
-              }}
-              tabIndex={-1}
-            >
-              <DropdownText
-                $color={options[key].color ?? 'base'}
-                $theme={theme}
-              >
-                {options[key].name}
-              </DropdownText>
-              <DropdownUtilWrapper>
-                {
-                  {
-                    text: undefined,
-                    'switch-button': (
-                      <SwitchButton
-                        active={options[key].active ?? false}
-                        onClick={(event) => {
-                          options[key].onClick
-                            ? options[key].onClick(event)
-                            : undefined;
-                        }}
-                      />
-                    ),
-                  }[options[key].type ?? 'text']
-                }
-              </DropdownUtilWrapper>
-            </DropdownItem>
-          ))}
-        </DropdownContainer>
+        <Dropdown options={options} onCloseRequest={() => setActive(false)} />
       }
     >
       <Wrapper>
