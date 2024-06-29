@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
-import { PriorityType, ThemeType } from '../../types';
+import { ColorType, PriorityType, ThemeType } from '../../types';
 import { toRem } from '../../utils';
 import { useTheme } from '../../contexts';
 import { Sans } from '../../global';
@@ -8,10 +8,12 @@ import { Sans } from '../../global';
 export interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
   children: ReactNode;
 
+  color?: ColorType;
   priority?: PriorityType;
 }
 
 const Wrapper = styled(Sans)<{
+  $color: ColorType;
   $priority: PriorityType;
 
   $theme: ThemeType;
@@ -19,8 +21,12 @@ const Wrapper = styled(Sans)<{
   color: ${(props) =>
     ({
       low: props.theme[props.$theme]['base.400'],
-      medium: props.theme[props.$theme]['base.500'],
-      high: props.theme[props.$theme]['base.500'],
+      medium: props.theme[props.$theme]['base.400'],
+      high: {
+        base: props.theme[props.$theme]['base.500'],
+        primary: props.theme[props.$theme]['primary.200'],
+        danger: props.theme[props.$theme]['danger.200'],
+      }[props.$color],
     }[props.$priority])};
 
   font-size: ${toRem(14)}rem;
@@ -29,13 +35,14 @@ const Wrapper = styled(Sans)<{
 
 export default function Link({
   children,
+  color = 'base',
   priority = 'medium',
   ...attr
 }: TextProps) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper $priority={priority} $theme={theme} {...attr}>
+    <Wrapper $color={color} $priority={priority} $theme={theme} {...attr}>
       {children}
     </Wrapper>
   );
