@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { Popover } from 'react-tiny-popover';
-import { Sans } from '../../global';
+import { Dropdown, Sans } from '../../global';
 import {
   BorderCurveType,
   ColorType,
@@ -13,6 +13,7 @@ import { toRem } from '../../utils';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { ReactComponent as CheckSVG } from '../../assets/check_16.svg';
+import { OptionProps } from '../../global/Dropdown';
 
 export interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   options: {
@@ -216,30 +217,21 @@ export default function Menu({
       padding={7}
       onClickOutside={() => setActive(false)}
       content={
-        <DropdownContainer $theme={theme}>
-          {Object.keys(options).map((key) => (
-            <DropdownItem
-              key={key}
-              $disabled={options[key].disabled ?? false}
-              $theme={theme}
-              disabled={options[key].disabled ?? false}
-              onClick={(event) => {
-                options[key].onClick ? options[key].onClick(event) : undefined;
-
-                setActive(false);
-              }}
-              tabIndex={-1}
-            >
-              <DropdownText
-                $color={options[key].color ?? 'base'}
-                $theme={theme}
-              >
-                {options[key].name}
-              </DropdownText>
-              {key === selection ? <CheckSVG /> : undefined}
-            </DropdownItem>
-          ))}
-        </DropdownContainer>
+        <Dropdown
+          options={{
+            ...Object.keys(options).reduce((acc, key) => {
+              acc[key] = {
+                name: options[key].name,
+                type: key === selection ? 'select' : 'text',
+                active: false,
+                disabled: options[key].disabled,
+                color: options[key].color,
+              };
+              return acc;
+            }, {} as { [key: string]: OptionProps }),
+          }}
+          onCloseRequest={() => setActive(false)}
+        />
       }
     >
       <Wrapper>
@@ -250,7 +242,13 @@ export default function Menu({
           $priority={priority}
           $curve={curve}
           $theme={theme}
-          onClick={() => setActive(!active)}
+          onClick={(event) => {
+            if (attr.onClick && typeof attr.onClick === 'function') {
+              attr.onClick(event);
+            }
+
+            setActive(!active);
+          }}
           disabled={disabled}
           tabIndex={-1}
         >

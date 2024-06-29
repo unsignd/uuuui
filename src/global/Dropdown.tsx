@@ -2,9 +2,11 @@ import { styled } from 'styled-components';
 import Sans from './Sans';
 import { ColorType, DropdownType, ThemeType } from '../types';
 import { toRem } from '../utils';
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { useTheme } from '../contexts';
 import { SwitchButton } from '../components';
+
+import { ReactComponent as CheckSVG } from '../assets/check_16.svg';
 
 export interface OptionProps extends HTMLAttributes<HTMLButtonElement> {
   name: string;
@@ -74,7 +76,9 @@ const Item = styled.button<{
   cursor: ${(props) =>
     props.$disabled
       ? 'not-allowed'
-      : { text: 'pointer', 'switch-button': 'auto' }[props.$type]};
+      : { text: 'pointer', select: 'pointer', 'switch-button': 'auto' }[
+          props.$type
+        ]};
 
   &:hover {
     background-color: ${(props) =>
@@ -82,6 +86,7 @@ const Item = styled.button<{
         ? undefined
         : {
             text: props.theme[props.$theme]['base.200'],
+            select: props.theme[props.$theme]['base.200'],
             'switch-button': undefined,
           }[props.$type]};
   }
@@ -126,8 +131,6 @@ function DropdownItem({
       disabled={disabled ?? false}
       tabIndex={-1}
       onClick={(event) => {
-        event.stopPropagation();
-
         switch (type) {
           case 'text': {
             if (attr.onClick && typeof attr.onClick === 'function') {
@@ -138,7 +141,16 @@ function DropdownItem({
 
             break;
           }
-          default:
+          case 'select': {
+            if (attr.onClick && typeof attr.onClick === 'function') {
+              attr.onClick(event);
+            }
+
+            onCloseRequest();
+
+            break;
+          }
+          case 'switch-button':
             undefined;
         }
       }}
@@ -150,6 +162,7 @@ function DropdownItem({
         {
           {
             text: undefined,
+            select: <CheckSVG />,
             'switch-button': (
               <SwitchButton
                 active={active}
