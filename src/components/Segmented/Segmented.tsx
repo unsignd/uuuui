@@ -55,6 +55,8 @@ const ButtonWrapper = styled.button<{
   justify-content: center;
   gap: ${toRem(7)}rem;
 
+  text-decoration: none;
+
   color: ${(props) => props.theme[props.$theme]['base.500']};
   background-color: ${(props) =>
     props.$active
@@ -68,8 +70,7 @@ const ButtonWrapper = styled.button<{
       large: toRem(20),
     }[props.$curve])}rem;
 
-  transition: scale 100ms ease-in-out, color 150ms ease-in-out,
-    background-color 150ms ease-in-out;
+  transition: scale 100ms ease-in-out, background-color 150ms ease-in-out;
 
   overflow: hidden;
   box-sizing: border-box;
@@ -79,14 +80,12 @@ const ButtonWrapper = styled.button<{
   cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
 
   &:hover {
-    color: ${(props) =>
-      props.$active ? undefined : props.theme[props.$theme]['base.400']};
-    background-color: ${(props) =>
-      props.$disabled ? undefined : props.theme[props.$theme]['base.200']};
+    text-decoration: ${(props) =>
+      props.$active || props.$disabled ? undefined : 'underline'};
   }
 
   &:active {
-    scale: 0.96;
+    scale: ${(props) => (props.$disabled ? undefined : 0.96)};
   }
 
   & svg {
@@ -104,8 +103,11 @@ const ButtonWrapper = styled.button<{
   }
 `;
 
-const Text = styled(Sans)`
+const Text = styled(Sans)<{
+  $theme: ThemeType;
+}>`
   font-size: ${toRem(14)}rem;
+  text-decoration-color: ${(props) => props.theme[props.$theme]['base.500']};
 `;
 
 export default function Segmented({
@@ -134,7 +136,9 @@ export default function Segmented({
           tabIndex={-1}
         >
           {options[key].icon ? <Icon icon={options[key].icon} /> : undefined}
-          {options[key].text ? <Text>{options[key].text}</Text> : undefined}
+          {options[key].text ? (
+            <Text $theme={theme}>{options[key].text}</Text>
+          ) : undefined}
         </ButtonWrapper>
       ))}
     </Wrapper>
