@@ -5,6 +5,7 @@ import { ThemeContext } from '../../contexts/Theme';
 import { ModalProvider } from 'styled-react-modal';
 import styled, { ThemeProvider } from 'styled-components';
 import { Toaster } from 'react-hot-toast';
+import { toRem } from '../../utils';
 
 interface ProviderProps {
   children: ReactNode;
@@ -81,7 +82,23 @@ export default function Provider({
         <ThemeContext.Provider value={{ theme, setTheme }}>
           <ModalProvider backgroundComponent={ModalBackground}>
             {children}
-            <Toaster position="top-center" gutter={8} />
+            <Toaster
+              position="top-center"
+              gutter={7}
+              toastOptions={{
+                style: {
+                  height: `${toRem(40)}rem`,
+
+                  margin: 0,
+                  padding: `0 ${toRem(14)}rem`,
+
+                  color: palette[theme]['base.100'],
+                  backgroundColor: palette[theme]['base.500'],
+
+                  borderRadius: `${toRem(10)}rem`,
+                },
+              }}
+            />
           </ModalProvider>
         </ThemeContext.Provider>
       </PaletteContext.Provider>
