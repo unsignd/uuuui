@@ -36,7 +36,6 @@ const Wrapper = styled(Sans)<{
     }[props.$priority])};
 
   font-size: ${toRem(14)}rem;
-  font-weight: 400;
 `;
 
 export default function Link({

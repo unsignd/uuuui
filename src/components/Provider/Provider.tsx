@@ -4,6 +4,7 @@ import { PaletteContext } from '../../contexts/Palette';
 import { ThemeContext } from '../../contexts/Theme';
 import { ModalProvider } from 'styled-react-modal';
 import styled, { ThemeProvider } from 'styled-components';
+import { Toaster } from 'react-hot-toast';
 
 interface ProviderProps {
   children: ReactNode;
@@ -80,6 +81,7 @@ export default function Provider({
         <ThemeContext.Provider value={{ theme, setTheme }}>
           <ModalProvider backgroundComponent={ModalBackground}>
             {children}
+            <Toaster position="top-center" gutter={8} />
           </ModalProvider>
         </ThemeContext.Provider>
       </PaletteContext.Provider>
