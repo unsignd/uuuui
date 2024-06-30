@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { ThemeType } from '../../types';
 import { useTheme } from '../../contexts';
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import { toRem } from '../../utils';
 import { Sans } from '../../global';
@@ -20,6 +20,8 @@ const Wrapper = styled(Tippy)``;
 const TooltipWrapper = styled.div<{
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
+  $open?: boolean;
+
   $theme: ThemeType;
 }>`
   height: ${toRem(28)}rem;
@@ -35,6 +37,12 @@ const TooltipWrapper = styled.div<{
   background-color: ${(props) => props.theme[props.$theme]['base.500']};
 
   border-radius: ${toRem(7)}rem;
+
+  transition: transform 100ms ease-in-out, opacity 150ms ease-in-out;
+
+  transform: ${(props) =>
+    props.$open ? 'translateY(0)' : `translateY(${toRem(7)}rem)`};
+  opacity: ${(props) => (props.$open ? 1 : 0)};
 
   & svg {
     height: ${toRem(16)}rem;
@@ -56,6 +64,8 @@ export default function Tooltip({
   text,
   disabled = false,
 }: TooltipProps) {
+  const [open, setOpen] = useState<boolean>(false);
+
   const { theme } = useTheme();
 
   return (
@@ -64,11 +74,20 @@ export default function Tooltip({
       interactive={true}
       disabled={disabled}
       render={() => (
-        <TooltipWrapper $icon={Icon} $theme={theme}>
+        <TooltipWrapper $icon={Icon} $open={open} $theme={theme}>
           {Icon ? <Icon /> : undefined}
           <Text>{text}</Text>
         </TooltipWrapper>
       )}
+      animation={true}
+      onMount={() => {
+        setTimeout(() => {
+          setOpen(true);
+        }, 10);
+      }}
+      onHide={() => {
+        setOpen(false);
+      }}
     >
       <ChildrenWrapper>{children}</ChildrenWrapper>
     </Wrapper>
