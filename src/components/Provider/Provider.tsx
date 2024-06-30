@@ -45,8 +45,8 @@ export default function Provider({
       'danger.100': '#fbd4d4',
       'danger.200': '#eb2626',
 
-      'warning.100': '#fdefd4',
-      'warning.200': '#f5b028',
+      'warning.100': '#faedd3',
+      'warning.200': '#e5a525',
 
       'base.100': '#ffffff',
       'base.200': '#f2f3f5',
@@ -61,8 +61,8 @@ export default function Provider({
       'danger.100': '#33260f',
       'danger.200': '#d62222',
 
-      'warning.100': '#34270f',
-      'warning.200': '#e0a024',
+      'warning.100': '#30250f',
+      'warning.200': '#d29722',
 
       'base.100': '#08080a',
       'base.200': '#181a1f',
