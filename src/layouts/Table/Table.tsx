@@ -14,7 +14,7 @@ interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
         text: string;
         sortable?: boolean;
         onClick?: (
-          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+          event: React.MouseEvent<HTMLParagraphElement, MouseEvent>
         ) => void;
       }
   )[];
@@ -91,7 +91,7 @@ const ColumnText = styled(Sans)<{
 `;
 
 const ArrowIcon = styled(ArrowDownSVG)<{
-  $sortedIndex?: number;
+  $sortedIndex?: boolean;
   $sortedMethod: null | 'ascending' | 'descending';
 
   $theme: ThemeType;
@@ -101,6 +101,8 @@ const ArrowIcon = styled(ArrowDownSVG)<{
 
   color: ${(props) => props.theme[props.$theme]['base.400']};
 
+  transform: ${(props) =>
+    props.$sortedMethod === 'descending' ? 'rotate(180deg)' : undefined};
   opacity: ${(props) => (props.$sortedIndex && props.$sortedMethod ? 1 : 0)};
 `;
 
@@ -118,15 +120,6 @@ const Item = styled.div`
 
   display: flex;
   align-items: center;
-`;
-
-const ItemText = styled(Sans)<{
-  $theme: ThemeType;
-}>`
-  color: ${(props) => props.theme[props.$theme]['base.500']};
-
-  font-size: ${toRem(14)}rem;
-  font-weight: 400;
 `;
 
 export default function Table({ header, data, ...attr }: TableProps) {
@@ -149,13 +142,26 @@ export default function Table({ header, data, ...attr }: TableProps) {
                 <Column>
                   <ColumnText
                     $theme={theme}
-                    onClick={() => setSortedIndex(header.indexOf(item))}
+                    onClick={(event) => {
+                      if (typeof item === 'object' && item.onClick) {
+                        item.onClick(event);
+                      }
+
+                      setSortedIndex(header.indexOf(item));
+                      setSortedMethod(
+                        sortedMethod === null
+                          ? 'ascending'
+                          : sortedMethod === 'ascending'
+                          ? 'descending'
+                          : null
+                      );
+                    }}
                   >
                     {typeof item === 'string' ? item : item.text}
                   </ColumnText>
                   <ArrowIcon
                     $theme={theme}
-                    $sortedIndex={sortedIndex}
+                    $sortedIndex={header.indexOf(item) === sortedIndex}
                     $sortedMethod={sortedMethod}
                   />
                 </Column>
@@ -169,9 +175,7 @@ export default function Table({ header, data, ...attr }: TableProps) {
           <Row key={index}>
             {row.map((key, index) => (
               <ItemWrapper key={index}>
-                <Item>
-                  <ItemText $theme={theme}>{key}</ItemText>
-                </Item>
+                <Item>{key}</Item>
               </ItemWrapper>
             ))}
           </Row>
