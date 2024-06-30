@@ -9,6 +9,7 @@ import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 
 interface HeaderProps extends HTMLAttributes<HTMLParagraphElement> {
   text: string;
+
   sortable?: boolean;
 }
 

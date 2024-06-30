@@ -21,8 +21,8 @@ const Wrapper = styled.div<{
   $theme: ThemeType;
 }>`
   width: ${(props) =>
-    !props.$children && props.$icon ? `${toRem(24)}rem` : 'auto'};
-  height: ${toRem(24)}rem;
+    !props.$children && props.$icon ? `${toRem(28)}rem` : 'auto'};
+  height: ${toRem(28)}rem;
 
   padding: 0 ${(props) => (!props.$children && props.$icon ? 0 : toRem(7))}rem;
 
