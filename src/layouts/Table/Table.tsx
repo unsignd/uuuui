@@ -5,6 +5,8 @@ import { TableHTMLAttributes } from 'react';
 import { useTheme } from '../../contexts';
 import { Sans } from '../../global';
 
+import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
+
 interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   header?: string[];
   data: any[][];
@@ -48,6 +50,8 @@ const Row = styled.tr`
 
 const ColumnWrapper = styled.th`
   height: ${toRem(40)}rem;
+
+  padding: 0;
 `;
 
 const Column = styled.div`
@@ -58,6 +62,7 @@ const Column = styled.div`
 
   display: flex;
   align-items: center;
+  gap: ${toRem(7)}rem;
 `;
 
 const ColumnText = styled(Sans)<{
@@ -67,10 +72,28 @@ const ColumnText = styled(Sans)<{
 
   font-size: ${toRem(14)}rem;
   font-weight: 400;
+  text-decoration-color: ${(props) => props.theme[props.$theme]['base.400']};
+
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
+const ArrowIcon = styled(ArrowDownSVG)<{
+  $theme: ThemeType;
+}>`
+  width: ${toRem(8)}rem;
+  height: ${toRem(8)}rem;
+
+  color: ${(props) => props.theme[props.$theme]['base.400']};
 `;
 
 const ItemWrapper = styled.td`
   height: ${toRem(40)}rem;
+
+  padding: 0;
 `;
 
 const Item = styled.div`
@@ -104,6 +127,7 @@ export default function Table({ header, data, ...attr }: TableProps) {
               <ColumnWrapper key={index} scope="col">
                 <Column>
                   <ColumnText $theme={theme}>{item}</ColumnText>
+                  <ArrowIcon $theme={theme} />
                 </Column>
               </ColumnWrapper>
             ))}
