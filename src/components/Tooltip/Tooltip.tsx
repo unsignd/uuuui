@@ -1,32 +1,27 @@
+import 'tippy.js/dist/tippy.css';
+
 import styled from 'styled-components';
 import { ThemeType } from '../../types';
 import { useTheme } from '../../contexts';
-import { ReactNode } from 'react';
-import ReactTooltip from 'rc-tooltip';
+import { ReactElement } from 'react';
+import Tippy from '@tippyjs/react';
 
 interface TooltipProps {
-  children: ReactNode;
+  children: ReactElement;
 
   text: string;
 }
 
-const Wrapper = styled(ReactTooltip)<{
+const Wrapper = styled(Tippy)<{
   $theme: ThemeType;
 }>``;
-
-const ChildrenWrapper = styled.div``;
 
 export default function Tooltip({ children, text }: TooltipProps) {
   const { theme } = useTheme();
 
   return (
-    <Wrapper
-      $theme={theme}
-      placement="left"
-      trigger={['click']}
-      overlay={<span>{text}</span>}
-    >
-      <ChildrenWrapper>{children}</ChildrenWrapper>
+    <Wrapper $theme={theme} content="Hello">
+      {children}
     </Wrapper>
   );
 }
