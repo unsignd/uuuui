@@ -109,8 +109,14 @@ const Text = styled(Sans)<{
     }[props.$color])};
 `;
 
-const UtilityWrapper = styled.div`
+const UtilityWrapper = styled.div<{
+  $theme: ThemeType;
+}>`
   flex-shrink: 0;
+
+  & svg {
+    color: ${(props) => props.theme[props.$theme]['base.400']};
+  }
 `;
 
 function DropdownItem({
@@ -156,7 +162,7 @@ function DropdownItem({
       <Text $color={color ?? 'base'} $theme={theme}>
         {text}
       </Text>
-      <UtilityWrapper>
+      <UtilityWrapper $theme={theme}>
         {
           {
             text: undefined,
@@ -165,9 +171,7 @@ function DropdownItem({
               <SwitchButton
                 active={active}
                 onClick={(event) => {
-                  if (attr.onClick && typeof attr.onClick === 'function') {
-                    attr.onClick(event);
-                  }
+                  attr.onClick ? attr.onClick(event) : undefined;
                 }}
               />
             ),

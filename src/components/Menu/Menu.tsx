@@ -1,10 +1,11 @@
-import { ButtonHTMLAttributes, useState } from 'react';
+import { HTMLAttributes, useState } from 'react';
 import styled from 'styled-components';
 import { Popover } from 'react-tiny-popover';
 import { Dropdown, Sans } from '../../global';
 import {
   BorderCurveType,
   ColorType,
+  DropdownType,
   PriorityType,
   ThemeType,
 } from '../../types';
@@ -14,16 +15,18 @@ import { toRem } from '../../utils';
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 import { OptionProps } from '../../global/Dropdown';
 
-interface MenuProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface MenuOptionProps extends HTMLAttributes<HTMLButtonElement> {
+  text: string;
+  type?: DropdownType;
+
+  disabled?: boolean;
+
+  color?: ColorType;
+}
+
+interface MenuProps extends HTMLAttributes<HTMLButtonElement> {
   options: {
-    [key: string]: {
-      text: string;
-      color?: ColorType;
-      disabled?: boolean;
-      onClick?: (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-      ) => void;
-    };
+    [key: string]: MenuOptionProps;
   };
 
   selection?: string;
@@ -150,11 +153,8 @@ export default function Menu({
           options={{
             ...Object.keys(options).reduce((acc, key) => {
               acc[key] = {
-                text: options[key].text,
+                ...options[key],
                 type: key === selection ? 'select' : 'text',
-                active: false,
-                disabled: options[key].disabled,
-                color: options[key].color,
               };
               return acc;
             }, {} as { [key: string]: OptionProps }),
