@@ -13,7 +13,9 @@ interface HeaderProps extends HTMLAttributes<HTMLParagraphElement> {
 }
 
 interface TableProps extends HTMLAttributes<HTMLTableElement> {
-  header?: (string | HeaderProps)[];
+  header?: {
+    [key: string]: HeaderProps;
+  };
   data: any[][];
 }
 
@@ -130,7 +132,9 @@ const ItemText = styled(Sans)<{
 
 export default function Table({ header, data, ...attr }: TableProps) {
   const [sortedIndex, setSortedIndex] = useState<number | undefined>(
-    header?.findIndex((item) => typeof item === 'object' && item.sortable)
+    header
+      ? Object.keys(header).findIndex((key) => header[key].sortable)
+      : undefined
   );
   const [sortedMethod, setSortedMethod] = useState<
     null | 'ascending' | 'descending'
@@ -143,38 +147,37 @@ export default function Table({ header, data, ...attr }: TableProps) {
       {header ? (
         <Header $theme={theme}>
           <Row>
-            {header.map((item, index) => (
+            {Object.keys(header).map((key, index) => (
               <ColumnWrapper key={index} scope="col">
-                <Column>
+                <Column {...header[key]} onClick={undefined}>
                   <ColumnText
-                    {...(typeof item === 'object' ? item : undefined)}
-                    $sortable={
-                      typeof item === 'object' && item.sortable ? true : false
-                    }
+                    $sortable={header[key].sortable ? true : false}
                     $theme={theme}
                     onClick={(event) => {
-                      if (typeof item === 'object' && item.onClick) {
-                        item.onClick(event);
-                      }
+                      header[key].onClick
+                        ? header[key].onClick(event)
+                        : undefined;
 
-                      if (typeof item === 'object' && item.sortable) {
+                      if (header[key].sortable) {
                         setSortedMethod(
-                          sortedIndex !== header.indexOf(item) ||
+                          sortedIndex !== Object.keys(header).indexOf(key) ||
                             sortedMethod === null
                             ? 'ascending'
                             : sortedMethod === 'ascending'
                             ? 'descending'
                             : null
                         );
-                        setSortedIndex(header.indexOf(item));
+                        setSortedIndex(Object.keys(header).indexOf(key));
                       }
                     }}
                   >
-                    {typeof item === 'string' ? item : item.text}
+                    {header[key].text}
                   </ColumnText>
                   <ArrowIcon
                     $theme={theme}
-                    $sortedIndex={sortedIndex === header.indexOf(item)}
+                    $sortedIndex={
+                      sortedIndex === Object.keys(header).indexOf(key)
+                    }
                     $sortedMethod={sortedMethod}
                   />
                 </Column>
