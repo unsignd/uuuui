@@ -7,7 +7,7 @@ import { Sans } from '../../global';
 
 interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
   header?: string[];
-  data: any[];
+  data: any[][];
 }
 
 const Wrapper = styled.table<{
@@ -18,6 +18,7 @@ const Wrapper = styled.table<{
   border: ${toRem(1)}rem solid
     ${(props) => props.theme[props.$theme]['base.300']};
   border-radius: ${toRem(7)}rem;
+  border-spacing: 0;
 
   overflow: hidden;
   box-sizing: border-box;
@@ -28,20 +29,16 @@ const Wrapper = styled.table<{
 const Header = styled.thead<{
   $theme: ThemeType;
 }>`
+  padding: 0 ${toRem(14)}rem;
+
   background-color: ${(props) => props.theme[props.$theme]['base.200']};
-
-  border-bottom: ${toRem(1)}rem solid
-    ${(props) => props.theme[props.$theme]['base.300']};
-
-  overflow: hidden;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 `;
 
 const Body = styled.tbody<{
   $theme: ThemeType;
 }>`
+  padding: 0 ${toRem(14)}rem;
+
   background-color: ${(props) => props.theme[props.$theme]['base.100']};
 `;
 
@@ -51,8 +48,13 @@ const Row = styled.tr`
 
 const ColumnWrapper = styled.th`
   height: ${toRem(40)}rem;
+`;
 
-  margin: 0 ${toRem(14)}rem;
+const Column = styled.div`
+  width: 100%;
+  height: 100%;
+
+  padding: 0 ${toRem(14)}rem;
 
   display: flex;
   align-items: center;
@@ -69,8 +71,13 @@ const ColumnText = styled(Sans)<{
 
 const ItemWrapper = styled.td`
   height: ${toRem(40)}rem;
+`;
 
-  margin: 0 ${toRem(14)}rem;
+const Item = styled.div`
+  width: 100%;
+  height: 100%;
+
+  padding: 0 ${toRem(14)}rem;
 
   display: flex;
   align-items: center;
@@ -95,7 +102,9 @@ export default function Table({ header, data, ...attr }: TableProps) {
           <Row>
             {header.map((item, index) => (
               <ColumnWrapper key={index} scope="col">
-                <ColumnText $theme={theme}>{item}</ColumnText>
+                <Column>
+                  <ColumnText $theme={theme}>{item}</ColumnText>
+                </Column>
               </ColumnWrapper>
             ))}
           </Row>
@@ -104,9 +113,11 @@ export default function Table({ header, data, ...attr }: TableProps) {
       <Body $theme={theme}>
         {data.map((row, index) => (
           <Row key={index}>
-            {Object.keys(row).map((key, index) => (
+            {row.map((key, index) => (
               <ItemWrapper key={index}>
-                <ItemText $theme={theme}>{row[key]}</ItemText>
+                <Item>
+                  <ItemText $theme={theme}>{key}</ItemText>
+                </Item>
               </ItemWrapper>
             ))}
           </Row>
