@@ -116,7 +116,7 @@ const ButtonWrapper = styled.button<{
   }
 
   &:active {
-    scale: 0.96;
+    scale: ${(props) => (props.$disabled ? undefined : 0.96)};
   }
 
   & svg {
