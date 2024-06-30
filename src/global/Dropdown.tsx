@@ -106,6 +106,7 @@ const Text = styled(Sans)<{
       base: props.theme[props.$theme]['base.500'],
       primary: props.theme[props.$theme]['primary.200'],
       danger: props.theme[props.$theme]['danger.200'],
+      warning: props.theme[props.$theme]['warning.200'],
     }[props.$color])};
 `;
 

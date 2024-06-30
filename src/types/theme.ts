@@ -5,6 +5,9 @@ export type ColorsetType = {
   'danger.100': string;
   'danger.200': string;
 
+  'warning.100': string;
+  'warning.200': string;
+
   'base.100': string;
   'base.200': string;
   'base.300': string;

@@ -67,6 +67,10 @@ const ButtonWrapper = styled.button<{
           light: props.theme[props.$theme]['base.100'],
           dark: props.theme[props.$theme]['base.500'],
         }[props.$theme],
+        warning: {
+          light: props.theme[props.$theme]['base.100'],
+          dark: props.theme[props.$theme]['base.500'],
+        }[props.$theme],
       }[props.$color],
     }[props.$priority])};
   background-color: ${(props) =>
@@ -81,6 +85,7 @@ const ButtonWrapper = styled.button<{
         base: props.theme[props.$theme]['base.500'],
         primary: props.theme[props.$theme]['primary.200'],
         danger: props.theme[props.$theme]['danger.200'],
+        warning: props.theme[props.$theme]['warning.200'],
       }[props.$color],
     }[props.$priority])};
 

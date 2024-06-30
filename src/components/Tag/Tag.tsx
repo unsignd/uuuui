@@ -36,12 +36,14 @@ const Wrapper = styled.div<{
       base: props.theme[props.$theme]['base.400'],
       primary: props.theme[props.$theme]['primary.200'],
       danger: props.theme[props.$theme]['danger.200'],
+      warning: props.theme[props.$theme]['warning.200'],
     }[props.$color])};
   background-color: ${(props) =>
     ({
       base: props.theme[props.$theme]['base.200'],
       primary: props.theme[props.$theme]['primary.100'],
       danger: props.theme[props.$theme]['danger.100'],
+      warning: props.theme[props.$theme]['warning.100'],
     }[props.$color])};
 
   border-radius: ${toRem(7)}rem;
