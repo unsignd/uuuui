@@ -1,23 +1,19 @@
 import styled from 'styled-components';
 import { ThemeType } from '../../types';
 import { toRem } from '../../utils';
-import { TableHTMLAttributes, useState } from 'react';
+import { HTMLAttributes, useState } from 'react';
 import { useTheme } from '../../contexts';
 import { Sans } from '../../global';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 
-interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
-  header?: (
-    | string
-    | {
-        text: string;
-        sortable?: boolean;
-        onClick?: (
-          event: React.MouseEvent<HTMLParagraphElement, MouseEvent>
-        ) => void;
-      }
-  )[];
+interface HeaderProps extends HTMLAttributes<HTMLParagraphElement> {
+  text: string;
+  sortable?: boolean;
+}
+
+interface TableProps extends HTMLAttributes<HTMLTableElement> {
+  header?: (string | HeaderProps)[];
   data: any[][];
 }
 
@@ -151,6 +147,7 @@ export default function Table({ header, data, ...attr }: TableProps) {
               <ColumnWrapper key={index} scope="col">
                 <Column>
                   <ColumnText
+                    {...(typeof item === 'object' ? item : undefined)}
                     $sortable={
                       typeof item === 'object' && item.sortable ? true : false
                     }
