@@ -135,18 +135,14 @@ function DropdownItem({
       onClick={(event) => {
         switch (type) {
           case 'text': {
-            if (attr.onClick && typeof attr.onClick === 'function') {
-              attr.onClick(event);
-            }
+            attr.onClick ? attr.onClick(event) : undefined;
 
             onCloseRequest();
 
             break;
           }
           case 'select': {
-            if (attr.onClick && typeof attr.onClick === 'function') {
-              attr.onClick(event);
-            }
+            attr.onClick ? attr.onClick(event) : undefined;
 
             onCloseRequest();
 
@@ -192,7 +188,6 @@ export default function Dropdown({ options, onCloseRequest }: DropdownProps) {
           {...options[key]}
           key={key}
           onCloseRequest={() => onCloseRequest()}
-          onClick={undefined}
         />
       ))}
     </Wrapper>
