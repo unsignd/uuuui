@@ -15,6 +15,7 @@ import { OptionProps } from '../../global/Dropdown';
 interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
   children?: ReactNode;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+
   options?: {
     [key: string]: OptionProps;
   };
