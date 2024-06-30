@@ -75,6 +75,8 @@ const Column = styled.div`
 `;
 
 const ColumnText = styled(Sans)<{
+  $sortable: boolean;
+
   $theme: ThemeType;
 }>`
   color: ${(props) => props.theme[props.$theme]['base.400']};
@@ -83,10 +85,10 @@ const ColumnText = styled(Sans)<{
   font-weight: 400;
   text-decoration-color: ${(props) => props.theme[props.$theme]['base.400']};
 
-  cursor: pointer;
+  cursor: ${(props) => (props.$sortable ? 'pointer' : 'auto')};
 
   &:hover {
-    text-decoration: underline;
+    text-decoration: ${(props) => (props.$sortable ? 'underline' : undefined)};
   }
 `;
 
@@ -149,27 +151,33 @@ export default function Table({ header, data, ...attr }: TableProps) {
               <ColumnWrapper key={index} scope="col">
                 <Column>
                   <ColumnText
+                    $sortable={
+                      typeof item === 'object' && item.sortable ? true : false
+                    }
                     $theme={theme}
                     onClick={(event) => {
                       if (typeof item === 'object' && item.onClick) {
                         item.onClick(event);
                       }
 
-                      setSortedIndex(header.indexOf(item));
-                      setSortedMethod(
-                        sortedMethod === null
-                          ? 'ascending'
-                          : sortedMethod === 'ascending'
-                          ? 'descending'
-                          : null
-                      );
+                      if (typeof item === 'object' && item.sortable) {
+                        setSortedMethod(
+                          sortedIndex !== header.indexOf(item) ||
+                            sortedMethod === null
+                            ? 'ascending'
+                            : sortedMethod === 'ascending'
+                            ? 'descending'
+                            : null
+                        );
+                        setSortedIndex(header.indexOf(item));
+                      }
                     }}
                   >
                     {typeof item === 'string' ? item : item.text}
                   </ColumnText>
                   <ArrowIcon
                     $theme={theme}
-                    $sortedIndex={header.indexOf(item) === sortedIndex}
+                    $sortedIndex={sortedIndex === header.indexOf(item)}
                     $sortedMethod={sortedMethod}
                   />
                 </Column>
@@ -180,11 +188,21 @@ export default function Table({ header, data, ...attr }: TableProps) {
       ) : undefined}
       <Body $theme={theme}>
         {data
-          .sort((a, b) =>
+          .toSorted((a, b) =>
             sortedIndex !== undefined && sortedMethod !== null
               ? sortedMethod === 'ascending'
-                ? a[sortedIndex].localeCompare(b[sortedIndex])
-                : b[sortedIndex].localeCompare(a[sortedIndex])
+                ? typeof a[sortedIndex] === 'string' &&
+                  typeof b[sortedIndex] === 'string'
+                  ? a[sortedIndex].localeCompare(b[sortedIndex])
+                  : a[sortedIndex] >= b[sortedIndex] || b[sortedIndex]
+                  ? 1
+                  : -1
+                : typeof a[sortedIndex] === 'string' &&
+                  typeof b[sortedIndex] === 'string'
+                ? b[sortedIndex].localeCompare(a[sortedIndex])
+                : a[sortedIndex] >= b[sortedIndex] || b[sortedIndex]
+                ? -1
+                : 1
               : 0
           )
           .map((row, index) => (
