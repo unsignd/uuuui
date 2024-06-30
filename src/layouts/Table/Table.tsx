@@ -122,6 +122,14 @@ const Item = styled.div`
   align-items: center;
 `;
 
+const ItemText = styled(Sans)<{
+  $theme: ThemeType;
+}>`
+  color: ${(props) => props.theme[props.$theme]['base.500']};
+  font-size: ${toRem(14)}rem;
+  font-weight: 400;
+`;
+
 export default function Table({ header, data, ...attr }: TableProps) {
   const [sortedIndex, setSortedIndex] = useState<number | undefined>(
     header?.findIndex((item) => typeof item === 'object' && item.sortable)
@@ -171,15 +179,29 @@ export default function Table({ header, data, ...attr }: TableProps) {
         </Header>
       ) : undefined}
       <Body $theme={theme}>
-        {data.map((row, index) => (
-          <Row key={index}>
-            {row.map((key, index) => (
-              <ItemWrapper key={index}>
-                <Item>{key}</Item>
-              </ItemWrapper>
-            ))}
-          </Row>
-        ))}
+        {data
+          .sort((a, b) =>
+            sortedIndex !== undefined && sortedMethod !== null
+              ? sortedMethod === 'ascending'
+                ? a[sortedIndex].localeCompare(b[sortedIndex])
+                : b[sortedIndex].localeCompare(a[sortedIndex])
+              : 0
+          )
+          .map((row, index) => (
+            <Row key={index}>
+              {row.map((key, index) => (
+                <ItemWrapper key={index}>
+                  <Item>
+                    {typeof key === 'string' || typeof key === 'number' ? (
+                      <ItemText $theme={theme}>{key}</ItemText>
+                    ) : (
+                      key
+                    )}
+                  </Item>
+                </ItemWrapper>
+              ))}
+            </Row>
+          ))}
       </Body>
     </Wrapper>
   );
