@@ -129,6 +129,15 @@ const Text = styled(Sans)<{
     }[props.$priority])};
 `;
 
+const DropdownWrapper = styled.div<{
+  $open: boolean;
+}>`
+  transition: transform 100ms ease-in-out, opacity 150ms ease-in-out;
+
+  transform: translateY(${(props) => (props.$open ? 0 : toRem(-7))}rem);
+  opacity: ${(props) => (props.$open ? 1 : 0)};
+`;
+
 export default function Menu({
   options,
   selection = Object.keys(options)[0],
@@ -138,6 +147,7 @@ export default function Menu({
   ...attr
 }: MenuProps) {
   const [active, setActive] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const { theme } = useTheme();
 
@@ -147,20 +157,34 @@ export default function Menu({
       positions={['bottom']}
       align={'start'}
       padding={7}
-      onClickOutside={() => setActive(false)}
+      onClickOutside={() => {
+        setOpen(false);
+
+        setTimeout(() => {
+          setActive(false);
+        }, 150);
+      }}
       content={
-        <Dropdown
-          options={{
-            ...Object.keys(options).reduce((acc, key) => {
-              acc[key] = {
-                ...options[key],
-                type: key === selection ? 'select' : 'text',
-              };
-              return acc;
-            }, {} as { [key: string]: OptionProps }),
-          }}
-          onCloseRequest={() => setActive(false)}
-        />
+        <DropdownWrapper $open={open}>
+          <Dropdown
+            options={{
+              ...Object.keys(options).reduce((acc, key) => {
+                acc[key] = {
+                  ...options[key],
+                  type: key === selection ? 'select' : 'text',
+                };
+                return acc;
+              }, {} as { [key: string]: OptionProps }),
+            }}
+            onCloseRequest={() => {
+              setOpen(false);
+
+              setTimeout(() => {
+                setActive(false);
+              }, 150);
+            }}
+          />
+        </DropdownWrapper>
       }
     >
       <Wrapper>
@@ -176,7 +200,19 @@ export default function Menu({
               attr.onClick(event);
             }
 
-            setActive(!active);
+            if (active) {
+              setOpen(false);
+
+              setTimeout(() => {
+                setActive(false);
+              }, 150);
+            } else {
+              setActive(true);
+
+              setTimeout(() => {
+                setOpen(true);
+              }, 10);
+            }
           }}
           disabled={disabled}
           tabIndex={-1}

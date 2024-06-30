@@ -131,6 +131,15 @@ const Text = styled(Sans)`
   font-size: ${toRem(14)}rem;
 `;
 
+const DropdownWrapper = styled.div<{
+  $open: boolean;
+}>`
+  transition: transform 100ms ease-in-out, opacity 150ms ease-in-out;
+
+  transform: translateY(${(props) => (props.$open ? 0 : toRem(-7))}rem);
+  opacity: ${(props) => (props.$open ? 1 : 0)};
+`;
+
 export default function Button({
   children,
   icon: Icon,
@@ -142,6 +151,7 @@ export default function Button({
   ...attr
 }: ButtonProps) {
   const [active, setActive] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const { theme } = useTheme();
 
@@ -151,9 +161,26 @@ export default function Button({
       positions={['bottom']}
       align={'start'}
       padding={7}
-      onClickOutside={() => setActive(false)}
+      onClickOutside={() => {
+        setOpen(false);
+
+        setTimeout(() => {
+          setActive(false);
+        }, 150);
+      }}
       content={
-        <Dropdown options={options} onCloseRequest={() => setActive(false)} />
+        <DropdownWrapper $open={open}>
+          <Dropdown
+            options={options}
+            onCloseRequest={() => {
+              setOpen(false);
+
+              setTimeout(() => {
+                setActive(false);
+              }, 150);
+            }}
+          />
+        </DropdownWrapper>
       }
     >
       <Wrapper>
@@ -174,7 +201,19 @@ export default function Button({
               attr.onClick(event);
             }
 
-            setActive(!active);
+            if (active) {
+              setOpen(false);
+
+              setTimeout(() => {
+                setActive(false);
+              }, 150);
+            } else {
+              setActive(true);
+
+              setTimeout(() => {
+                setOpen(true);
+              }, 10);
+            }
           }}
         >
           {Icon ? <Icon /> : undefined}
