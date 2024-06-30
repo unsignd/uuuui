@@ -6,19 +6,17 @@ import { Sans } from '../../global';
 import { useTheme } from '../../contexts';
 import Icon from '../Icon';
 
+interface OptionProps extends HTMLAttributes<HTMLButtonElement> {
+  disabled?: boolean;
+
+  text?: string;
+  icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+  color?: ColorType;
+}
+
 interface SegmentedProps extends HTMLAttributes<HTMLDivElement> {
   options: {
-    [key: string]: {
-      disabled?: boolean;
-
-      text?: string;
-      icon?: React.FC<React.SVGProps<SVGSVGElement>>;
-      color?: ColorType;
-
-      onClick?: (
-        event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-      ) => void;
-    };
+    [key: string]: OptionProps;
   };
 
   selection?: string;
@@ -116,6 +114,7 @@ export default function Segmented({
     <Wrapper {...attr}>
       {Object.keys(options).map((key) => (
         <ButtonWrapper
+          {...options[key]}
           key={key}
           $children={options[key].text}
           $icon={options[key].icon}
@@ -123,9 +122,6 @@ export default function Segmented({
           $disabled={options[key].disabled ?? false}
           $curve={curve}
           $theme={theme}
-          onClick={(event) =>
-            options[key].onClick ? options[key].onClick(event) : undefined
-          }
           disabled={options[key].disabled ?? false}
           tabIndex={-1}
         >
