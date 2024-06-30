@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useTheme } from '../../contexts';
 import { ColorType, ThemeType } from '../../types';
 import { toRem } from '../../utils';
-import { Mono } from '../../global';
+import { Sans } from '../../global';
 
 interface TagProps extends HTMLAttributes<HTMLParagraphElement> {
   children?: ReactNode;
@@ -53,9 +53,9 @@ const Wrapper = styled.div<{
   }
 `;
 
-const Text = styled(Mono)`
+const Text = styled(Sans)`
   font-size: ${toRem(14)}rem;
-  font-weight: 600;
+  font-weight: 400;
 `;
 
 export default function Tag({
