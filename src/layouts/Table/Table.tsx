@@ -1,14 +1,23 @@
 import styled from 'styled-components';
 import { ThemeType } from '../../types';
 import { toRem } from '../../utils';
-import { TableHTMLAttributes } from 'react';
+import { TableHTMLAttributes, useState } from 'react';
 import { useTheme } from '../../contexts';
 import { Sans } from '../../global';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';
 
 interface TableProps extends TableHTMLAttributes<HTMLTableElement> {
-  header?: string[];
+  header?: (
+    | string
+    | {
+        text: string;
+        sortable?: boolean;
+        onClick?: (
+          event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+        ) => void;
+      }
+  )[];
   data: any[][];
 }
 
@@ -82,12 +91,17 @@ const ColumnText = styled(Sans)<{
 `;
 
 const ArrowIcon = styled(ArrowDownSVG)<{
+  $sortedIndex?: number;
+  $sortedMethod: null | 'ascending' | 'descending';
+
   $theme: ThemeType;
 }>`
   width: ${toRem(8)}rem;
   height: ${toRem(8)}rem;
 
   color: ${(props) => props.theme[props.$theme]['base.400']};
+
+  opacity: ${(props) => (props.$sortedIndex && props.$sortedMethod ? 1 : 0)};
 `;
 
 const ItemWrapper = styled.td`
@@ -116,6 +130,13 @@ const ItemText = styled(Sans)<{
 `;
 
 export default function Table({ header, data, ...attr }: TableProps) {
+  const [sortedIndex, setSortedIndex] = useState<number | undefined>(
+    header?.findIndex((item) => typeof item === 'object' && item.sortable)
+  );
+  const [sortedMethod, setSortedMethod] = useState<
+    null | 'ascending' | 'descending'
+  >(null);
+
   const { theme } = useTheme();
 
   return (
@@ -126,8 +147,17 @@ export default function Table({ header, data, ...attr }: TableProps) {
             {header.map((item, index) => (
               <ColumnWrapper key={index} scope="col">
                 <Column>
-                  <ColumnText $theme={theme}>{item}</ColumnText>
-                  <ArrowIcon $theme={theme} />
+                  <ColumnText
+                    $theme={theme}
+                    onClick={() => setSortedIndex(header.indexOf(item))}
+                  >
+                    {typeof item === 'string' ? item : item.text}
+                  </ColumnText>
+                  <ArrowIcon
+                    $theme={theme}
+                    $sortedIndex={sortedIndex}
+                    $sortedMethod={sortedMethod}
+                  />
                 </Column>
               </ColumnWrapper>
             ))}
