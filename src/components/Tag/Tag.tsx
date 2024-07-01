@@ -29,7 +29,7 @@ const Wrapper = styled.div<{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${toRem(7)}rem;
+  gap: ${toRem(3.5)}rem;
 
   color: ${(props) =>
     ({
@@ -37,14 +37,14 @@ const Wrapper = styled.div<{
       primary: props.theme[props.$theme]['primary.200'],
       danger: props.theme[props.$theme]['danger.200'],
       warning: props.theme[props.$theme]['warning.200'],
-    }[props.$color])};
+    })[props.$color]};
   background-color: ${(props) =>
     ({
       base: props.theme[props.$theme]['base.200'],
       primary: props.theme[props.$theme]['primary.100'],
       danger: props.theme[props.$theme]['danger.100'],
       warning: props.theme[props.$theme]['warning.100'],
-    }[props.$color])};
+    })[props.$color]};
 
   border-radius: ${toRem(7)}rem;
 
