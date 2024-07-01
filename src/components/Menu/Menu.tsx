@@ -66,21 +66,23 @@ const ButtonWrapper = styled.button<{
         ? props.theme[props.$theme]['base.200']
         : props.theme[props.$theme]['base.100'],
       high: props.theme[props.$theme]['base.500'],
-    }[props.$priority])};
+    })[props.$priority]};
 
   border: ${(props) =>
     ({
       low: 'none',
       medium: `${toRem(1)}rem solid ${props.theme[props.$theme]['base.300']}`,
       high: 'none',
-    }[props.$priority])};
+    })[props.$priority]};
   border-radius: ${(props) =>
     ({
       medium: toRem(10),
       large: toRem(20),
-    }[props.$curve])}rem;
+    })[props.$curve]}rem;
 
-  transition: scale 100ms ease-in-out, background-color 150ms ease-in-out;
+  transition:
+    scale 100ms ease-in-out,
+    background-color 150ms ease-in-out;
 
   overflow: hidden;
   box-sizing: border-box;
@@ -95,7 +97,7 @@ const ButtonWrapper = styled.button<{
         low: props.theme[props.$theme]['base.200'],
         medium: props.theme[props.$theme]['base.200'],
         high: undefined,
-      }[props.$priority])};
+      })[props.$priority]};
   }
 
   &:active {
@@ -108,7 +110,7 @@ const ButtonWrapper = styled.button<{
         low: props.theme[props.$theme]['base.400'],
         medium: props.theme[props.$theme]['base.400'],
         high: props.theme[props.$theme]['base.100'],
-      }[props.$priority])};
+      })[props.$priority]};
 
     flex-shrink: 0;
   }
@@ -126,13 +128,15 @@ const Text = styled(Sans)<{
       low: props.theme[props.$theme]['base.500'],
       medium: props.theme[props.$theme]['base.500'],
       high: props.theme[props.$theme]['base.100'],
-    }[props.$priority])};
+    })[props.$priority]};
 `;
 
 const DropdownWrapper = styled.div<{
   $open: boolean;
 }>`
-  transition: transform 100ms ease-in-out, opacity 150ms ease-in-out;
+  transition:
+    transform 100ms ease-in-out,
+    opacity 150ms ease-in-out;
 
   transform: translateY(${(props) => (props.$open ? 0 : toRem(-7))}rem);
   opacity: ${(props) => (props.$open ? 1 : 0)};
@@ -168,13 +172,16 @@ export default function Menu({
         <DropdownWrapper $open={open}>
           <Dropdown
             options={{
-              ...Object.keys(options).reduce((acc, key) => {
-                acc[key] = {
-                  ...options[key],
-                  type: key === selection ? 'select' : 'text',
-                };
-                return acc;
-              }, {} as { [key: string]: OptionProps }),
+              ...Object.keys(options).reduce(
+                (acc, key) => {
+                  acc[key] = {
+                    ...options[key],
+                    type: key === selection ? 'select' : 'text',
+                  };
+                  return acc;
+                },
+                {} as { [key: string]: OptionProps }
+              ),
             }}
             onCloseRequest={() => {
               setOpen(false);
