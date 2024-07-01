@@ -103,7 +103,7 @@ const ArrowIcon = styled(ArrowDownSVG)<{
   color: ${(props) => props.theme[props.$theme]['base.400']};
 
   transform: ${(props) =>
-    props.$sortedMethod === 'descending' ? 'rotate(180deg)' : undefined};
+    props.$sortedMethod === 'ascending' ? 'rotate(180deg)' : undefined};
   opacity: ${(props) => (props.$sortedIndex && props.$sortedMethod ? 1 : 0)};
 `;
 
@@ -165,8 +165,8 @@ export default function Table({ header, data, ...attr }: TableProps) {
                             sortedMethod === null
                             ? 'ascending'
                             : sortedMethod === 'ascending'
-                            ? 'descending'
-                            : null
+                              ? 'descending'
+                              : null
                         );
                         setSortedIndex(Object.keys(header).indexOf(key));
                       }
@@ -195,15 +195,19 @@ export default function Table({ header, data, ...attr }: TableProps) {
                 ? typeof a[sortedIndex] === 'string' &&
                   typeof b[sortedIndex] === 'string'
                   ? a[sortedIndex].localeCompare(b[sortedIndex])
-                  : a[sortedIndex] >= b[sortedIndex] || b[sortedIndex]
-                  ? 1
-                  : -1
+                  : a[sortedIndex] >= b[sortedIndex] ||
+                      b[sortedIndex] === undefined ||
+                      b[sortedIndex] === null
+                    ? 1
+                    : -1
                 : typeof a[sortedIndex] === 'string' &&
-                  typeof b[sortedIndex] === 'string'
-                ? b[sortedIndex].localeCompare(a[sortedIndex])
-                : a[sortedIndex] >= b[sortedIndex] || b[sortedIndex]
-                ? -1
-                : 1
+                    typeof b[sortedIndex] === 'string'
+                  ? b[sortedIndex].localeCompare(a[sortedIndex])
+                  : a[sortedIndex] >= b[sortedIndex] ||
+                      b[sortedIndex] === undefined ||
+                      b[sortedIndex] === null
+                    ? -1
+                    : 1
               : 0
           )
           .map((row, index) => (
