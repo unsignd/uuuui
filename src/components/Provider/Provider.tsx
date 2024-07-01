@@ -86,6 +86,7 @@ export default function Provider({
               position="top-center"
               gutter={7}
               toastOptions={{
+                duration: 4000,
                 style: {
                   height: `${toRem(40)}rem`,
 
@@ -111,8 +112,9 @@ export default function Provider({
                     backgroundColor: palette[theme]['danger.100'],
                   },
                 },
+                // As warning
                 loading: {
-                  // As warning
+                  duration: 4000,
                   style: {
                     color: palette[theme]['warning.200'],
                     backgroundColor: palette[theme]['warning.100'],
