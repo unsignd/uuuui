@@ -5,7 +5,7 @@ import Icon from './Icon';
 import { ReactComponent as TicketSVG } from '../../assets/ticket_20.svg';
 
 const meta: Meta<typeof Icon> = {
-  title: 'Components/Icon/Color',
+  title: 'Component/Icon/Color',
   component: Icon,
 };
 

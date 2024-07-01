@@ -6,7 +6,7 @@ import Button from '../Button';
 import { ReactComponent as TicketSVG } from '../../assets/ticket_20.svg';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Components/Tooltip/Icon',
+  title: 'Component/Tooltip/Icon',
   component: Tooltip,
 };
 

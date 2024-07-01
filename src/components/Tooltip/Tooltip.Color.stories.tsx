@@ -4,7 +4,7 @@ import Tooltip from './Tooltip';
 import Button from '../Button';
 
 const meta: Meta<typeof Tooltip> = {
-  title: 'Components/Tooltip/Color',
+  title: 'Component/Tooltip/Color',
   component: Tooltip,
 };
 

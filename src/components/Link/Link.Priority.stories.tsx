@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Link from './Link';
 
 const meta: Meta<typeof Link> = {
-  title: 'Components/Link/Priority',
+  title: 'Component/Link/Priority',
   component: Link,
 };
 

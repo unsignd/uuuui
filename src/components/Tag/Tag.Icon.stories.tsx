@@ -5,7 +5,7 @@ import Tag from './Tag';
 import { ReactComponent as TicketSVG } from '../../assets/ticket_20.svg';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Components/Tag/Icon',
+  title: 'Component/Tag/Icon',
   component: Tag,
 };
 

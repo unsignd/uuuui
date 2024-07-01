@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Tag from './Tag';
 
 const meta: Meta<typeof Tag> = {
-  title: 'Components/Tag/Color',
+  title: 'Component/Tag/Color',
   component: Tag,
 };
 

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Segmented from './Segmented';
 
 const meta: Meta<typeof Segmented> = {
-  title: 'Components/Segmented/Curve',
+  title: 'Component/Segmented/Curve',
   component: Segmented,
 };
 

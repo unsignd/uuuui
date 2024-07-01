@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import SwitchButton from './SwitchButton';
 
 const meta: Meta<typeof SwitchButton> = {
-  title: 'Components/SwitchButton/Disabled',
+  title: 'Component/SwitchButton/Disabled',
   component: SwitchButton,
 };
 

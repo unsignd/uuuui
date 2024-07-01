@@ -5,7 +5,7 @@ import Input from './Input';
 import { ReactComponent as TicketSVG } from '../../assets/ticket_20.svg';
 
 const meta: Meta<typeof Input> = {
-  title: 'Components/Input/Icon',
+  title: 'Component/Input/Icon',
   component: Input,
 };
 
@@ -13,14 +13,14 @@ type Story = StoryObj<typeof Input>;
 
 export const Without_Icon: Story = {
   args: {
-    placeholder: 'Find Items...',
+    placeholder: 'Search Items...',
   },
 };
 
 export const With_Icon: Story = {
   args: {
     icon: TicketSVG,
-    placeholder: 'Find Items...',
+    placeholder: 'Search Items...',
   },
 };
 
