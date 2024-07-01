@@ -31,7 +31,7 @@ const Wrapper = styled.button<{
       dark: props.$active
         ? props.theme[props.$theme]['primary.200']
         : props.theme[props.$theme]['base.100'],
-    }[props.$theme])};
+    })[props.$theme]};
 
   border: ${(props) =>
     ({
@@ -39,16 +39,22 @@ const Wrapper = styled.button<{
       dark: props.$active
         ? 'none'
         : `${toRem(1)}rem solid ${props.theme[props.$theme]['base.300']}`,
-    }[props.$theme])};
+    })[props.$theme]};
   border-radius: ${toRem(12)}rem;
 
-  transition: background-color 150ms ease-in-out;
+  transition:
+    scale 100ms ease-in-out,
+    background-color 150ms ease-in-out;
 
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   opacity: ${(props) => (props.$disabled ? 0.4 : 1)};
   cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'pointer')};
+
+  &:active {
+    scale: ${(props) => (props.$disabled ? undefined : 0.96)};
+  }
 `;
 
 const Circle = styled.div<{
@@ -65,7 +71,7 @@ const Circle = styled.div<{
     ({
       light: props.theme[props.$theme]['base.100'],
       dark: props.theme[props.$theme]['base.500'],
-    }[props.$theme])};
+    })[props.$theme]};
 
   border-radius: ${toRem(10)}rem;
 
