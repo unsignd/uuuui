@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { ThemeType } from '../../types';
+import { ColorType, ThemeType } from '../../types';
 import { useTheme } from '../../contexts';
 import { ReactElement, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
@@ -13,6 +13,8 @@ interface TooltipProps {
   text: string;
 
   disabled?: boolean;
+
+  color?: ColorType;
 }
 
 const Wrapper = styled(Tippy)``;
@@ -21,6 +23,8 @@ const TooltipWrapper = styled.div<{
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
   $open?: boolean;
+
+  $color: ColorType;
 
   $theme: ThemeType;
 }>`
@@ -33,8 +37,20 @@ const TooltipWrapper = styled.div<{
   justify-content: center;
   gap: ${toRem(7)}rem;
 
-  color: ${(props) => props.theme[props.$theme]['base.100']};
-  background-color: ${(props) => props.theme[props.$theme]['base.500']};
+  color: ${(props) =>
+    ({
+      base: props.theme[props.$theme]['base.400'],
+      primary: props.theme[props.$theme]['primary.200'],
+      danger: props.theme[props.$theme]['danger.200'],
+      warning: props.theme[props.$theme]['warning.200'],
+    }[props.$color])};
+  background-color: ${(props) =>
+    ({
+      base: props.theme[props.$theme]['base.200'],
+      primary: props.theme[props.$theme]['primary.100'],
+      danger: props.theme[props.$theme]['danger.100'],
+      warning: props.theme[props.$theme]['warning.100'],
+    }[props.$color])};
 
   border-radius: ${toRem(7)}rem;
 
@@ -63,6 +79,7 @@ export default function Tooltip({
   icon: Icon,
   text,
   disabled = false,
+  color = 'base',
 }: TooltipProps) {
   const [open, setOpen] = useState<boolean>(false);
 
@@ -74,7 +91,7 @@ export default function Tooltip({
       interactive={true}
       disabled={disabled}
       render={() => (
-        <TooltipWrapper $icon={Icon} $open={open} $theme={theme}>
+        <TooltipWrapper $icon={Icon} $open={open} $color={color} $theme={theme}>
           {Icon ? <Icon /> : undefined}
           <Text>{text}</Text>
         </TooltipWrapper>
