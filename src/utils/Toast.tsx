@@ -41,6 +41,12 @@ class Toast {
       icon: <Icon />,
     });
   }
+
+  static warning(text: string) {
+    reactToast.loading(() => <Text>{text}</Text>, {
+      icon: <Icon />,
+    });
+  }
 }
 
 function toast(text: string) {
@@ -49,5 +55,6 @@ function toast(text: string) {
 
 toast.success = Toast.success;
 toast.error = Toast.error;
+toast.warning = Toast.warning;
 
 export default toast;

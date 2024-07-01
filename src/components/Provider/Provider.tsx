@@ -111,6 +111,13 @@ export default function Provider({
                     backgroundColor: palette[theme]['danger.100'],
                   },
                 },
+                loading: {
+                  // As warning
+                  style: {
+                    color: palette[theme]['warning.200'],
+                    backgroundColor: palette[theme]['warning.100'],
+                  },
+                },
               }}
             />
           </ModalProvider>
