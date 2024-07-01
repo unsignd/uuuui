@@ -11,6 +11,29 @@ const Text = styled(Sans)`
   }
 `;
 
-export default function toast(text: string) {
-  rht(() => <Text>{text}</Text>);
+class Toast {
+  constructor(text: string) {
+    rht(() => <Text>{text}</Text>);
+  }
+
+  static success(text: string) {
+    rht.success(() => <Text>{text}</Text>, {
+      icon: '',
+    });
+  }
+
+  static error(text: string) {
+    rht.error(() => <Text>{text}</Text>, {
+      icon: '',
+    });
+  }
 }
+
+function toast(text: string) {
+  return new Toast(text);
+}
+
+toast.success = Toast.success;
+toast.error = Toast.error;
+
+export default toast;

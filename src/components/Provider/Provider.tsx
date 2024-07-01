@@ -46,7 +46,7 @@ export default function Provider({
       'danger.200': '#eb2626',
 
       'warning.100': '#faedd3',
-      'warning.200': '#e5a525',
+      'warning.200': '#eba926',
 
       'base.100': '#ffffff',
       'base.200': '#f2f3f5',
@@ -62,7 +62,7 @@ export default function Provider({
       'danger.200': '#d62222',
 
       'warning.100': '#30250f',
-      'warning.200': '#d29722',
+      'warning.200': '#d69a23',
 
       'base.100': '#08080a',
       'base.200': '#181a1f',
@@ -96,6 +96,20 @@ export default function Provider({
                   backgroundColor: palette[theme]['base.500'],
 
                   borderRadius: `${toRem(10)}rem`,
+
+                  boxShadow: 'none',
+                },
+                success: {
+                  style: {
+                    color: palette[theme]['primary.200'],
+                    backgroundColor: palette[theme]['primary.100'],
+                  },
+                },
+                error: {
+                  style: {
+                    color: palette[theme]['danger.200'],
+                    backgroundColor: palette[theme]['danger.100'],
+                  },
                 },
               }}
             />
