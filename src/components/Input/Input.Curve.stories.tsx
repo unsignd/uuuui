@@ -10,12 +10,14 @@ const meta: Meta<typeof Input> = {
 export const Medium: Meta<typeof Input> = {
   args: {
     curve: 'medium',
+    placeholder: 'Find Items...',
   },
 };
 
 export const Large: Meta<typeof Input> = {
   args: {
     curve: 'large',
+    placeholder: 'Find Items...',
   },
 };
 
