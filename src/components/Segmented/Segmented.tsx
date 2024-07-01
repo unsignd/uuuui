@@ -11,7 +11,6 @@ interface OptionProps extends HTMLAttributes<HTMLButtonElement> {
 
   text?: string;
   icon?: React.FC<React.SVGProps<SVGSVGElement>>;
-  color?: ColorType;
 }
 
 interface SegmentedProps extends HTMLAttributes<HTMLDivElement> {
@@ -66,9 +65,11 @@ const ButtonWrapper = styled.button<{
     ({
       medium: toRem(10),
       large: toRem(20),
-    }[props.$curve])}rem;
+    })[props.$curve]}rem;
 
-  transition: scale 100ms ease-in-out, background-color 150ms ease-in-out;
+  transition:
+    scale 100ms ease-in-out,
+    background-color 150ms ease-in-out;
 
   overflow: hidden;
   box-sizing: border-box;
@@ -89,7 +90,9 @@ const ButtonWrapper = styled.button<{
   & svg {
     height: ${toRem(16)}rem;
 
-    transition: scale 100ms ease-in-out, background-color 150ms ease-in-out;
+    transition:
+      scale 100ms ease-in-out,
+      background-color 150ms ease-in-out;
 
     flex-shrink: 0;
   }
