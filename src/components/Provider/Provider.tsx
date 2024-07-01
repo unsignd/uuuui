@@ -92,8 +92,8 @@ export default function Provider({
                   margin: 0,
                   padding: `0 ${toRem(14)}rem`,
 
-                  color: palette[theme]['base.100'],
-                  backgroundColor: palette[theme]['base.500'],
+                  color: palette[theme]['base.400'],
+                  backgroundColor: palette[theme]['base.200'],
 
                   borderRadius: `${toRem(10)}rem`,
 
