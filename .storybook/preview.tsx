@@ -1,37 +1,31 @@
-import React from 'react';
+import './preview.css';
+
+import React, { useEffect, useState } from 'react';
 import type { Preview } from '@storybook/react';
 
 import centered from '@storybook/addon-centered/react';
 import { useDarkMode } from 'storybook-dark-mode';
 
 import Provider from '../src/components/Provider';
+import { themes } from '@storybook/theming';
 
 const preview: Preview = {
   decorators: [
     centered,
     (Story) => {
-      if (useDarkMode()) {
-        return (
-          <Provider theme="dark">
-            <Story />
-          </Provider>
-        );
-      } else {
-        return (
-          <Provider theme="light">
-            <Story />
-          </Provider>
-        );
-      }
+      return (
+        <Provider theme={useDarkMode() ? 'dark' : 'light'}>
+          <Story />
+        </Provider>
+      );
     },
   ],
   parameters: {
-    backgrounds: {
-      default: 'dark',
-      values: [
-        { name: 'light', value: '#ffffff' },
-        { name: 'dark', value: '#333333' },
-      ],
+    darkMode: {
+      dark: { ...themes.dark, appBg: '#08080A' },
+      light: { ...themes.normal, appBg: '#ffffff' },
+      darkClass: 'lights-out',
+      lightClass: 'lights-on',
     },
     controls: {
       matchers: {
