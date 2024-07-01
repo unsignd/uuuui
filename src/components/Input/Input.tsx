@@ -36,7 +36,7 @@ const Wrapper = styled.div<{
     ({
       medium: toRem(10),
       large: toRem(20),
-    }[props.$curve])}rem;
+    })[props.$curve]}rem;
 
   overflow: hidden;
   box-sizing: border-box;
@@ -57,6 +57,8 @@ const Wrapper = styled.div<{
 const InputField = styled.input<{
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
+  $disabled: boolean;
+
   $theme: ThemeType;
 }>`
   width: 100%;
@@ -73,6 +75,7 @@ const InputField = styled.input<{
   border: none;
 
   outline: none;
+  cursor: ${(props) => (props.$disabled ? 'not-allowed' : 'auto')};
 
   &::placeholder {
     color: ${(props) => props.theme[props.$theme]['base.400']};
@@ -100,6 +103,7 @@ export default function Input({
       <InputField
         {...attr}
         $icon={Icon}
+        $disabled={disabled}
         $theme={theme}
         tabIndex={-1}
         disabled={disabled}
