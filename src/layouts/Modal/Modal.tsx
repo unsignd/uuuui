@@ -34,7 +34,7 @@ const Wrapper = ReactModal.styled`
   background-color: ${(props: ReactModalProps) => props.$colorset['base.100']};
 
   border: ${toRem(1)}rem solid ${(props: ReactModalProps) =>
-  props.$colorset['base.300']};
+    props.$colorset['base.300']};
   border-radius: ${toRem(7)}rem;
 
   transition: scale 100ms ease-in-out;
@@ -118,7 +118,7 @@ export default function Modal({
       onEscapeKeydown={() => (onCloseRequest ? onCloseRequest() : undefined)}
     >
       <Header $theme={theme}>
-        <Text priority={'low'}>{title}</Text>
+        <Text>{title}</Text>
         <XSVG onClick={() => (onCloseRequest ? onCloseRequest() : undefined)} />
       </Header>
       <Body>{children}</Body>
