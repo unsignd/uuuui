@@ -1,30 +1,44 @@
-import rht from 'react-hot-toast';
+import reactToast from 'react-hot-toast';
 import styled from 'styled-components';
 import { Sans } from '../global';
 import { toRem } from '.';
 
 const Text = styled(Sans)`
+  max-width: 100%;
+
+  display: inline-block;
+
   font-size: ${toRem(14)}rem;
 
   div:has(&) {
     margin: 0;
+
+    overflow: hidden;
+  }
+`;
+
+const Icon = styled.div`
+  div:has(&) {
+    min-width: 0;
   }
 `;
 
 class Toast {
+  static activeToasts = [];
+
   constructor(text: string) {
-    rht(() => <Text>{text}</Text>);
+    reactToast(() => <Text>{text}</Text>);
   }
 
   static success(text: string) {
-    rht.success(() => <Text>{text}</Text>, {
-      icon: '',
+    reactToast.success(() => <Text>{text}</Text>, {
+      icon: <Icon />,
     });
   }
 
   static error(text: string) {
-    rht.error(() => <Text>{text}</Text>, {
-      icon: '',
+    reactToast.error(() => <Text>{text}</Text>, {
+      icon: <Icon />,
     });
   }
 }
