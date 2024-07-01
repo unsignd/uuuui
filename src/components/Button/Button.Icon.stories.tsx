@@ -22,7 +22,7 @@ export const With_Icon: Meta<typeof Button> = {
   },
 };
 
-export const Only_Icon: Meta<typeof Button> = {
+export const Icon_Only: Meta<typeof Button> = {
   args: {
     icon: TicketSVG,
   },

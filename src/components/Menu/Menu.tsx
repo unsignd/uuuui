@@ -30,6 +30,7 @@ interface MenuProps extends HTMLAttributes<HTMLButtonElement> {
   };
 
   selection?: string;
+
   disabled?: boolean;
 
   priority?: PriorityType;
@@ -93,11 +94,13 @@ const ButtonWrapper = styled.button<{
 
   &:hover {
     background-color: ${(props) =>
-      ({
-        low: props.theme[props.$theme]['base.200'],
-        medium: props.theme[props.$theme]['base.200'],
-        high: undefined,
-      })[props.$priority]};
+      props.$disabled
+        ? undefined
+        : {
+            low: props.theme[props.$theme]['base.200'],
+            medium: props.theme[props.$theme]['base.200'],
+            high: undefined,
+          }[props.$priority]};
   }
 
   &:active {

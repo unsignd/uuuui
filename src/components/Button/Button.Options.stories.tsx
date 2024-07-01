@@ -19,6 +19,10 @@ export const With_Options: Meta<typeof Button> = {
       default: {
         text: 'Option',
       },
+      colored: {
+        text: 'Option with Color',
+        color: 'danger',
+      },
       disabled: {
         text: 'Disabled Option',
         disabled: true,
