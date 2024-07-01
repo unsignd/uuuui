@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import SwitchButton from './SwitchButton';
 
@@ -7,13 +7,15 @@ const meta: Meta<typeof SwitchButton> = {
   component: SwitchButton,
 };
 
-export const Not_Active: Meta<typeof SwitchButton> = {
+type Story = StoryObj<typeof SwitchButton>;
+
+export const Not_Active: Story = {
   args: {
     active: false,
   },
 };
 
-export const Active: Meta<typeof SwitchButton> = {
+export const Active: Story = {
   args: {
     active: true,
   },

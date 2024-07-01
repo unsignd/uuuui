@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Menu from './Menu';
 
@@ -7,7 +7,9 @@ const meta: Meta<typeof Menu> = {
   component: Menu,
 };
 
-export const Medium: Meta<typeof Menu> = {
+type Story = StoryObj<typeof Menu>;
+
+export const Medium: Story = {
   args: {
     options: {
       option_1: {
@@ -24,7 +26,7 @@ export const Medium: Meta<typeof Menu> = {
   },
 };
 
-export const Large: Meta<typeof Menu> = {
+export const Large: Story = {
   args: {
     options: {
       option_1: {

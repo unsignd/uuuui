@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Menu from './Menu';
 
@@ -7,7 +7,9 @@ const meta: Meta<typeof Menu> = {
   component: Menu,
 };
 
-export const With_Options: Meta<typeof Menu> = {
+type Story = StoryObj<typeof Menu>;
+
+export const With_Options: Story = {
   args: {
     options: {
       default: {

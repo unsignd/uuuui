@@ -22,20 +22,24 @@ const Wrapper = styled(Tippy)``;
 const TooltipWrapper = styled.div<{
   $icon?: React.FC<React.SVGProps<SVGSVGElement>>;
 
+  $text?: string;
+
   $open?: boolean;
 
   $color: ColorType;
 
   $theme: ThemeType;
 }>`
+  width: ${(props) =>
+    !props.$text && props.$icon ? `${toRem(28)}rem` : 'auto'};
   height: ${toRem(28)}rem;
 
-  padding: 0 ${toRem(7)}rem;
+  padding: 0 ${(props) => (!props.$text && props.$icon ? 0 : toRem(7))}rem;
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: ${toRem(7)}rem;
+  gap: ${toRem(3.5)}rem;
 
   color: ${(props) =>
     ({
@@ -43,18 +47,20 @@ const TooltipWrapper = styled.div<{
       primary: props.theme[props.$theme]['primary.200'],
       danger: props.theme[props.$theme]['danger.200'],
       warning: props.theme[props.$theme]['warning.200'],
-    }[props.$color])};
+    })[props.$color]};
   background-color: ${(props) =>
     ({
       base: props.theme[props.$theme]['base.200'],
       primary: props.theme[props.$theme]['primary.100'],
       danger: props.theme[props.$theme]['danger.100'],
       warning: props.theme[props.$theme]['warning.100'],
-    }[props.$color])};
+    })[props.$color]};
 
   border-radius: ${toRem(7)}rem;
 
-  transition: transform 100ms ease-in-out, opacity 150ms ease-in-out;
+  transition:
+    transform 100ms ease-in-out,
+    opacity 150ms ease-in-out;
 
   transform: ${(props) =>
     props.$open ? 'translateY(0)' : `translateY(${toRem(7)}rem)`};
@@ -91,9 +97,15 @@ export default function Tooltip({
       interactive={true}
       disabled={disabled}
       render={() => (
-        <TooltipWrapper $icon={Icon} $open={open} $color={color} $theme={theme}>
+        <TooltipWrapper
+          $icon={Icon}
+          $text={text}
+          $open={open}
+          $color={color}
+          $theme={theme}
+        >
           {Icon ? <Icon /> : undefined}
-          <Text>{text}</Text>
+          {text ? <Text>{text}</Text> : undefined}
         </TooltipWrapper>
       )}
       animation={true}

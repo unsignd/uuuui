@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Input from './Input';
 
@@ -9,13 +9,15 @@ const meta: Meta<typeof Input> = {
   component: Input,
 };
 
-export const Without_Icon: Meta<typeof Input> = {
+type Story = StoryObj<typeof Input>;
+
+export const Without_Icon: Story = {
   args: {
     placeholder: 'Find Items...',
   },
 };
 
-export const With_Icon: Meta<typeof Input> = {
+export const With_Icon: Story = {
   args: {
     icon: TicketSVG,
     placeholder: 'Find Items...',

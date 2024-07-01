@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Input from './Input';
 
@@ -7,14 +7,16 @@ const meta: Meta<typeof Input> = {
   component: Input,
 };
 
-export const Medium: Meta<typeof Input> = {
+type Story = StoryObj<typeof Input>;
+
+export const Medium: Story = {
   args: {
     curve: 'medium',
     placeholder: 'Find Items...',
   },
 };
 
-export const Large: Meta<typeof Input> = {
+export const Large: Story = {
   args: {
     curve: 'large',
     placeholder: 'Find Items...',

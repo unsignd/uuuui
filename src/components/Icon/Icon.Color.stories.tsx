@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Icon from './Icon';
 
@@ -9,7 +9,9 @@ const meta: Meta<typeof Icon> = {
   component: Icon,
 };
 
-export const Base: Meta<typeof Icon> = {
+type Story = StoryObj<typeof Icon>;
+
+export const Base: Story = {
   args: {
     icon: TicketSVG,
     color: 'base',
@@ -17,7 +19,7 @@ export const Base: Meta<typeof Icon> = {
   },
 };
 
-export const Primary: Meta<typeof Icon> = {
+export const Primary: Story = {
   args: {
     icon: TicketSVG,
     color: 'primary',
@@ -25,7 +27,7 @@ export const Primary: Meta<typeof Icon> = {
   },
 };
 
-export const Danger: Meta<typeof Icon> = {
+export const Danger: Story = {
   args: {
     icon: TicketSVG,
     color: 'danger',
@@ -33,7 +35,7 @@ export const Danger: Meta<typeof Icon> = {
   },
 };
 
-export const Warning: Meta<typeof Icon> = {
+export const Warning: Story = {
   args: {
     icon: TicketSVG,
     color: 'warning',

@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Button from './Button';
 
@@ -9,20 +9,22 @@ const meta: Meta<typeof Button> = {
   component: Button,
 };
 
-export const Without_Icon: Meta<typeof Button> = {
+type Story = StoryObj<typeof Button>;
+
+export const Without_Icon: Story = {
   args: {
     children: 'Button',
   },
 };
 
-export const With_Icon: Meta<typeof Button> = {
+export const With_Icon: Story = {
   args: {
     children: 'Button',
     icon: TicketSVG,
   },
 };
 
-export const Icon_Only: Meta<typeof Button> = {
+export const Icon_Only: Story = {
   args: {
     icon: TicketSVG,
   },

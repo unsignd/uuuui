@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Icon from './Icon';
 
@@ -9,19 +9,21 @@ const meta: Meta<typeof Icon> = {
   component: Icon,
 };
 
-export const Low: Meta<typeof Icon> = {
+type Story = StoryObj<typeof Icon>;
+
+export const Low: Story = {
   args: {
     icon: TicketSVG,
     priority: 'low',
   },
 };
-export const Medium: Meta<typeof Icon> = {
+export const Medium: Story = {
   args: {
     icon: TicketSVG,
     priority: 'medium',
   },
 };
-export const High: Meta<typeof Icon> = {
+export const High: Story = {
   args: {
     icon: TicketSVG,
     priority: 'high',

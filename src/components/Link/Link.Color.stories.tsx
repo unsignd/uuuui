@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Link from './Link';
 
@@ -7,7 +7,9 @@ const meta: Meta<typeof Link> = {
   component: Link,
 };
 
-export const Base: Meta<typeof Link> = {
+type Story = StoryObj<typeof Link>;
+
+export const Base: Story = {
   args: {
     children: 'Link',
     color: 'base',
@@ -15,7 +17,7 @@ export const Base: Meta<typeof Link> = {
   },
 };
 
-export const Primary: Meta<typeof Link> = {
+export const Primary: Story = {
   args: {
     children: 'Link',
     color: 'primary',
@@ -23,7 +25,7 @@ export const Primary: Meta<typeof Link> = {
   },
 };
 
-export const Danger: Meta<typeof Link> = {
+export const Danger: Story = {
   args: {
     children: 'Link',
     color: 'danger',
@@ -31,7 +33,7 @@ export const Danger: Meta<typeof Link> = {
   },
 };
 
-export const Warning: Meta<typeof Link> = {
+export const Warning: Story = {
   args: {
     children: 'Link',
     color: 'warning',

@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Text from './Text';
 
@@ -7,21 +7,23 @@ const meta: Meta<typeof Text> = {
   component: Text,
 };
 
-export const Low: Meta<typeof Text> = {
+type Story = StoryObj<typeof Text>;
+
+export const Low: Story = {
   args: {
     children: 'Text',
     priority: 'low',
   },
 };
 
-export const Medium: Meta<typeof Text> = {
+export const Medium: Story = {
   args: {
     children: 'Text',
     priority: 'medium',
   },
 };
 
-export const High: Meta<typeof Text> = {
+export const High: Story = {
   args: {
     children: 'Text',
     priority: 'high',

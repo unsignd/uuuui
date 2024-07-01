@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Button from './Button';
 
@@ -7,14 +7,16 @@ const meta: Meta<typeof Button> = {
   component: Button,
 };
 
-export const Not_Disabled: Meta<typeof Button> = {
+type Story = StoryObj<typeof Button>;
+
+export const Not_Disabled: Story = {
   args: {
     children: 'Button',
     disabled: false,
   },
 };
 
-export const Disabled: Meta<typeof Button> = {
+export const Disabled: Story = {
   args: {
     children: 'Button',
     disabled: true,

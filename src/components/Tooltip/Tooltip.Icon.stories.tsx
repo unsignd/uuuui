@@ -1,31 +1,35 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Tag from './Tag';
+import Tooltip from './Tooltip';
+import Button from '../Button';
 
 import { ReactComponent as TicketSVG } from '../../assets/ticket_20.svg';
 
-const meta: Meta<typeof Tag> = {
-  title: 'Components/Tag/Icon',
-  component: Tag,
+const meta: Meta<typeof Tooltip> = {
+  title: 'Components/Tooltip/Icon',
+  component: Tooltip,
 };
 
-type Story = StoryObj<typeof Tag>;
+type Story = StoryObj<typeof Tooltip>;
 
 export const Without_Icon: Story = {
   args: {
-    children: 'Tag',
+    children: <Button>Hover me!</Button>,
+    text: 'Tag',
   },
 };
 
 export const With_Icon: Story = {
   args: {
-    children: 'Tag',
+    children: <Button>Hover me!</Button>,
     icon: TicketSVG,
+    text: 'Tag',
   },
 };
 
 export const Icon_Only: Story = {
   args: {
+    children: <Button>Hover me!</Button>,
     icon: TicketSVG,
   },
 };

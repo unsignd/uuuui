@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Heading from './Heading';
 
@@ -7,7 +7,9 @@ const meta: Meta<typeof Heading> = {
   component: Heading,
 };
 
-export const Base: Meta<typeof Heading> = {
+type Story = StoryObj<typeof Heading>;
+
+export const Base: Story = {
   args: {
     children: 'Heading',
   },

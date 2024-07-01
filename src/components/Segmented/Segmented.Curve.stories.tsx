@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Segmented from './Segmented';
 
@@ -7,7 +7,9 @@ const meta: Meta<typeof Segmented> = {
   component: Segmented,
 };
 
-export const Medium: Meta<typeof Segmented> = {
+type Story = StoryObj<typeof Segmented>;
+
+export const Medium: Story = {
   args: {
     options: {
       option_1: {
@@ -24,7 +26,7 @@ export const Medium: Meta<typeof Segmented> = {
   },
 };
 
-export const Large: Meta<typeof Segmented> = {
+export const Large: Story = {
   args: {
     options: {
       option_1: {

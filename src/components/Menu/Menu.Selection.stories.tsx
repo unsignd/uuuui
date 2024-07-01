@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Menu from './Menu';
 
@@ -7,7 +7,9 @@ const meta: Meta<typeof Menu> = {
   component: Menu,
 };
 
-export const Without_Selection: Meta<typeof Menu> = {
+type Story = StoryObj<typeof Menu>;
+
+export const Without_Selection: Story = {
   args: {
     options: {
       option_1: {
@@ -23,7 +25,7 @@ export const Without_Selection: Meta<typeof Menu> = {
   },
 };
 
-export const With_Selection: Meta<typeof Menu> = {
+export const With_Selection: Story = {
   args: {
     options: {
       option_1: {

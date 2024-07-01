@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import Tag from './Tag';
 
@@ -7,28 +7,30 @@ const meta: Meta<typeof Tag> = {
   component: Tag,
 };
 
-export const Base: Meta<typeof Tag> = {
+type Story = StoryObj<typeof Tag>;
+
+export const Base: Story = {
   args: {
     children: 'Tag',
     color: 'base',
   },
 };
 
-export const Primary: Meta<typeof Tag> = {
+export const Primary: Story = {
   args: {
     children: 'Tag',
     color: 'primary',
   },
 };
 
-export const Danger: Meta<typeof Tag> = {
+export const Danger: Story = {
   args: {
     children: 'Tag',
     color: 'danger',
   },
 };
 
-export const Warning: Meta<typeof Tag> = {
+export const Warning: Story = {
   args: {
     children: 'Tag',
     color: 'warning',
