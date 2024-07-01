@@ -58,7 +58,7 @@ export default function Provider({
       'primary.100': '#0d1a37',
       'primary.200': '#1f63eb',
 
-      'danger.100': '#33260f',
+      'danger.100': '#310d0f',
       'danger.200': '#d62222',
 
       'warning.100': '#30230b',
