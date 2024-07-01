@@ -7,9 +7,6 @@ import { Sans } from '../../global';
 
 interface HeadingProps extends HTMLAttributes<HTMLParagraphElement> {
   children: ReactNode;
-
-  color?: ColorType;
-  priority?: PriorityType;
 }
 
 const Wrapper = styled(Sans)<{
