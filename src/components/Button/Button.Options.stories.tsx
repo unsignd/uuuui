@@ -14,6 +14,7 @@ export const Without_Options: Meta<typeof Button> = {
 };
 export const With_Options: Meta<typeof Button> = {
   args: {
+    children: 'Button',
     options: {
       default: {
         text: 'Option',
@@ -28,7 +29,6 @@ export const With_Options: Meta<typeof Button> = {
         active: true,
       },
     },
-    children: 'Button',
   },
 };
 

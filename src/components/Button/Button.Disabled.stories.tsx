@@ -9,15 +9,15 @@ const meta: Meta<typeof Button> = {
 
 export const Not_Disabled: Meta<typeof Button> = {
   args: {
-    disabled: false,
     children: 'Button',
+    disabled: false,
   },
 };
 
 export const Disabled: Meta<typeof Button> = {
   args: {
-    disabled: true,
     children: 'Button',
+    disabled: true,
   },
 };
 

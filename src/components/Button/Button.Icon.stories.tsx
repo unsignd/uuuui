@@ -17,8 +17,8 @@ export const Without_Icon: Meta<typeof Button> = {
 
 export const With_Icon: Meta<typeof Button> = {
   args: {
-    icon: TicketSVG,
     children: 'Button',
+    icon: TicketSVG,
   },
 };
 

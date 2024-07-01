@@ -9,15 +9,15 @@ const meta: Meta<typeof Button> = {
 
 export const Medium: Meta<typeof Button> = {
   args: {
-    curve: 'medium',
     children: 'Button',
+    curve: 'medium',
   },
 };
 
 export const Large: Meta<typeof Button> = {
   args: {
-    curve: 'large',
     children: 'Button',
+    curve: 'large',
   },
 };
 

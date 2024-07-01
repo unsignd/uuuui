@@ -9,33 +9,33 @@ const meta: Meta<typeof Button> = {
 
 export const Base: Meta<typeof Button> = {
   args: {
+    children: 'Button',
     color: 'base',
     priority: 'high',
-    children: 'Button',
   },
 };
 
 export const Primary: Meta<typeof Button> = {
   args: {
+    children: 'Button',
     color: 'primary',
     priority: 'high',
-    children: 'Button',
   },
 };
 
 export const Danger: Meta<typeof Button> = {
   args: {
+    children: 'Button',
     color: 'danger',
     priority: 'high',
-    children: 'Button',
   },
 };
 
 export const Warning: Meta<typeof Button> = {
   args: {
+    children: 'Button',
     color: 'warning',
     priority: 'high',
-    children: 'Button',
   },
 };
 

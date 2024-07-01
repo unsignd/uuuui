@@ -9,20 +9,20 @@ const meta: Meta<typeof Button> = {
 
 export const Low: Meta<typeof Button> = {
   args: {
-    priority: 'low',
     children: 'Button',
+    priority: 'low',
   },
 };
 export const Medium: Meta<typeof Button> = {
   args: {
-    priority: 'medium',
     children: 'Button',
+    priority: 'medium',
   },
 };
 export const High: Meta<typeof Button> = {
   args: {
-    priority: 'high',
     children: 'Button',
+    priority: 'high',
   },
 };
 
