@@ -4,7 +4,7 @@ import { Canvas, Meta } from '@storybook/blocks';
 
 # usePalette()
 
-`usePalette()` is a hook used to access the getter and setter of library's color palette. You can load the current color palette and set the palette with the `palette` and `setPalette` variables.
+`usePalette()` is a hook used to access the getter and setter of library's color palette. You can load the current color palette and set the palette with the `palette` and `setPalette()`.
 
 ```tsx
 import { usePalette } from '@unsignd/uuuui';
@@ -18,24 +18,95 @@ function Component() {
 
 <br />
 
-#### `palette`: PaletteType
+#### `palette`: [PaletteType](/docs/type-palettetype--docs)
 
-The theme variable holds the current theme, which can be either `light` or `dark`.
+The `palette` variable holds the current theme, which can be either `light` or `dark`.
 
 ```tsx
-console.log(theme);
+console.log(palette);
 ```
 
 <hr />
 
-#### `setPalette()`: (palette: PaletteType) => void
+#### `setPalette()`: (palette: [<ins>PaletteType</ins>](/docs/type-palettetype--docs)) => void
 
-The setTheme function allows you to change the theme. You can set it to either `light` or `dark`. You can see an example on [<ins>Hook/useTheme()/Theme Switch</ins>](/story/hook-usetheme--theme-switch).
+The `setPalette()` function allows you to change the theme. You can set it to either `light` or `dark`.
 
 ```tsx
-setTheme('light');
-setTheme('dark);
+// Set a custom palette.
+setPalette({
+  light: {
+    'primary.100': '#d6e3fb',
+    'primary.200': '#3471eb',
 
-// Switch theme
-setTheme(theme === 'light' ? 'dark' : 'light');
+    'danger.100': '#fbd6d6',
+    'danger.200': '#eb3434',
+
+    'warning.100': '#fbefd6',
+    'warning.200': '#ebae34',
+
+    'base.100': '#ffffff',
+    'base.200': '#f2f3f5',
+    'base.300': '#e6e7eb',
+    'base.400': '#8a8f99',
+    'base.500': '#08080a',
+  },
+  dark: {
+    'primary.100': '#101a32',
+    'primary.200': '#2e64d1',
+
+    'danger.100': '#301011',
+    'danger.200': '#d12e2e',
+
+    'warning.100': '#302511',
+    'warning.200': '#d19b2e',
+
+    'base.100': '#08080a',
+    'base.200': '#181a1f',
+    'base.300': '#292c33',
+    'base.400': '#757a85',
+    'base.500': '#ffffff',
+  },
+});
+```
+
+## Initial Value
+
+If the component is wrapped with a Provider, it automatically sets the `palette`'s initial value below unless you provide a `palette` property.
+
+```json
+{
+  "light": {
+    "primary.100": "#d6e3fb",
+    "primary.200": "#3471eb",
+
+    "danger.100": "#fbd6d6",
+    "danger.200": "#eb3434",
+
+    "warning.100": "#fbefd6",
+    "warning.200": "#ebae34",
+
+    "base.100": "#ffffff",
+    "base.200": "#f2f3f5",
+    "base.300": "#e6e7eb",
+    "base.400": "#8a8f99",
+    "base.500": "#08080a"
+  },
+  "dark": {
+    "primary.100": "#101a32",
+    "primary.200": "#2e64d1",
+
+    "danger.100": "#301011",
+    "danger.200": "#d12e2e",
+
+    "warning.100": "#302511",
+    "warning.200": "#d19b2e",
+
+    "base.100": "#08080a",
+    "base.200": "#181a1f",
+    "base.300": "#292c33",
+    "base.400": "#757a85",
+    "base.500": "#ffffff"
+  }
+}
 ```

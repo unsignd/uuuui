@@ -5,7 +5,7 @@ import * as UseThemeStories from './useTheme.stories';
 
 # useTheme()
 
-`useTheme()` is a hook used to access the getter and setter of library's theme. You can load the current theme and set the theme with the `theme` and `setTheme` variables.
+`useTheme()` is a hook used to access the getter and setter of library's theme. You can load the current theme and set the theme with the `theme` and `setTheme()`.
 
 ```tsx
 import { useTheme } from '@unsignd/uuuui';
@@ -19,9 +19,9 @@ function Component() {
 
 <br />
 
-#### `theme`: 'light' | 'dark'
+#### `theme`: [ThemeType](/docs/type-themetype--docs)
 
-The theme variable holds the current theme, which can be either `light` or `dark`.
+The `theme` variable holds the current theme.
 
 ```tsx
 console.log(theme);
@@ -29,14 +29,22 @@ console.log(theme);
 
 <hr />
 
-#### `setTheme()`: (theme: 'light' | 'dark')) => void
+#### `setTheme()`: (theme: [ThemeType](/docs/type-themetype--docs))) => void
 
-The setTheme function allows you to change the theme. You can set it to either `light` or `dark`. You can see an example on [<ins>Hook/useTheme()/Theme Switch</ins>](/story/hook-usetheme--theme-switch).
+The `setTheme()` function allows you to change the theme. Check the [<ins>Theme Switching Example</ins>](/story/hook-usetheme--theme-switch).
 
 ```tsx
 setTheme('light');
 setTheme('dark);
 
-// Switch theme
+// Switch theme.
 setTheme(theme === 'light' ? 'dark' : 'light');
+```
+
+## Initial Value
+
+If the component is wrapped with a Provider, it automatically sets the `theme`'s initial value below unless you provide a `theme` property.
+
+```json
+"light"
 ```

@@ -1,0 +1,44 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+<Meta title="Type/PaletteType" />
+
+# PaletteType
+
+`PaletteType` is a type used in [<ins>usePalette()</ins>](/docs/hook-usepalette-docs--docs) hook.
+
+```tsx
+export type PaletteType = {
+  light: {
+    'primary.100': string;
+    'primary.200': string;
+
+    'danger.100': string;
+    'danger.200': string;
+
+    'warning.100': string;
+    'warning.200': string;
+
+    'base.100': string;
+    'base.200': string;
+    'base.300': string;
+    'base.400': string;
+    'base.500': string;
+  };
+  dark: {
+    'primary.100': string;
+    'primary.200': string;
+
+    'danger.100': string;
+    'danger.200': string;
+
+    'warning.100': string;
+    'warning.200': string;
+
+    'base.100': string;
+    'base.200': string;
+    'base.300': string;
+    'base.400': string;
+    'base.500': string;
+  };
+};
+```
