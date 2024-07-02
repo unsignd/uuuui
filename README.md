@@ -1,6 +1,7 @@
 <div align="center">
-  <img src="/banner.png" width="100%"/>
-
+  
+![Banner](./public/banner_light.png#gh-light-mode-only)
+![Banner](./public/banner_dark.png#gh-dark-mode-only)
 # uuuui
 
 </div>
