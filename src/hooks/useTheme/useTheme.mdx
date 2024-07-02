@@ -1,0 +1,42 @@
+import { Canvas, Meta } from '@storybook/blocks';
+import * as UseThemeStories from './useTheme.stories';
+
+<Meta of={UseThemeStories} />
+
+# useTheme()
+
+`useTheme()` is a hook used to access the getter and setter of library's theme. You can load the current theme and set the theme with the `theme` and `setTheme` variables.
+
+```tsx
+import { useTheme } from '@unsignd/uuuui';
+
+function Component() {
+  const { theme, setTheme } = useTheme();
+  //...
+```
+
+## Usage
+
+<br />
+
+#### `theme`: 'light' | 'dark'
+
+The theme variable holds the current theme, which can be either `light` or `dark`.
+
+```tsx
+console.log(theme);
+```
+
+<hr />
+
+#### `setTheme()`: (theme: 'light' | 'dark')) => void
+
+The setTheme function allows you to change the theme. You can set it to either `light` or `dark`. You can see an example on [<ins>Hook/useTheme()/Theme Switch</ins>](/story/hook-usetheme--theme-switch).
+
+```tsx
+setTheme('light');
+setTheme('dark);
+
+// Switch theme
+setTheme(theme === 'light' ? 'dark' : 'light');
+```

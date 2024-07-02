@@ -14,7 +14,7 @@ function Component({ onClick }: ComponentProps) {
 }
 
 const meta: Meta<typeof Component> = {
-  title: 'Hook/useToast',
+  title: 'Hook/useToast()',
   component: Component,
   tags: ['!autodocs'],
 };

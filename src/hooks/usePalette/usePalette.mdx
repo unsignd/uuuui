@@ -1,0 +1,41 @@
+import { Canvas, Meta } from '@storybook/blocks';
+
+<Meta title="Hook/usePalette()/Docs" />
+
+# usePalette()
+
+`usePalette()` is a hook used to access the getter and setter of library's color palette. You can load the current color palette and set the palette with the `palette` and `setPalette` variables.
+
+```tsx
+import { usePalette } from '@unsignd/uuuui';
+
+function Component() {
+  const { palette, setPalette } = usePalette();
+  //...
+```
+
+## Usage
+
+<br />
+
+#### `palette`: PaletteType
+
+The theme variable holds the current theme, which can be either `light` or `dark`.
+
+```tsx
+console.log(theme);
+```
+
+<hr />
+
+#### `setPalette()`: (palette: PaletteType) => void
+
+The setTheme function allows you to change the theme. You can set it to either `light` or `dark`. You can see an example on [<ins>Hook/useTheme()/Theme Switch</ins>](/story/hook-usetheme--theme-switch).
+
+```tsx
+setTheme('light');
+setTheme('dark);
+
+// Switch theme
+setTheme(theme === 'light' ? 'dark' : 'light');
+```

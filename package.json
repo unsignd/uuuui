@@ -36,6 +36,7 @@
   },
   "dependencies": {
     "@storybook/addon-centered": "^5.3.21",
+    "@storybook/addon-links": "^8.1.11",
     "@svgr/rollup": "^8.1.0",
     "@tippyjs/react": "^4.2.6",
     "@types/react": "^18.3.3",
