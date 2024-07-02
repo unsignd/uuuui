@@ -39,35 +39,35 @@ export default function Provider({
   children,
   palette: initialPalette = {
     light: {
-      'primary.100': '#d6e4ff',
-      'primary.200': '#3377ff',
+      'primary.100': '#d6e3fb',
+      'primary.200': '#3471eb',
 
-      'danger.100': '#fbd4d4',
-      'danger.200': '#eb2626',
+      'danger.100': '#fbd6d6',
+      'danger.200': '#eb3434',
 
-      'warning.100': '#fdeecf',
-      'warning.200': '#f5a80f',
+      'warning.100': '#fbefd6',
+      'warning.200': '#ebae34',
 
       'base.100': '#ffffff',
       'base.200': '#f2f3f5',
       'base.300': '#e6e7eb',
-      'base.400': '#b6bac2',
+      'base.400': '#8a8f99',
       'base.500': '#08080a',
     },
     dark: {
-      'primary.100': '#0d1a37',
-      'primary.200': '#1f63eb',
+      'primary.100': '#101a32',
+      'primary.200': '#2e64d1',
 
-      'danger.100': '#310d0f',
-      'danger.200': '#d62222',
+      'danger.100': '#301011',
+      'danger.200': '#d12e2e',
 
-      'warning.100': '#30230b',
-      'warning.200': '#d1900d',
+      'warning.100': '#302511',
+      'warning.200': '#d19b2e',
 
       'base.100': '#08080a',
       'base.200': '#181a1f',
       'base.300': '#292c33',
-      'base.400': '#4d525c',
+      'base.400': '#757a85',
       'base.500': '#ffffff',
     },
   },
