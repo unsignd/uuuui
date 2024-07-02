@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
 
 <Meta title="Introduction/Getting Started" />
 
@@ -20,7 +20,7 @@ Anyone can use **uuuui** by installing it using `npm` or `yarn`.
 
 ## Install
 
-To install `uuuui`, run one of the following commands on your terminal.
+To install `uuuui`, run one of the following commands in your project's root directory using your terminal:
 
 ```bash
 # NPM
@@ -32,4 +32,78 @@ yarn add @unsignd/uuuui
 
 ## Setup
 
-To make `uuuui` work properly, a `<Provider>` component should wrap other `uuuui` components.
+As `uuuui` uses React contexts, `<Provider>` component should wrap others to make them work properly.
+
+```tsx
+// index.jsx
+import ReactDOM from 'react-dom/client';
+import { Provider } from '@unsignd/uuuui';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider>
+    {/* ... */}
+  </Provider>
+);
+```
+```tsx
+// index.tsx
+import ReactDOM from 'react-dom/client';
+import { Provider } from '@unsignd/uuuui';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+root.render(
+  <Provider>
+    {/* ... */}
+  </Provider>
+);
+```
+
+You can also specify the library's color palette and theme as `<Provider>`'s properties to override their initial values.
+
+```tsx
+// index.jsx
+import ReactDOM from 'react-dom/client';
+import { Provider } from '@unsignd/uuuui';
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <Provider palette={/* ... */} theme="dark">
+    {/* ... */}
+  </Provider>
+);
+```
+```tsx
+// index.tsx
+import ReactDOM from 'react-dom/client';
+import { Provider } from '@unsignd/uuuui';
+
+const root = ReactDOM.createRoot(
+  document.getElementById('root') as HTMLElement
+);
+root.render(
+  <Provider palette={/* ... */} theme="dark">
+    {/* ... */}
+  </Provider>
+);
+```
+
+## Import
+
+Import `uuuui` components you want to use from `@unsignd/uuuui`.
+
+```tsx
+import { Button, /* ... */ } from '@unsignd/uuuui';
+```
+
+## Usage
+
+For the usage of a specific component, check out the [Component](/docs/component-button-color--docs), [Layout](/docs/layout-modal-active--docs), [Hook](/docs/hook-usepalette-docs--docs) categories.<br />
+Also, there are structures of types in [Type](/docs/type-palettetype--docs) categories.
+<br />
+
+## Troubleshooting
+
+Refer to the [Troubleshooting](/docs/introduction-troubleshooting--docs) page for solutioins of frequently occurring issues.

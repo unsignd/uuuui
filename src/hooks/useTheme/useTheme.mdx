@@ -1,4 +1,4 @@
-import { Canvas, Meta } from '@storybook/blocks';
+import { Meta } from '@storybook/blocks';
 import * as UseThemeStories from './useTheme.stories';
 
 <Meta of={UseThemeStories} />
@@ -31,7 +31,7 @@ console.log(theme);
 
 #### `setTheme()`: (theme: [ThemeType](/docs/type-themetype--docs))) => void
 
-The `setTheme()` function allows you to change the theme. Check the [<ins>Theme Switching Example</ins>](/story/hook-usetheme--theme-switch).
+The `setTheme()` function allows you to change the theme. Check the [<ins>Theme switching example</ins>](/story/hook-usetheme--theme-switch).
 
 ```tsx
 setTheme('light');
@@ -43,7 +43,7 @@ setTheme(theme === 'light' ? 'dark' : 'light');
 
 ## Initial Value
 
-If the component is wrapped with a `<Provider>`, it automatically sets the `theme`'s initial value below unless you provide a `theme` property.
+If the component is wrapped with `<Provider>`, it automatically sets the `theme`'s initial value below unless you provide a `theme` property.
 
 ```json
 "light"
