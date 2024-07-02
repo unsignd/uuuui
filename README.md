@@ -5,9 +5,9 @@
 
 </div>
 
-**uuuui** is an open-source React Typescript component library.
+`uuuui` is an open-source React Typescript component library.
 <br/>
-Anyone can use **uuuui** by installing it using `npm` or `yarn`.
+Anyone can easily use `uuuui` by installing it via `npm` or `yarn`.
 <br/>
 <br/>
 
