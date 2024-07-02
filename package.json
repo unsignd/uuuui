@@ -50,5 +50,8 @@
     "react-tiny-popover": "^8.0.4",
     "styled-components": "^6.1.11",
     "styled-react-modal": "^3.1.1"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.6.1"
   }
 }
