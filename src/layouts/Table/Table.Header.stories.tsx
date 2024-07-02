@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import Table from './Table';
-import { ExampleModalContent } from '../../global';
 
 const meta: Meta<typeof Table> = {
   title: 'Layout/Table/Header',
