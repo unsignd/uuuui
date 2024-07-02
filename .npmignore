@@ -1,0 +1,9 @@
+node_modules/
+
+.github/
+.storybook/
+
+tsconfig.json
+.prettierignore
+
+.git
