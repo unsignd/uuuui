@@ -14,8 +14,9 @@ function Component({ onClick }: ComponentProps) {
 }
 
 const meta: Meta<typeof Component> = {
-  title: 'Hook/Toast/Type',
+  title: 'Hook/useToast',
   component: Component,
+  tags: ['!autodocs'],
 };
 
 type Story = StoryObj<typeof Component>;
