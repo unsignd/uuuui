@@ -1,7 +1,7 @@
 import reactToast from 'react-hot-toast';
 import styled from 'styled-components';
-import { Sans } from '../global';
-import { toRem } from '.';
+import { Sans } from '../../global';
+import { toRem } from '../../utils';
 
 const Text = styled(Sans)`
   max-width: 100%;

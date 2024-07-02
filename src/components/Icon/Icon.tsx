@@ -1,7 +1,7 @@
 import React, { SVGProps } from 'react';
 import styled from 'styled-components';
 import { toRem } from '../../utils';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { ColorType, PriorityType, ThemeType } from '../../types';
 
 interface IconProps extends SVGProps<SVGSVGElement> {
@@ -37,7 +37,7 @@ const Wrapper = styled.div<{
           danger: props.theme[props.$theme]['danger.200'],
           warning: props.theme[props.$theme]['warning.200'],
         }[props.$color],
-      }[props.$priority])};
+      })[props.$priority]};
 
     flex-shrink: 0;
   }

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ButtonHTMLAttributes } from 'react';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { ThemeType } from '../../types';
 import { toRem } from '../../utils';
 

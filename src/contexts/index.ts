@@ -1,2 +1,2 @@
-export { usePalette } from './Palette';
-export { useTheme } from './Theme';
+export { default as PaletteContext } from './PaletteContext';
+export { default as ThemeContext } from './ThemeContext';

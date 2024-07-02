@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { ColorType, ThemeType } from '../../types';
 import { toRem } from '../../utils';
 import { Sans } from '../../global';

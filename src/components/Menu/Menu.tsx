@@ -9,7 +9,7 @@ import {
   PriorityType,
   ThemeType,
 } from '../../types';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { toRem } from '../../utils';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';

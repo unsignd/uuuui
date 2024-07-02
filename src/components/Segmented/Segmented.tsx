@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { BorderCurveType, ColorType, ThemeType } from '../../types';
 import { toRem } from '../../utils';
 import { Sans } from '../../global';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import Icon from '../Icon';
 
 interface OptionProps extends HTMLAttributes<HTMLButtonElement> {

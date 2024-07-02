@@ -3,7 +3,7 @@ import Sans from './Sans';
 import { ColorType, DropdownType, ThemeType } from '../types';
 import { toRem } from '../utils';
 import { HTMLAttributes } from 'react';
-import { useTheme } from '../contexts';
+import { useTheme } from '../hooks';
 import { SwitchButton } from '../components';
 
 import { ReactComponent as CheckSVG } from '../assets/check_16.svg';
@@ -107,7 +107,7 @@ const Text = styled(Sans)<{
       primary: props.theme[props.$theme]['primary.200'],
       danger: props.theme[props.$theme]['danger.200'],
       warning: props.theme[props.$theme]['warning.200'],
-    }[props.$color])};
+    })[props.$color]};
 `;
 
 const UtilityWrapper = styled.div<{

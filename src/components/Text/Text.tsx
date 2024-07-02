@@ -2,7 +2,7 @@ import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
 import { ColorType, PriorityType, ThemeType } from '../../types';
 import { toRem } from '../../utils';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { Sans } from '../../global';
 
 interface TextProps extends HTMLAttributes<HTMLParagraphElement> {
@@ -33,7 +33,7 @@ const Wrapper = styled(Sans)<{
         danger: props.theme[props.$theme]['danger.200'],
         warning: props.theme[props.$theme]['warning.200'],
       }[props.$color],
-    }[props.$priority])};
+    })[props.$priority]};
 
   font-size: ${toRem(14)}rem;
 `;

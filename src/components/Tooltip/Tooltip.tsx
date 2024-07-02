@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ColorType, ThemeType } from '../../types';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { ReactElement, useState } from 'react';
 import Tippy from '@tippyjs/react/headless';
 import { toRem } from '../../utils';

@@ -1,6 +1,6 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { ColorType, ThemeType } from '../../types';
 import { PriorityType } from '../../types';
 import { toRem } from '../../utils';
@@ -25,7 +25,7 @@ const Wrapper = styled(Sans)<{
       low: 'none',
       medium: 'underline',
       high: 'none',
-    }[props.$priority])};
+    })[props.$priority]};
   text-decoration-color: ${(props) =>
     ({
       low: props.theme[props.$theme]['base.400'],
@@ -36,7 +36,7 @@ const Wrapper = styled(Sans)<{
         danger: props.theme[props.$theme]['danger.200'],
         warning: props.theme[props.$theme]['warning.200'],
       }[props.$color],
-    }[props.$priority])};
+    })[props.$priority]};
 
   color: ${(props) =>
     ({
@@ -48,7 +48,7 @@ const Wrapper = styled(Sans)<{
         danger: props.theme[props.$theme]['danger.200'],
         warning: props.theme[props.$theme]['warning.200'],
       }[props.$color],
-    }[props.$priority])};
+    })[props.$priority]};
 
   cursor: pointer;
 

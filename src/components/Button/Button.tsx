@@ -7,7 +7,7 @@ import {
   ColorType,
   ThemeType,
 } from '../../types';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { Popover } from 'react-tiny-popover';
 import { Dropdown, Sans } from '../../global';
 import { OptionProps } from '../../global/Dropdown';
@@ -72,7 +72,7 @@ const ButtonWrapper = styled.button<{
           dark: props.theme[props.$theme]['base.500'],
         }[props.$theme],
       }[props.$color],
-    }[props.$priority])};
+    })[props.$priority]};
   background-color: ${(props) =>
     ({
       low: props.$active
@@ -87,21 +87,23 @@ const ButtonWrapper = styled.button<{
         danger: props.theme[props.$theme]['danger.200'],
         warning: props.theme[props.$theme]['warning.200'],
       }[props.$color],
-    }[props.$priority])};
+    })[props.$priority]};
 
   border: ${(props) =>
     ({
       low: 'none',
       medium: `${toRem(1)}rem solid ${props.theme[props.$theme]['base.300']}`,
       high: 'none',
-    }[props.$priority])};
+    })[props.$priority]};
   border-radius: ${(props) =>
     ({
       medium: toRem(10),
       large: toRem(20),
-    }[props.$curve])}rem;
+    })[props.$curve]}rem;
 
-  transition: scale 100ms ease-in-out, background-color 150ms ease-in-out;
+  transition:
+    scale 100ms ease-in-out,
+    background-color 150ms ease-in-out;
 
   overflow: hidden;
   box-sizing: border-box;
@@ -139,7 +141,9 @@ const Text = styled(Sans)`
 const DropdownWrapper = styled.div<{
   $open: boolean;
 }>`
-  transition: transform 100ms ease-in-out, opacity 150ms ease-in-out;
+  transition:
+    transform 100ms ease-in-out,
+    opacity 150ms ease-in-out;
 
   transform: translateY(${(props) => (props.$open ? 0 : toRem(-7))}rem);
   opacity: ${(props) => (props.$open ? 1 : 0)};

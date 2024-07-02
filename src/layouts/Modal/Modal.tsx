@@ -1,7 +1,7 @@
 import { ReactNode, useState } from 'react';
 import ReactModal from 'styled-react-modal';
 import { toRem } from '../../utils';
-import { usePalette, useTheme } from '../../contexts';
+import { usePalette, useTheme } from '../../hooks';
 import { ColorsetType, ThemeType } from '../../types';
 import styled from 'styled-components';
 import Text from '../../components/Text';

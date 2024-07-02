@@ -1,8 +1,8 @@
 import { HTMLAttributes, ReactNode } from 'react';
 import styled from 'styled-components';
-import { ColorType, PriorityType, ThemeType } from '../../types';
+import { ThemeType } from '../../types';
 import { toRem } from '../../utils';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { Sans } from '../../global';
 
 interface HeadingProps extends HTMLAttributes<HTMLParagraphElement> {

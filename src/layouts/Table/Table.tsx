@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { ThemeType } from '../../types';
 import { toRem } from '../../utils';
 import { HTMLAttributes, useState } from 'react';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { Sans } from '../../global';
 
 import { ReactComponent as ArrowDownSVG } from '../../assets/arrow_down_8.svg';

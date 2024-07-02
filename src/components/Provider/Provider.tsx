@@ -1,7 +1,6 @@
 import { ReactNode, useState } from 'react';
 import { PaletteType, ThemeType } from '../../types/theme';
-import { PaletteContext } from '../../contexts/Palette';
-import { ThemeContext } from '../../contexts/Theme';
+import { PaletteContext, ThemeContext } from '../../contexts';
 import { ModalProvider } from 'styled-react-modal';
 import styled, { ThemeProvider } from 'styled-components';
 import { Toaster } from 'react-hot-toast';

@@ -7,7 +7,7 @@ import { useDarkMode } from 'storybook-dark-mode';
 import { themes } from '@storybook/theming';
 
 import Provider from '../src/components/Provider';
-import { useTheme } from '../src/contexts';
+import { useTheme } from '../src/hooks';
 import { ThemeType } from '../src/types';
 
 // force re-rendering

@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 import styled from 'styled-components';
 import { BorderCurveType, ThemeType } from '../../types';
-import { useTheme } from '../../contexts';
+import { useTheme } from '../../hooks';
 import { toRem } from '../../utils';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
