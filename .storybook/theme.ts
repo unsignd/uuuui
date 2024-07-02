@@ -5,6 +5,6 @@ export default create({
   brandTitle: 'uuuui — React Typescript Component Library',
   brandUrl: 'https://uuuui.vercel.app',
   brandImage:
-    'https://github.com/unsignd/uuuui/blob/master/public/icon?raw=true',
+    'https://github.com/unsignd/uuuui/blob/master/public/logo?raw=true',
   brandTarget: '_self',
 });
