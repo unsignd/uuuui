@@ -6,17 +6,22 @@ const config: StorybookConfig = {
     '../src/**/*.mdx',
     '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
+  staticDirs: ['../public'],
   addons: [
     '@storybook/addon-onboarding',
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storybook-dark-mode',
-    '@storybook/addon-themes',
   ],
   framework: {
     name: '@storybook/react-vite',
     options: {},
   },
+  managerHead: (head) => `
+        ${head}
+        <link rel='favicon' href='favicon.ico' />
+        <link rel='icon' href='favicon.ico' />
+        `,
 };
 export default config;
