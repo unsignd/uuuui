@@ -63,6 +63,7 @@ const preview: Preview = {
       },
     },
     docs: {
+      theme: themes.light,
       story: {
         inline: false,
         iframeHeight: 400,
