@@ -62,7 +62,14 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    docs: {
+      story: {
+        inline: false,
+        iframeHeight: 400,
+      },
+    },
   },
+  tags: ['autodocs'],
 };
 
 export default preview;
