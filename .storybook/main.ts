@@ -19,9 +19,14 @@ const config: StorybookConfig = {
     options: {},
   },
   managerHead: (head) => `
-        ${head}
-        <link rel='favicon' href='favicon.ico' />
-        <link rel='icon' href='favicon.ico' />
-        `,
+    ${head}
+    <link rel='favicon' href='favicon.ico' />
+    <link rel='icon' href='favicon.ico' />
+    <style>
+      .css-1rb1jn6 {
+        height: 40px;
+      }
+    </style>
+  `,
 };
 export default config;

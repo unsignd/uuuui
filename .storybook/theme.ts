@@ -2,9 +2,6 @@ import { create } from '@storybook/theming/create';
 
 export default create({
   base: 'light',
-  brandTitle: 'uuuui — React Typescript Component Library',
-  brandUrl: 'https://uuuui.vercel.app',
   brandImage:
-    'https://github.com/unsignd/uuuui/blob/master/public/logo?raw=true',
-  brandTarget: '_self',
+    'https://github.com/unsignd/uuuui/blob/master/public/logo.png?raw=true',
 });
