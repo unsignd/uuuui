@@ -3,3 +3,42 @@ import { Meta } from '@storybook/blocks';
 <Meta title="Introduction/Troubleshooting" />
 
 # Troubleshooting
+
+You may be able to solve issues related to `uuuui` here!
+
+<br />
+
+## Passing SVGs to Components
+
+For components which contains `icon` property, you only can pass SVGs which are `ReactComponent`.<br />
+Try to follow the steps below to solve this error.
+
+Create a `custom.d.ts` file inside your project's `src` folder and add the following code:
+
+```ts
+declare module '*.svg' {
+  import React = require('react');
+  export const ReactComponent: React.FC<React.SVGProps<SVGSVGElement>>;
+  const src: string;
+  export default src;
+}
+```
+
+Open `tsconfig.json` in the project's root directory and edit the `"include"` section.
+
+```json
+{
+  // ...
+  "include": ["src/custom.d.ts", /* ... */],
+  // ...
+}
+```
+
+
+Now you can import SVGs with the following syntax:
+
+```tsx
+import { ReactComponent as MySVG } from './path/name.svg';
+
+/* ... */
+```
