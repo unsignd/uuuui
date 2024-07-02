@@ -11,7 +11,7 @@
     "start": "node dist/index.cjs.js",
     "test": "npm run build && npm pack",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "npm run build && storybook build"
   },
   "keywords": [],
   "author": "",
