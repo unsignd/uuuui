@@ -22,5 +22,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [dts({ rollupTypes: true }), react(), svgr()],
+  plugins: [, react(), svgr(), dts({ rollupTypes: true })],
 });
