@@ -1,7 +1,7 @@
 {
   "name": "@unsignd/uuuui",
-  "version": "1.0.13",
-  "description": "",
+  "version": "1.0.15",
+  "description": "Open-source React Typescript component library.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
@@ -13,8 +13,14 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "npm run build && storybook build"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "react",
+    "typescript",
+    "component library",
+    "design library",
+    "ui"
+  ],
+  "author": "Yejoon Kim <unsigndid@gmail.com>",
   "license": "ISC",
   "devDependencies": {
     "@storybook/addon-essentials": "^8.1.11",
